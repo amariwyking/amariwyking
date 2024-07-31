@@ -15,6 +15,20 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-typewriter')({
+      wordsets: {
+        construction: {
+            words: ['this website is under construction'],
+            delay: 1,
+            repeat: 0,
+            writeSpeed: 0.1,
+            eraseSpeed: 0,
+            blinkSpeed: 1,
+            caretSpacing: '0.3em',
+        }
+      }
+    }),
+  ]
 };
 export default config;
