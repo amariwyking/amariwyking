@@ -36,12 +36,11 @@ const config: Config = {
       wordsets: {
         construction: {
           words: ['this website is under construction'],
-          delay: 1,
+          delay: 0.5,
           repeat: 0,
-          writeSpeed: 0.1,
+          writeSpeed: 0.05,
           eraseSpeed: 0,
           blinkSpeed: 1,
-          caretSpacing: '0.3em',
         }
       }
     }),
