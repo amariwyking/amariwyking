@@ -35,12 +35,25 @@ const config: Config = {
     require('tailwind-typewriter')({
       wordsets: {
         construction: {
-          words: ['this website is under construction'],
-          delay: 0.5,
-          repeat: 0,
+          words: [
+            'this website is under construction',
+          ],
+          delay: 0.50,
           writeSpeed: 0.05,
+          blinkSpeed: 1.00,
           eraseSpeed: 0,
-          blinkSpeed: 1,
+          repeat: 0,
+        },
+
+        upload: {
+          words: [
+            'Upload an image for the gallery',
+          ],
+          delay: 0.25,
+          writeSpeed: 0.025,
+          blinkSpeed: 0,
+          eraseSpeed: 0,
+          repeat: 0,
         }
       }
     }),

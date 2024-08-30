@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/blob": "^0.23.4",
     "next": "14.2.5",
+    "next-auth": "^5.0.0-beta.20",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-typewriter": "^1.0.1"
