@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Amari Wyking Garrett
 
-## Getting Started
+##  About Me
+Urban tech innovator leveraging AI/ML to solve complex city challenges. Passionate about data-driven solutions for transportation, safety, and environmental issues. Interested in developing intuitive applications and conducting impactful research to improve urban life. Combines strong software engineering skills with growing expertise in urban informatics to create innovative, sustainable solutions for 21st-century cities.
 
-First, run the development server:
+## Education
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* New York University (Sept. 2023 - Present)
+	+ M.S. Applied Urban Science & Informatics (Expected 2025)
+* North Carolina Agricultural and Technical State University (Aug. 2019 - May 2023)
+	+ B.S. cum laude Computer Science (2023)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Employment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Idaho National Laboratory (May 2024 - Aug. 2024)
+	+ Data Science Intern
+* Idaho National Laboratory (Aug. 2023 - May 2023)
+	+ Data Science Intern
+* Apple (May 2022 - Aug. 2022)
+	+ Software Engineering Intern
+* Meta (May 2021 - Aug. 2021)
+	+ Software Engineering Intern
+* Meta (June 2020 - Aug. 2020)
+	+ Software Engineering Intern
+* Method Group (Mar. 2019 - May 2019)
+	+ IT Intern
+* Microsoft (June 2018 - Aug. 2018)
+	+ Video Game Development Intern
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Awards
 
-## Learn More
+* The National GEM Consortium - GEM Fellowship (2023)
+* Thurgood Marshall College Fund - Apple HBCU Scholar (2022)
+* CUSP - Global Data Dive: Transport, Safety, Air Quality, and Health (2024)
+	+ 1st Place - NYU CUSP
+* NYU CUSP - Inaugural CUSP Local Data Dive (2023)
+	+ People's Choice Award
+* NCAT College of Engineering - HackNCAT 4.0 (2021)
+	+ 1st Place - Disney
+* Meta - BiT Hackathon (2018)
+	+ 1st Place
+* Meta - BiT Hackathon (2017)
+	+ Judge's Award
+* Meta - Seattle Environmental Justice Hackathon (2017)
+	+ Most Creative Project
 
-To learn more about Next.js, take a look at the following resources:
+## Volunteering
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* Soronko Academy (Mar. 2019 - May 2019)
+	+ Teaching Assistant
+	+ Introduced 40+ women and children to basic computer skills and how to design websites by teaching the basics of HTML & CSS
