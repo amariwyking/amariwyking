@@ -18,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
-        <main>
-          {children}
-        </main>
+        <div className="grid h-screen grid-rows-[auto_1fr]">
+          <NavBar />
+          <main className="overflow-y-auto">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
