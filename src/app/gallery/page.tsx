@@ -8,6 +8,8 @@ export default function Gallery() {
             <div className="items-center">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="grid gap-4 justify-center">
+                        {/* Idea: Images that are randomly sorted on the table and are shuffled around via the cursor. */}
+                        {/* When an image is clicked, it should orient itself and expan to the center of the screen  */}
                         <div>
                             <Image
                                 className="h-auto max-w-full rounded-lg"
