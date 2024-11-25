@@ -12,10 +12,12 @@
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.1.9",
     "@vercel/blob": "^0.23.4",
+    "ai": "^4.0.3",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "react": "^18",
     "react-dom": "^18",
+    "replicate": "^1.0.1",
     "tailwind-typewriter": "^1.0.1"
   },
   "devDependencies": {
