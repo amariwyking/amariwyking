@@ -38,7 +38,7 @@ export default function GalleryUploadPage() {
                 image: newBlob.url
               }
               
-              console.log(process.env.REPLICATE_API_TOKEN)
+              console.log('Replicate API Token' + process.env.REPLICATE_API_TOKEN)
 
               const replicate = new Replicate();
               const output = await replicate.run('zsxkib/blip-3:499bec581d8f64060fd695ec0c34d7595c6824c4118259aa8b0788e0d2d903e1', { input })
