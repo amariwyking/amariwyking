@@ -1,8 +1,10 @@
+import Intro from "./components/landing/Intro";
+import ProfilePic from "./components/landing/ProfilePic";
+
 export default function Home() {
   return (
-      <div className="flex flex-col place-content-center p-8 items-stretch">
-          <p className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-mono text-center">amari wyking</p>
-        <span className="block text-sm sm:text-l md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl type-construction text-gray-500 my-4 text-center"></span>
-      </div>
+    <div className="sm:px-8 mt-9">
+      <Intro />
+    </div>
   );
 }
