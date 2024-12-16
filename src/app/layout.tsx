@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="${inter.variable}">
-      <body className="flex h-full bg-white">
-        <div className="flex w-full">
-          <div className="fixed inset-0 flex justify-center sm:px-8">
+      <body className="flex h-fit bg-white overflow-scroll">
+        <div className="flex justify-center w-full">
+          <div className="flex justify-center sm:px-8">
             <div className="flex w-full max-w-7xl lg:px-8">
               <div className="relative flex w-full bg-white dark:bg-gray-900">
                 <main className="flex-auto">
