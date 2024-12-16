@@ -1,13 +1,18 @@
+import { Avatar } from '../../MTailwind'
+
 import Image from 'next/image'
 
-export default function ProfilePic () {
+export default function ProfilePic() {
     return (
-        <Image 
-        
-        className="h-24 w-24 rounded-full"
-        src="https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/2024_August_22_17-24%201-WgNLJiBNfhDTwg6c804skHDQL2O7tu.jpg"
-        alt=""
-        width={480}
-        height={480} />
+        <div className='flex items-center justify-center order-1 md:order-2'>
+            <Image
+                className="h-auto max-w-full rounded-full"
+                src="https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/amaricentralpark-jDbY6NzedmqovP6SSm5wmsyK6lNoue.jpeg"
+                alt=""
+                width={280}
+                height={280}
+            />
+            {/* <Avatar src='https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/amaricentralpark-jDbY6NzedmqovP6SSm5wmsyK6lNoue.jpeg' size='xxl' alt='Amari' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} /> */}
+        </div>
     )
 }

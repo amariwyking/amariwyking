@@ -17,18 +17,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="${inter.variable}">
-      <body className="flex h-full">
+      <body className="flex h-full bg-white">
         <div className="flex w-full">
           <div className="fixed inset-0 flex justify-center sm:px-8">
             <div className="flex w-full max-w-7xl lg:px-8">
-              <div className="w-full bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-gray-300/20">
+              <div className="relative flex w-full bg-white dark:bg-gray-900">
+                <main className="flex-auto">
+                  {children}
+                </main>
               </div>
             </div>
-          </div>
-          <div className="relative flex w-full flex-col">
-            <main className="flex-auto">
-              {children}
-            </main>
           </div>
         </div>
       </body>
