@@ -3,8 +3,6 @@ import IntroBio from "./components/landing/IntroBio";
 import IntroHook from "./components/landing/IntroHook";
 import ProfilePic from "./components/landing/ProfilePic";
 
-import { Avatar } from './MTailwind'
-
 export default function Home() {
   return (
     <div className='flex align-middle justify-center sm:px-8 mt-9'>
