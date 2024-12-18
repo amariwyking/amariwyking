@@ -16,17 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="${inter.variable}">
-      <body className="flex h-fit bg-gray-50 dark:bg-gray-900 overflow-scroll">
-        <div className="flex justify-center w-full sm:px-8">
-          <div className="flex w-full max-w-7xl lg:px-8">
-            <div className="relative flex w-full">
-              <main className="flex-auto">
-                {children}
-              </main>
-            </div>
-          </div>
-        </div>
+    <html lang="en" className="h-full overflow-scroll">
+      <body className="flex h-full bg-gray-50 dark:bg-gray-900">
+        {children}
       </body>
     </html>
   );
