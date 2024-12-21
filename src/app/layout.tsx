@@ -17,8 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full overflow-scroll">
-      <body className="flex h-full bg-gray-50 dark:bg-gray-900">
-        {children}
+      <body className="flex flex-col h-full md:mx-32">
+        <div className="">
+          <NavBar />
+          {children}
+        </div>
       </body>
     </html>
   );

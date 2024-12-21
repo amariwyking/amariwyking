@@ -1,65 +1,91 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { usePathname } from 'next/navigation'
+import * as React from "react";
+import {
+    Button,
+    IconButton,
+    Typography,
+    Collapse,
+    Navbar,
+} from "@material-tailwind/react";
+import {
+    Archive,
+    CodeBracketsSquare,
+    MediaImageList,
+    Menu,
+    MultiplePages,
+    ProfileCircle,
+    SelectFace3d,
+    Xmark,
+} from "iconoir-react";
 
-
-const menuItems = [
-    { name: 'human', href: '/' },
-    { name: 'developer', href: '/developer' },
-    { name: 'photographer', href: '/gallery' },
-    { name: 'model', href: '/model' },
+const LINKS = [
+    {
+        icon: MediaImageList,
+        title: "Gallery",
+        href: "/gallery",
+    },
+    {
+        icon: MultiplePages,
+        title: "Articles",
+        href: "#",
+    },
+    {
+        icon: CodeBracketsSquare,
+        title: "Projects",
+        href: "#",
+    },
 ];
 
+function NavList() {
+    return (
+        <ul className="mt-4 flex flex-col gap-x-3 gap-y-1.5 lg:mt-0 lg:flex-row lg:items-center">
+            {LINKS.map(({ icon: Icon, title, href }) => (
+                <li key={title}>
+                    <Typography
+                        as="a"
+                        href={href}
+                        type="small"
+                        className="flex items-center gap-x-2 p-1 text-foreground hover:text-primary"
+                    >
+                        <Icon className="h-4 w-4" />
+                        {title}
+                    </Typography>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
 export default function NavBar() {
-    const pathname = usePathname()
-    // console.log(pathname)
+    const [openNav, setOpenNav] = React.useState(false);
 
-    // console.log(typeof menuItems)
-
-    // menuItems.find(pathname)
-
-    const name = (menuItems.find(item => item.href === pathname) || {}).name || 'human';
-
-    const [selectedPage, setSelectedPage] = useState(name)
+    React.useEffect(() => {
+        window.addEventListener(
+            "resize",
+            () => window.innerWidth >= 960 && setOpenNav(false),
+        );
+    }, []);
 
     return (
-        <div className='mx-auto flex h-2 items-center justify-center py-20'>
-            <div className='group flex cursor-pointer py-2 text-xl'>
-
-                {/* Menu Box */}
-                <div className='flex items-center justify-between space-x-2 px-4'>
-                    <a className='menu-hover py-2 font-medium text-gray-400 lg:mx-4'>
-                        the {selectedPage}
-                    </a>
-                    <span>
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='3'
-                            stroke='currentColor' className='transition-all ease-in-out h-6 w-6 -rotate-90 group-hover:translate-x-16 duration-300 delay-75'>
-                            <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
-                        </svg>
-                    </span>
-                </div>
-
-                <div className='transition-all ease-in-out opacity-0 z-50 flex w-fit flex-row py-1 px-12 text-gray-800 shadow-xl group-hover:opacity-100 group-hover:translate duration-500'>
-                    {menuItems.map((item) => (
-                        <a
-                            key={item.name}
-                            href={item.href}
-                            className={`my-2 block font-normal transition-colors mx-2 ${item.name === selectedPage ? 'text-cyan-400' : 'text-gray-500 hover:text-cyan-400'
-                                }`}
-                            onClick={(e) => {
-                                e.preventDefault()
-                                setSelectedPage(item.name)
-                                // open(item.href)
-                                window.location.href = item.href
-
-                            }}
-                        >
-                            {item.name}
-                        </a>
-                    ))}
+        <Navbar className="flex justify-center mx-auto my-8 px-8 py-2 rounded-full w-fit max-w-screen-xl bg-surface">
+            <div className="flex items-center">
+                <Typography
+                    as="a"
+                    href="/"
+                    type="small"
+                    className="ml-2 mr-2 block py-1 font-mono font-semibold text-foreground"
+                >
+                    Amari Wyking
+                </Typography>
+                <hr className="ml-1 mr-1.5 hidden h-5 w-px border-l border-t-0 border-secondary-dark lg:block" />
+                <div className="hidden lg:block">
+                    <NavList />
                 </div>
             </div>
-        </div>
-    )
+            <Collapse open={openNav}>
+                <NavList />
+            </Collapse>
+        </Navbar>
+    );
 }
