@@ -49,7 +49,7 @@ const config: Config = {
         },
 
         primary: {
-          default: "#6028ff",     // Main action buttons, key interactive elements
+          default: "#76DB61",     // Main action buttons, key interactive elements
           dark: "#5216eb",        // Hover/pressed states for primary actions
           light: "#724dff",       // Secondary primary elements, highlights
           foreground: "#f9fafb"   // Text on primary-colored backgrounds
