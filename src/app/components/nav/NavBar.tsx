@@ -9,13 +9,10 @@ import {
     Navbar,
 } from "@material-tailwind/react";
 import {
-    Archive,
     CodeBracketsSquare,
     MediaImageList,
     Menu,
     MultiplePages,
-    ProfileCircle,
-    SelectFace3d,
     Xmark,
 } from "iconoir-react";
 
@@ -65,18 +62,18 @@ export default function NavBar() {
     React.useEffect(() => {
         window.addEventListener(
             "resize",
-            () => window.innerWidth >= 960 && setOpenNav(false),
+            () => window.innerWidth >= 768 && setOpenNav(false),
         );
     }, []);
 
     return (
-        <Navbar className="flex justify-center mx-auto my-8 py-2 rounded-full w-fit max-w-screen-xl ring-1 ring-secondary shadow-md">
-            <div className="flex items-center">
+        <Navbar className="flex mt-6 py-2 rounded-md ring-1 ring-secondary shadow-md max-w-screen-xl lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
+            <div className="flex items-center w-full">
                 <Typography
                     as="a"
                     href="/"
                     type="small"
-                    className="ml-2 mx-8 block py-1 font-mono font-semibold text-foreground"
+                    className="ml-2 mx-4 lg:mx-8 block py-1 font-mono font-semibold text-foreground"
                 >
                     Amari Wyking
                 </Typography>
@@ -84,6 +81,19 @@ export default function NavBar() {
                 <div className="hidden lg:block">
                     <NavList />
                 </div>
+                <IconButton
+                    size="sm"
+                    variant="ghost"
+                    color="secondary"
+                    onClick={() => setOpenNav(!openNav)}
+                    className="ml-auto mr-4 grid lg:hidden"
+                >
+                    {openNav ? (
+                        <Xmark className="h-4 w-4" />
+                    ) : (
+                        <Menu className="h-4 w-4" />
+                    )}
+                </IconButton>
             </div>
             <Collapse open={openNav}>
                 <NavList />
