@@ -67,7 +67,7 @@ export default function NavBar() {
     }, []);
 
     return (
-        <Navbar className="flex mt-6 py-2 rounded-md ring-1 ring-secondary shadow-md max-w-screen-xl lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
+        <Navbar className="flex flex-col mt-6 py-2 rounded-md ring-1 ring-secondary shadow-md max-w-screen-xl transition-all lg:flex-row lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
             <div className="flex items-center w-full">
                 <Typography
                     as="a"
@@ -78,9 +78,6 @@ export default function NavBar() {
                     Amari Wyking
                 </Typography>
                 <hr className="hidden h-5 w-px border-l-2 border-t-0 border-secondary-dark lg:block" />
-                <div className="hidden lg:block">
-                    <NavList />
-                </div>
                 <IconButton
                     size="sm"
                     variant="ghost"
@@ -94,6 +91,9 @@ export default function NavBar() {
                         <Menu className="h-4 w-4" />
                     )}
                 </IconButton>
+                <div className="hidden lg:block">
+                    <NavList />
+                </div>
             </div>
             <Collapse open={openNav}>
                 <NavList />
