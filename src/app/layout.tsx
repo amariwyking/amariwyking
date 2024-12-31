@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full overflow-scroll">
-      <body className="flex flex-col h-full md:mx-32">
-        <div className="">
+      <body className="flex flex-col h-full mx-4 md:mx-32">
+        <div>
           <NavBar />
           {children}
         </div>
