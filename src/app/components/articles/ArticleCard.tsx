@@ -8,8 +8,6 @@ type ArticleCardProps = {
     date: string
 }
 
-
-
 const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     const options: Intl.DateTimeFormatOptions = {
@@ -24,25 +22,26 @@ const formatDate = (dateStr: string) => {
 
 export default function ArticleCard(props: ArticleCardProps) {
     return (
-        <div className="flex flex-row space-x-6">
-            <div className="basis-48 py-6 text-zinc-400 font-light">
-                <Typography>
+        <div className="flex flex-row ring-0 ring-surface lg:ring-0 rounded-xl">
+            <div className="basis-48 lg:py-6 lg:mr-6 text-zinc-400 font-light hidden md:block">
+                <Typography className=" text-right">
                     {formatDate(props.date)}
                 </Typography>
             </div>
-            <Card className="max-w-2xl p-6 hover:bg-surface text-surface-foreground duration-300">
+            <Card className="max-w-2xl lg:p-6 hover:bg-surface text-surface-foreground duration-300">
                 <Card.Body>
-                    <Typography className="font-medium">
+                    {/* <Typography type="h3" className="font-medium text-base"> */}
+                    <Typography className="text-sm font-semibold tracking-wider uppercase lg:text-base">
                         {props.title}
                     </Typography>
-                    <Typography className="line-clamp-3 my-1 text-zinc-500">
+                    <Typography className="text-xs line-clamp-3 my-1 text-zinc-500 lg:text-base">
                         {props.description}
                     </Typography>
                 </Card.Body>
                 <Card.Footer>
-                    <div className="flex flex-row my-4 text-emerald-500 font-normal">
-                        <Typography>Read More</Typography>
-                        <NavArrowRight />
+                    <div className="flex flex-row items-center py-1 lg:my-2 text-emerald-500">
+                        <Typography className="text-xs py-1 lg:text-base">Read More</Typography>
+                        <NavArrowRight className="mx-1 w-4 lg:w-6"/>
                     </div>
                 </Card.Footer>
             </Card>
