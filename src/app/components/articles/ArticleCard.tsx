@@ -24,7 +24,7 @@ export default function ArticleCard(props: ArticleCardProps) {
     return (
         <div className="flex flex-row ring-0 ring-surface lg:ring-0 rounded-xl">
             <div className="basis-48 lg:py-6 lg:mr-6 text-zinc-400 font-light hidden md:block">
-                <Typography>
+                <Typography className=" text-right">
                     {formatDate(props.date)}
                 </Typography>
             </div>
