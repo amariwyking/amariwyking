@@ -14,19 +14,19 @@ const description =
 const articlesData = [
     {
         id: '00',
-        title: 'Spatial and Temporal Distributions of Chicago Crimes',
-        description: 'In this article I demonstrate how k-means and Gaussian mixture clustering methods can be used to identify how various types of crime display different trends over space and time in Chicago, IL.',
+        title: 'Crime in Chicago',
+        description: 'In this article I demonstrate how k-means and Gaussian mixture clustering methods can be used to conduct a spatiotemporal analysis of crime across Chicago, IL.',
         date: '2024-04-16'
     },
     {
         id: '01',
-        title: 'The Gender-Data Gap: How Design Fails Half of Humanity',
+        title: 'The Gender-Data Gap',
         description: 'Picture a world where every product, service, and system was designed with only half of humanity in mind. Now consider this hypothetical scenario is closer to fact than it is to fiction.',
         date: '2024-11-19'
     },
     {
         id: '02',
-        title: 'Equity in Education: Bridging Funding Disparities for a Prosperous America',
+        title: 'Equity in Education',
         description: 'Quality education serves as the bedrock of prosperous and equitable communities, fostering the capacity to address local, national, and global challenges effectively.',
         date: '2023-09-29'
     },
@@ -38,9 +38,9 @@ const articleCards = articlesData.map((articleProps) => (
 
 export default function ArticlesPage() {
     return (
-        <div>
+        <div className="flex justify-center">
             <MainContainer header={header} description={description}>
-                <div className="ml-6 my-6 flex-row space-y-6">
+                <div className="my-6 justify-center flex-row space-y-6 lg:ml-6">
                     {articleCards}
                 </div>
 
