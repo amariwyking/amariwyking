@@ -1,10 +1,22 @@
+
+import IntroBio from "./components/landing/IntroBio";
+import IntroHook from "./components/landing/IntroHook";
+import ProfilePic from "./components/landing/ProfilePic";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col place-content-center p-8">
-      <div className="items-stretch">
-          <p className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-mono text-center">amari wyking</p>
-        <span className="block text-sm sm:text-l md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl type-construction text-gray-500 my-4 text-center"></span>
+    <div className="flex h-full justify-center items-center w-full sm:px-8">
+      <div className="flex w-full max-w-7xl lg:px-8">
+        <div className="relative flex-auto w-full">
+          <div className='flex align-middle justify-center sm:px-8 mt-9'>
+            <div className="grid md:grid-cols-2 mx-auto w-full md:px-24 lg:px-32">
+              <ProfilePic />
+              <IntroHook />
+              <IntroBio />
+            </div>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
