@@ -1,11 +1,16 @@
+"use client"
+
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { NavArrowRight } from "iconoir-react";
 import React from "react";
 
-type ArticleCardProps = {
-    title: string
-    description: string
-    date: string
+interface ArticleCardProps {
+    id: string,
+    title: string,
+    date: string,
+    category: string,
+    description: string,
+    content: string,
 }
 
 const formatDate = (dateStr: string) => {
@@ -30,7 +35,6 @@ export default function ArticleCard(props: ArticleCardProps) {
             </div>
             <Card className="max-w-2xl lg:p-6 hover:bg-surface text-surface-foreground duration-300">
                 <Card.Body>
-                    {/* <Typography type="h3" className="font-medium text-base"> */}
                     <Typography className="text-sm font-semibold tracking-wider uppercase lg:text-base">
                         {props.title}
                     </Typography>
