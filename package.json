@@ -12,11 +12,13 @@
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^3.0.0-beta.24",
     "@vercel/blob": "^0.23.4",
+    "gray-matter": "^4.0.3",
     "iconoir-react": "^7.10.1",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^9.0.1",
     "tailwind-typewriter": "^1.0.1"
   },
   "devDependencies": {
