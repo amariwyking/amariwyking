@@ -1,5 +1,6 @@
 ---
 title: Design Thinking - First Encounter
+slug: design-thinking-first-encounter
 date: 2024-12-13
 category: Product Design
 description: After spending 15 weeks learning about the ideas and techniques associated with design thinking and more importantly, putting them into practice, I wanted to take a moment to reflect on some emergent concepts that stood out to me.

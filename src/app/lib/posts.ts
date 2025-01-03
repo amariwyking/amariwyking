@@ -1,20 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { Blog } from '../types/blogs';
 
 // Set the posts directory to the folder in the root of the process' current working directory
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-type PostData = {
-    id: string,
-    title: string,
-    date: string,
-    category: string,
-    description: string,
-    content: string,
-}
-
-export function getSortedPostsData() {
+export function getSortedPostsData(): Blog[] {
     // Get file names under /posts
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames.map((fileName) => {
@@ -33,11 +25,11 @@ export function getSortedPostsData() {
             id,
             content: matterResult.content,
             ...matterResult.data,
-        } as PostData;
+        } as Blog;
     });
 
     return allPostsData.sort((a, b) => {
-        if (a.date, b.date) {
+        if (a.date < b.date) {
             return 1;
         } else {
             return -1;
