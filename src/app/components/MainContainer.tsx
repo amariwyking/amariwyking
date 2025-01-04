@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 type MainContainerProps = {
     header: string
     description: string
