@@ -36,3 +36,21 @@ export function loadBlogPosts(): Blog[] {
         }
     });
 }
+
+
+export function getArticleBySlug (slug: string): Blog | null {
+    const filePath = path.join(postsDirectory, `${slug}.md`);
+    if (!fs.existsSync(filePath)) return null;
+
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+
+        // Use gray-matter to parse the metadata section of the markdown
+        const matterResult = matter(fileContents);
+
+        // Combine the data with the id
+        return {
+            content: matterResult.content,
+            ...matterResult.data,
+        } as Blog;
+  };
+  

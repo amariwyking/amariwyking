@@ -3,6 +3,7 @@
 import { BlogCardProps as BlogPostCardProps } from "@/app/types/blogs";
 import { Card, Typography, Button } from "@material-tailwind/react";
 import { NavArrowRight } from "iconoir-react";
+import Link from "next/link";
 import React from "react";
 
 const formatDate = (dateStr: string) => {
@@ -37,10 +38,12 @@ export default function BlogPostCard(props: BlogPostCardProps) {
                     </Typography>
                 </Card.Body>
                 <Card.Footer>
-                    <div className="flex flex-row items-center py-1 lg:my-2 text-emerald-500">
-                        <Typography className="text-xs py-1 lg:text-base">Read More</Typography>
-                        <NavArrowRight className="mx-1 w-4 lg:w-6" />
-                    </div>
+                    <Link href={`/blog/${blog.slug}`}>
+                        <div className="flex w-fit items-center py-1 lg:my-2 text-emerald-500">
+                            <Typography className="text-xs py-1 lg:text-base">Read More</Typography>
+                            <NavArrowRight className="mx-1 w-4 lg:w-6 " />
+                        </div>
+                    </Link>
                 </Card.Footer>
             </Card>
         </div>
