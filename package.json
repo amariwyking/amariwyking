@@ -34,6 +34,9 @@
   },
   "overrides": {
     "@types/react": "19.0.2",
-    "@types/react-dom": "19.0.2"
+    "@types/react-dom": "19.0.2",
+    "iconoir-react": {
+      "react": "^19.0.0"
+    }
   }
 }
