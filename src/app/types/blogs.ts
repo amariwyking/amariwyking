@@ -10,7 +10,6 @@ export interface Blog {
 
 export interface BlogCardProps {
     blog: Blog,
-    onBlogPostSelected: (blog: Blog) => void,
 }
 
 export interface BlogPostListProps {

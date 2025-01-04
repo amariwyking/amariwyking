@@ -19,11 +19,6 @@ const formatDate = (dateStr: string) => {
 
 export default function BlogPostCard(props: BlogPostCardProps) {
     const blog = props.blog;
-    const onBlogPostSelected = props.onBlogPostSelected;
-
-    const openBlogPost = () => {
-        onBlogPostSelected(blog)
-    }
 
     return (
         <div className="flex flex-row ring-0 ring-surface lg:ring-0 rounded-xl">
@@ -42,12 +37,10 @@ export default function BlogPostCard(props: BlogPostCardProps) {
                     </Typography>
                 </Card.Body>
                 <Card.Footer>
-                    <button onClick={openBlogPost}>
-                        <div className="flex flex-row items-center py-1 lg:my-2 text-emerald-500">
-                            <Typography className="text-xs py-1 lg:text-base">Read More</Typography>
-                            <NavArrowRight className="mx-1 w-4 lg:w-6" />
-                        </div>
-                    </button>
+                    <div className="flex flex-row items-center py-1 lg:my-2 text-emerald-500">
+                        <Typography className="text-xs py-1 lg:text-base">Read More</Typography>
+                        <NavArrowRight className="mx-1 w-4 lg:w-6" />
+                    </div>
                 </Card.Footer>
             </Card>
         </div>
