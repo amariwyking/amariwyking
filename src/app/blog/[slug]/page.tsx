@@ -34,10 +34,9 @@ export default async function Page({
             <div className="flex flex-col h-full justify-center items-center shadow-lg">
                 <div className="w-fit">
 
-                    <Markdown
-                        children={content}
-                        className="prose"
-                    />
+                    <Markdown className="prose">
+                        {content}
+                    </Markdown>
                 </div>
             </div>
         </div>
