@@ -24,8 +24,8 @@ const LINKS = [
     },
     {
         icon: MultiplePages,
-        title: "Articles",
-        href: "/articles",
+        title: "Blog",
+        href: "/blog",
     },
     {
         icon: CodeBracketsSquare,

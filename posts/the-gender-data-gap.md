@@ -1,5 +1,6 @@
 ---
 title: The Gender-Data Gap
+slug: the-gender-data-gap
 date: 2024-11-18
 category: Product Design
 description: Picture a world where every product, service, and system was designed with only half of humanity in mind. Now consider this hypothetical scenario is closer to fact than it is to fiction.

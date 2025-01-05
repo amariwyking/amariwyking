@@ -145,6 +145,7 @@ const config: Config = {
         }
       }
     }),
+    require('@tailwindcss/typography'),
     require('tailwind-typewriter')({
       wordsets: {
         construction: {
