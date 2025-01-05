@@ -31,9 +31,8 @@ export default async function Page({
 
     return (
         <div className="px-36">
-            <div className="flex flex-col h-full justify-center items-center shadow-lg">
+            <div className="flex flex-col h-full justify-center items-center">
                 <div className="w-fit">
-
                     <Markdown className="prose">
                         {content}
                     </Markdown>
