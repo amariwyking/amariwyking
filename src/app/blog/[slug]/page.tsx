@@ -1,5 +1,7 @@
 import { getArticleBySlug, loadBlogPosts } from "@/app/lib/load-blog-posts"
 import { Blog } from "@/app/types/blogs";
+import { Typography } from "@material-tailwind/react";
+import Markdown from "markdown-to-jsx";
 
 export async function generateStaticParams() {
     const blogPosts = loadBlogPosts();
@@ -15,9 +17,29 @@ export default async function Page({
 }: {
     params: Promise<{ slug: string, post: Blog }>
 }) {
-    const slug = (await params).slug
+    const slug = (await params).slug;
 
-    const blogPost = getArticleBySlug(slug)
+    const blogPost = getArticleBySlug(slug);
 
-    return <div>{blogPost?.content}</div>
+    var content = undefined;
+
+    if (blogPost) {
+        content = blogPost.content;
+    } else {
+        content = "404 | Blog post not found"
+    }
+
+    return (
+        <div className="px-36">
+            <div className="flex flex-col h-full justify-center items-center shadow-lg">
+                <div className="w-fit">
+
+                    <Markdown
+                        children={content}
+                        className="prose"
+                    />
+                </div>
+            </div>
+        </div>
+    )
 }
