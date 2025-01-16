@@ -10,7 +10,5 @@ export function findGalleryPhotos(): string[] {
         file.endsWith('.jpg')
     )
 
-    console.log(fileNames)
-
     return photos
 }
