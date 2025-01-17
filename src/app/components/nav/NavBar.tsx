@@ -27,11 +27,6 @@ const LINKS = [
         title: "Blog",
         href: "/blog",
     },
-    {
-        icon: CodeBracketsSquare,
-        title: "Projects",
-        href: "#",
-    },
 ];
 
 function NavList() {
