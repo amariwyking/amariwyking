@@ -2,21 +2,23 @@
 
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { PhotoMetadata } from "../lib/gallery";
 
-interface PhotoData {
-    directory: string,
-    filenames: string[],
+export interface PhotoCollectionProps {
+    photosData: PhotoMetadata[]
 }
 
 interface MasonryColumn {
     id: number;
-    items: string[];
+    items: PhotoMetadata[];
 }
 
-export default function PhotoCollection(props: PhotoData) {
+export default function PhotoCollection(props: PhotoCollectionProps) {
     const [columns, setColumns] = useState<MasonryColumn[]>([]);
     const [columnCount, setColumnCount] = useState(3);
     const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+    const photosData = props.photosData
 
     useEffect(() => {
         const updateColumnCount = () => {
@@ -36,13 +38,13 @@ export default function PhotoCollection(props: PhotoData) {
             items: []
         }));
 
-        props.filenames.forEach((filename, index) => {
+        photosData.forEach((photo, index) => {
             const columnIndex = index % columnCount;
-            newColumns[columnIndex].items.push(filename);
+            newColumns[columnIndex].items.push(photo);
         });
 
         setColumns(newColumns);
-    }, [props.filenames, columnCount]);
+    }, [photosData, columnCount]);
 
     const handleImageLoad = (filename: string) => {
         setLoadedImages(prev => new Set(prev).add(filename));
@@ -53,12 +55,12 @@ export default function PhotoCollection(props: PhotoData) {
             <div className="flex gap-4">
                 {columns.map(column => (
                     <div key={column.id} className="flex-1 flex flex-col gap-4">
-                        {column.items.map((filename) => (
-                            <div key={filename} className="relative w-full">
-                                <div className={`relative w-full ${!loadedImages.has(filename) ? 'bg-gray-200 animate-pulse' : ''}`}>
+                        {column.items.map((photo) => (
+                            <div key={photo.fileName} className="relative w-full">
+                                <div className={`relative w-full ${!loadedImages.has(photo.fileName) ? 'bg-gray-200 animate-pulse' : ''}`}>
                                     <Image
-                                        className={`rounded-lg transition-opacity duration-300 ${loadedImages.has(filename) ? 'opacity-100' : 'opacity-0'}`}
-                                        src={`${props.directory}/${filename}`}
+                                        className={`rounded-lg transition-opacity duration-300 ${loadedImages.has(photo.fileName) ? 'opacity-100' : 'opacity-0'}`}
+                                        src={photo.filePath}
                                         alt=""
                                         width={1000}
                                         height={1000}
@@ -67,7 +69,7 @@ export default function PhotoCollection(props: PhotoData) {
                                             height: 'auto',
                                         }}
                                         priority={column.id === 0}
-                                        onLoadingComplete={() => handleImageLoad(filename)}
+                                        onLoadingComplete={() => handleImageLoad(photo.fileName)}
                                     />
                                 </div>
                             </div>
