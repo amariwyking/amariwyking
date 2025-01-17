@@ -21,7 +21,7 @@ export default function RootLayout({
         <header className="absolute lg:fixed w-full">
           <NavBar />
         </header>
-        <main className="mx-4 md:mx-32 ring-0 ring-surface shadow-xl">
+        <main className="mx-0 md:mx-32 ring-0 ring-surface shadow-xl">
           <div className="flex flex-col h-full min-h-screen py-32">
             {children}
           </div>
