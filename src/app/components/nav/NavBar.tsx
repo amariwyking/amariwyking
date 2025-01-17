@@ -9,13 +9,10 @@ import {
     Navbar,
 } from "@material-tailwind/react";
 import {
-    Archive,
     CodeBracketsSquare,
     MediaImageList,
     Menu,
     MultiplePages,
-    ProfileCircle,
-    SelectFace3d,
     Xmark,
 } from "iconoir-react";
 
@@ -27,8 +24,8 @@ const LINKS = [
     },
     {
         icon: MultiplePages,
-        title: "Articles",
-        href: "/articles",
+        title: "Blog",
+        href: "/blog",
     },
     {
         icon: CodeBracketsSquare,
@@ -65,22 +62,35 @@ export default function NavBar() {
     React.useEffect(() => {
         window.addEventListener(
             "resize",
-            () => window.innerWidth >= 960 && setOpenNav(false),
+            () => window.innerWidth >= 768 && setOpenNav(false),
         );
     }, []);
 
     return (
-        <Navbar className="flex justify-center mx-auto my-8 py-2 rounded-full w-fit max-w-screen-xl ring-1 ring-secondary shadow-md">
-            <div className="flex items-center">
+        <Navbar className="flex flex-col mt-6 py-2 z-10 bg-white rounded-md ring-1 ring-secondary shadow-md max-w-screen-xl transition-all lg:flex-row lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
+            <div className="flex items-center w-full">
                 <Typography
                     as="a"
                     href="/"
                     type="small"
-                    className="ml-2 mx-8 block py-1 font-mono font-semibold text-foreground"
+                    className="ml-2 mx-4 lg:mx-8 block py-1 font-mono font-semibold text-foreground"
                 >
                     Amari Wyking
                 </Typography>
                 <hr className="hidden h-5 w-px border-l-2 border-t-0 border-secondary-dark lg:block" />
+                <IconButton
+                    size="sm"
+                    variant="ghost"
+                    color="secondary"
+                    onClick={() => setOpenNav(!openNav)}
+                    className="ml-auto mr-4 grid lg:hidden"
+                >
+                    {openNav ? (
+                        <Xmark className="h-4 w-4" />
+                    ) : (
+                        <Menu className="h-4 w-4" />
+                    )}
+                </IconButton>
                 <div className="hidden lg:block">
                     <NavList />
                 </div>
