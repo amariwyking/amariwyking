@@ -1,18 +1,16 @@
-import { Avatar } from '../../MTailwind'
-
 import Image from 'next/image'
+import path from 'path'
 
 export default function ProfilePic() {
     return (
         <div className='flex items-center justify-center order-1 md:order-2'>
             <Image
-                className="rounded-full w-48 md:w-64 lg:w-80 sm:ring-4 md:ring-8 ring-gray-500 dark:ring-gray-400 hover:ring-light-green-400 transition duration-[350] ease-in-out"
-                src="https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/amaricentralpark-jDbY6NzedmqovP6SSm5wmsyK6lNoue.jpeg"
+                className="rounded-full w-48 md:w-64 lg:w-80 sm:ring-4 md:ring-8 ring-surface hover:ring-surface-dark transition duration-300 ease-in-out"
+                src='/general_images/amaricentralpark.jpg'
                 alt=""
                 width={280}
                 height={280}
             />
-            {/* <Avatar src='https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/amaricentralpark-jDbY6NzedmqovP6SSm5wmsyK6lNoue.jpeg' size='xxl' alt='Amari' placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} /> */}
         </div>
     )
 }
