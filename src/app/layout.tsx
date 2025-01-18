@@ -18,11 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full overflow-scroll">
       <body>
-        <header className="absolute lg:fixed w-full">
+        <header className="absolute lg:fixed w-full z-50">
           <NavBar />
         </header>
-        <main className="mx-0 md:mx-32 ring-0 ring-surface shadow-xl">
-          <div className="flex flex-col h-full min-h-screen py-32">
+        <main className="relative mx-0 md:mx-32 z-0 ring-0 ring-surface shadow-xl">
+          <div className="flex flex-col h-full min-h-screen py-16 lg:py-32">
             {children}
           </div>
         </main>
