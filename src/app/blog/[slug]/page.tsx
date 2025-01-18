@@ -30,11 +30,13 @@ export default async function Page({
     }
 
     return (
-        <div className="px-36">
+        <div className="px-12 lg:px-36">
+            <div>
+            </div>
             <div className="flex flex-col h-full justify-center items-center">
                 <div className="w-fit">
                     <Markdown className="prose">
-                        {content}
+                        {`<h1>${blogPost?.title}</h1>` + content}
                     </Markdown>
                 </div>
             </div>
