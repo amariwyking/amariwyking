@@ -33,6 +33,8 @@ Much like the landmark "Brown v. Board of Education" case in 1954 highlighted th
 
 The consequences are stark. Affluent schools enjoy ample resources, offering smaller class sizes, cutting-edge technology, and a wide array of educational opportunities. In contrast, schools in impoverished areas grapple with overcrowded classrooms, antiquated resources, and limited support staff.
 
+![Unequal Funding Across States: Disparities in Support for Students](/blog_photos/unequal_education_funding.png)
+
 These disparities hinder equitable access to knowledge and opportunity, perpetuating cycles of inequality. To fulfill the promise of U.S. public education and ensure equitable opportunities, federal legislation is imperative. It should target funding reform, prioritize resource equity, and bridge educational gaps.
 
 By addressing funding disparities, the government can uphold the principles of fairness and justice and provide every American child with an equal opportunity to thrive. Upholding this promise not only aligns with the spirit of "Brown v. Board of Education" but also charts a path toward a more equitable and prosperous future for all Americans.
