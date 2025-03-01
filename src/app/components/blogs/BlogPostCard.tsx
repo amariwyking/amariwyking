@@ -7,13 +7,24 @@ import Link from "next/link";
 import React from "react";
 
 const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
+    // Create the UTC date
+    const utcDate = new Date(dateStr);
+
+    // 
+    const estDate = new Date(
+        utcDate.getUTCFullYear(),
+        utcDate.getUTCMonth(),
+        utcDate.getUTCDate(),
+        utcDate.getUTCHours(),
+        utcDate.getUTCMinutes(),
+        utcDate.getUTCSeconds()
+      );
+
     const options: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+        timeZone: 'America/New_York',
+        dateStyle: 'long',
     };
-    const formattedDate: string = date.toLocaleDateString(undefined, options);
+    const formattedDate: string = estDate.toLocaleDateString('en-US', options);
 
     return formattedDate;
 }
