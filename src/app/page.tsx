@@ -9,10 +9,10 @@ export default function Home() {
       <div className="flex w-full max-w-7xl lg:px-8">
         <div className="relative flex-auto w-full">
           <div className='flex align-middle justify-center sm:px-8 mt-9'>
-            <div className="grid md:grid-cols-2 mx-auto w-full md:px-24 lg:px-32">
-              <ProfilePic />
+            <div className="mx-auto w-full md:px-24 lg:px-32">
               <IntroHook />
-              <IntroBio />
+              <ProfilePic />
+              {/* <IntroBio /> */}
             </div>
           </div>
         </div>
