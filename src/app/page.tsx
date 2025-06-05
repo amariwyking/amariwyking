@@ -1,16 +1,21 @@
 
-import HeroName from "./components/landing/HeroName";
-import IntroBio from "./components/landing/IntroBio";
-import IntroHook from "./components/landing/IntroHook";
-import ProfilePic from "./components/landing/ProfilePic";
+"use client";
+
+import { useState } from "react";
+import QuoteIntro from "./components/landing/QuoteIntro";
+import LandingPage from "./components/landing/LandingPage";
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <div className="flex h-full justify-center items-center w-full sm:px-8">
-      <HeroName />
-      {/* <IntroHook /> */}
-      {/* <ProfilePic /> */}
-      {/* <IntroBio /> */}
-    </div>
+    <>
+      {showIntro && <QuoteIntro onComplete={handleIntroComplete} />}
+      {!showIntro && <LandingPage />}
+    </>
   );
 }

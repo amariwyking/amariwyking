@@ -92,7 +92,7 @@ export default function HeroName() {
     }, [originalText]);
 
     return (
-        <div className="h-screen flex items-center justify-center">
+        <div className="h-fit flex items-center justify-center">
             <Typography
                 ref={nameRef}
                 className="name font-bold text-center text-clip leading-tight tracking-normal text-gray-800 dark:text-gray-100 mx-auto my-6 w-full text-9xl select-none"

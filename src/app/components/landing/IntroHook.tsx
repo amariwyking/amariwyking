@@ -9,7 +9,7 @@ import { useRef } from 'react';
 
 
 export default function IntroHook() {
-    const suffixRef = useRef();
+    const suffixRef = useRef<HTMLSpanElement>(null);
 
     useGSAP(() => {
         let stHook = SplitText.create(".hook", { type: "words, lines" })
@@ -17,7 +17,10 @@ export default function IntroHook() {
         let stSuffix = SplitText.create(".suffix", { type: "chars" })
 
         function suffixAnimation() {
-            const suffixWidth = suffixRef.current.getBoundingClientRect().width;
+            const suffixElement = suffixRef.current;
+            if (!suffixElement) return;
+
+            const suffixWidth = suffixElement.getBoundingClientRect().width;
 
             return gsap.timeline()
                 .from(stSuffix.chars, {
@@ -36,7 +39,7 @@ export default function IntroHook() {
                 }, "<");
         }
 
-        gsap.timeline()
+        const tlHumanist = gsap.timeline()
             .from(stHook.words[0], {
                 opacity: 0,
                 x: -100,
@@ -54,8 +57,12 @@ export default function IntroHook() {
                 y: 50,
                 ease: "ease",
                 duration: 0.8,
-            }, "-=0.6")
-            .add(suffixAnimation());
+            }, "-=0.6");
+
+        const tlSuffix = suffixAnimation();
+        if (tlSuffix) {
+            tlHumanist.add(tlSuffix);
+        }
 
 
     })
