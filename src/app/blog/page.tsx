@@ -11,7 +11,7 @@ export default async function BlogPage() {
     const allBlogPosts = loadBlogPosts();
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center py-16">
             <MainContainer header={header} description={description}>
                 <BlogPostList blogsList={allBlogPosts} />
             </MainContainer>

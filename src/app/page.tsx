@@ -1,22 +1,34 @@
+"use client";
 
-import IntroBio from "./components/landing/IntroBio";
-import IntroHook from "./components/landing/IntroHook";
-import ProfilePic from "./components/landing/ProfilePic";
+import { useState, useEffect } from "react";
+import QuoteIntro from "./components/landing/QuoteIntro";
+import LandingPage from "./components/landing/LandingPage";
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem("hasVisited");
+
+    if (hasVisited === "true") {
+      setShowIntro(false);
+    } else {
+      setShowIntro(true);
+      localStorage.setItem("hasVisited", "true");
+    }
+  }, []);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <div className="flex h-full justify-center items-center w-full sm:px-8">
-      <div className="flex w-full max-w-7xl lg:px-8">
-        <div className="relative flex-auto w-full">
-          <div className='flex align-middle justify-center sm:px-8 mt-4'>
-            <div className="grid md:grid-cols-2 mx-auto w-full md:px-24 lg:px-32">
-              <ProfilePic />
-              <IntroHook />
-              <IntroBio />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      {showIntro ? (
+        <QuoteIntro onComplete={handleIntroComplete} />
+      ) : (
+        <LandingPage />
+      )}
+    </>
   );
 }
