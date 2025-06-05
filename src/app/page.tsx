@@ -1,12 +1,22 @@
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuoteIntro from "./components/landing/QuoteIntro";
 import LandingPage from "./components/landing/LandingPage";
 
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem("hasVisited");
+
+    if (hasVisited === "true") {
+      setShowIntro(false);
+    } else {
+      setShowIntro(true);
+      localStorage.setItem("hasVisited", "true");
+    }
+  }, []);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
@@ -14,8 +24,11 @@ export default function Home() {
 
   return (
     <>
-      {showIntro && <QuoteIntro onComplete={handleIntroComplete} />}
-      {!showIntro && <LandingPage />}
+      {showIntro ? (
+        <QuoteIntro onComplete={handleIntroComplete} />
+      ) : (
+        <LandingPage />
+      )}
     </>
   );
 }
