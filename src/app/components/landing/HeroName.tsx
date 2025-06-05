@@ -10,11 +10,6 @@ import { useRef, useEffect } from 'react';
 // Register GSAP plugins
 gsap.registerPlugin(ScrambleTextPlugin, SplitText);
 
-// Configuration for scramble effect
-const config = {
-    random: true,
-}
-
 // Character set for scrambling 
 const defaultChars = "01"
 
@@ -24,21 +19,9 @@ export default function HeroName() {
 
     // Ref to store SplitText instance for cleanup
     const splitTextRef = useRef<SplitText | null>(null);
-    
-    // Original text content
-    const originalText = "AMARI : WYKING";
 
-    // Function to generate scrambled version of text
-    const generateScrambledText = (text: string) => {
-        return text
-            .split('')
-            .map(char => {
-                // Keep spaces and colons, scramble everything else
-                if (char === ' ' || char === ':') return char;
-                return defaultChars[Math.floor(Math.random() * defaultChars.length)];
-            })
-            .join('');
-    };
+    // Original text content
+    const originalText = "AMARI WYKING";
 
     // GSAP animations setup
     useGSAP(() => {
@@ -48,7 +31,6 @@ export default function HeroName() {
         // Create SplitText instance first
         const splitInstance = SplitText.create(nameElement, {
             type: "chars, words",
-            wordDelimiter: " : ",
             wordsClass: "word++",
             charsClass: "char"
         });
@@ -58,6 +40,7 @@ export default function HeroName() {
 
         // Now scramble the text content of each character element
         const chars = nameElement.querySelectorAll('.char');
+
         chars.forEach(char => {
             const originalChar = char.textContent || '';
             if (originalChar !== ' ' && originalChar !== ':') {
@@ -66,18 +49,17 @@ export default function HeroName() {
         });
 
         const staggerSpeed = 0.1;
-        const entranceDuration = 1.0;
+        const entranceEase = "power2.in"
+        const entranceDuration = 0.5;
+        const scrambleDuration = 0.8;
 
         // Create timeline for coordinated animations
         const tl = gsap.timeline();
 
-        const charAnimDistance = 50;
-
         // Entrance animation for first word (scrambled AMARI)
         tl.from(".word1 .char", {
             opacity: 0,
-            y: (index) => Math.random() > 0.5 ? charAnimDistance : -1 * charAnimDistance,
-            ease: "elastic.out(2.5)",
+            ease: entranceEase,
             duration: entranceDuration,
             stagger: -1 * staggerSpeed,
         })
@@ -85,25 +67,21 @@ export default function HeroName() {
         // Entrance animation for second word (scrambled WYKING)
         tl.from(".word2 .char", {
             opacity: 0,
-            y: (index) => Math.random() > 0.5 ? charAnimDistance : -1 * charAnimDistance,
-            ease: "elastic.out(2.5)",
+            ease: entranceEase,
             duration: entranceDuration,
             stagger: staggerSpeed,
         }, "<")
 
         // Wait for entrance animations to mostly complete, then unscramble
         tl.to(nameElement, {
-            duration: 1.5,              // Unscramble duration
-            ease: 'power2.out',         // Smooth reveal
+            duration: scrambleDuration,              // Unscramble duration
             scrambleText: {
                 text: originalText,      // Reveal the real text
                 speed: 2,                // Speed of character changes
                 chars: defaultChars,     // Use full character set for scrambling
-                // revealDelay: 0.1,        // Small delay between each character reveal
                 tweenLength: false,      // Don't animate length changes
             }
-        }); // Start unscrambling before entrance fully completes
-
+        }, "+=0.4"); // Start unscrambling before entrance fully completes
 
         // Cleanup function
         return () => {
@@ -122,7 +100,7 @@ export default function HeroName() {
                 aria-level={1}
                 aria-label="Amari Wyking"
             >
-                AMARI : WYKING
+                AMARI WYKING
             </Typography>
         </div>
     );
