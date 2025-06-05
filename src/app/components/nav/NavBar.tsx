@@ -27,11 +27,6 @@ const LINKS = [
         title: "Blog",
         href: "/blog",
     },
-    {
-        icon: CodeBracketsSquare,
-        title: "Projects",
-        href: "#",
-    },
 ];
 
 function NavList() {
@@ -67,7 +62,7 @@ export default function NavBar() {
     }, []);
 
     return (
-        <Navbar className="flex flex-col mt-6 py-2 z-10 bg-white rounded-md ring-1 ring-secondary shadow-md max-w-screen-xl transition-all lg:flex-row lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
+        <Navbar className="flex flex-col lg:mt-6 py-2 z-10 bg-white rounded-sm lg:ring-1 ring-secondary shadow-md max-w-screen-xl transition-all lg:flex-row lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
             <div className="flex items-center w-full">
                 <Typography
                     as="a"

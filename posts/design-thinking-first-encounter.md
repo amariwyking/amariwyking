@@ -5,35 +5,20 @@ date: 2024-12-13
 category: Product Design
 description: After spending 15 weeks learning about the ideas and techniques associated with design thinking and more importantly, putting them into practice, I wanted to take a moment to reflect on some emergent concepts that stood out to me.
 ---
+The process we now call “design thinking” began developing in the 1970s. Its value has proven so significant that New York University now offers it as a course, where I had the privilege of learning its principles under Kristine Mudd’s instruction. After 15 weeks of studying and practicing design thinking techniques, I want to reflect on what stood out to me most.
+## Do as nature does
+Nature is a marvel. Natural cycles and ecosystems throughout nature work in concert, pushing here and pulling there in a struggle for equilibrium. During moments of admiration, the feeling that nature is perfect often bubbles up. Yet a closer look reveals that nature is far from perfect. Instead, nature embraces failure, with forces of life and death catalyzing adaptation. This creates a masterclass in iterative design, a key pillar of design thinking.
+When developing solutions for a problem space, we must accept that ideas rarely arrive fully formed. Whatever emerges during ideation will need iteration and refinement until it becomes worthy of appraisal, just as nature’s creations adapt to their problem sets.
+## At the root of the problem…is another problem
+The iterative process extends beyond developing solutions — it must begin with the problem itself. In my group’s term project, we chose university student sleep as our problem space. What began as an initiative to improve student sleep habits evolved into an application for maximizing daytime productivity. This shift emerged from our field research, where we interviewed NYU students and explored sleep patterns in depth. These interviews revealed personal experiences, behaviors, and grievances, which we noted and compiled. Organizing these notes on a synthesis board allowed themes to surface naturally.
+We discovered that students across demographics felt stressed from academic pressures, often sacrificing sleep for schoolwork.
+## Shift your perspective
+Once we were confident in our identification of a problem worth solving, we put our pride aside and engaged in another round of iteration, this time through problem reframing. Ultimately, this led us to design a solution helping students dedicate time to studies while reducing the effort needed for scheduling and executing tasks.
+Key steps in this process included:
+- **Articulating the problem and identifying who’s involved:** Should our solution target students or course instructors?
+- **Consider what we might be missing:** Perhaps students are misusing time during the day
+- **Rethinking whether this is the proper goal to pursue:** Are students looking for solutions to be more productive?
+- **Examining bright spots:** Some students do manage to handle homework and sleep well
+- **Considering how we might be contributing to the problem:** Will our push notifications contribute to student stress?
 
-The idea for this last reflection is to put in context the readings, class activities and team project and highlight the key learnings for _you._
-
-- Illustrate your ideas and insights with a couple of specific examples.
-- Include some thoughts about how this connects to your studies or future (professional or personal) endeavors, and what methods/dimensions you might want to explore further.
-
----
-
-**Brainstorm**
-
-In engineering the traditional philosophy surrounding design goes something like this:
-
-- Identify a problem
-- Assemble a team of experts to study the problem
-- Develop a solution, test it
-- Push to market
-
-In retrospect, one might shake their head at the fact that there seemed to be little regard for the opinion of anyone outside of the product's own team.
-
-It wasn't until the 1970s that the process we refer to today as "design thinking" began to develop. Since then, design thinking has proven to be so valuable that it is now offered as a course at New York University. It was here that I had the privilege of learning the ins and outs of design thinking under the instruction of Kristine Mudd. After spending 15 weeks learning about the ideas and techniques associated with design thinking and more importantly, putting them into practice, it's worth taking a moment to reflect on the things that stood out to me most.
-
-### Be Like Nature
-
-Nature is an absolute marvel. The myriad natural cycles and delicate ecosystems that exist throughout nature seem to work in perfect concert, pushing here and pulling there in a struggle for equilibrium. It's not rare that the feeling that nature is perfect might bubble up during a moment of admiration. But when one takes a closer look, it becomes apparent that nature is far from perfect. Rather, nature is constantly embracing failure, as the forces of life and death catalyze adaptation. The result is a masterclass in iterative design, a key pillar of design thinking.
-
-It's vitally important for us to accept that when developing solutions for a problem space, ideas will seldom be fully developed upon arrival. Rather, we should expect that whatever is proposed during the ideation phase will be iterated upon and refined until an idea worthy of appraisal has emerged, just as nature's creations continue to adapt to their problem sets.
-
-### At the root of the problem... is another problem
-
-What stands out to me is that this iterative process should not be exclusive to the development of the solution. In fact, iteration should begin with the problem. For my groups term project, we designated university student sleep as our problem space. But what started out as an initiative to improve students sleep habits, ended as an application designed to help students maximize productivity during the day. This development was the result of our field research, which entailed us interviewing a diverse group of NYU students and diving deep into all things sleep. The interviews provided us with an array of personal experiences, behaviors, and grievances which we diligently noted and compiled. Using a synthesis board to organize these notes allowed for common themes to naturally emerge.
-
-What we found was that students across all demographics expressed that they feel stressed due to academic pressures and many students made a habit of sacrificing sleep to complete schoolwork. Consequently, we set out to design a solution that could help students dedicate time to their studies while minimizing the effort that goes into scheduling and executing tasks. Of course...the development of our solution would be an iterative process as well.
+The process of reframing problems and letting solutions evolve through iteration has fundamentally changed how I approach challenges. My experience with my team and Kristine’s course showed me that what seems like an obvious solution rarely survives first contact with reality — you’ve got to get your hands dirty, talk to real people, and challenge your assumptions. As I move into entrepreneurship, I plan to embrace this spirit of constant evolution. Like the ecosystems I discussed earlier, I’ll let my ideas push and pull, die and adapt, until they find their place in the market’s delicate balance.

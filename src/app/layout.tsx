@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full overflow-scroll">
       <body>
-        <header className="fixed w-full">
+        <header className="absolute lg:fixed w-full z-50">
           <NavBar />
         </header>
         <main>
