@@ -17,6 +17,7 @@
 /build
 
 # misc
+CLAUDE.md
 .DS_Store
 *.pem
 
