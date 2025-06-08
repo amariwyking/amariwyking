@@ -18,9 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full overflow-scroll">
       <body>
-        <header className="absolute lg:fixed w-full z-50">
+        {/* <header className="absolute lg:fixed w-full z-50">
           <NavBar />
-        </header>
+        </header> */}
         <main>
           <div className="flex flex-col h-full min-h-screen">
             {children}

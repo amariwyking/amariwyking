@@ -58,7 +58,7 @@ export type ExperienceEntry = {
   tenure: [Date, Date | null]; // start and end date, null for current positions
   notes: string[]; // bullet points or summary
   skills: Skill[]; // list of associated tags
-  company?: 'INL' | 'Meta' | 'Microsoft' | 'Apple'; // categorization for filtering
+  type?: 'work' | 'project' | 'education'; // categorization for filtering
 };
 
 export type ResumePage = {

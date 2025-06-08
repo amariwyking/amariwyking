@@ -47,9 +47,9 @@ export default function ExperienceSection({ experience, index, className = "" }:
               </Typography>
             </div>
             
-            {experience.company && (
+            {experience.employer && (
               <div className={`type-badge px-4 py-2 rounded-full text-white text-sm font-medium uppercase tracking-wider`}>
-                {experience.company}
+                {experience.employer}
               </div>
             )}
           </div>

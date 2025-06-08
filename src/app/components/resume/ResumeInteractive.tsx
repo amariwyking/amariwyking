@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Typography } from '@material-tailwind/react';
 import { resumeData } from '@/app/lib/resume-data';
 import { ResumePage } from '@/app/types/resume';
+import PersonalIntro from '../landing/PersonalIntro';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,70 +17,120 @@ interface ResumeInteractiveProps {
 
 export default function ResumeInteractive({ data = resumeData }: ResumeInteractiveProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sectionsRef = useRef<HTMLElement[]>([]);
-
-  // Helper function to add section refs
-  const addToSectionRefs = (element: HTMLElement | null) => {
-    if (element && !sectionsRef.current.includes(element)) {
-      sectionsRef.current.push(element);
-    }
-  };
+  const visionRef = useRef<HTMLElement>(null);
+  const missionRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
     const container = containerRef.current;
-    if (!container) return;
+    const visionSection = visionRef.current;
+    const missionSection = missionRef.current;
+    const experienceSection = experienceRef.current;
+
+    if (!container || !visionSection || !missionSection || !experienceSection) return;
 
     // Clear previous ScrollTriggers
     ScrollTrigger.getAll().forEach(st => st.kill());
 
+    // Vision Section - Pinned
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: visionSection,
+        start: "top top",
+        end: "+=100%",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true
+      }
+    })
+      .fromTo(".vision-content",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      )
+      .to(".vision-content",
+        { opacity: 0, y: -50, duration: 0.5 },
+        "+=0.5"
+      );
 
-    // Animate each resume section as it enters viewport
-    sectionsRef.current.forEach((section, index) => {
-      // Animate child elements with stagger
-      const childElements = section.querySelectorAll('.animate-child');
-      if (childElements.length > 0) {
-        gsap.from(childElements, {
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            toggleActions: "play none none none"
-          },
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 0.3
-        });
+    // Mission Section - Pinned
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: missionSection,
+        start: "top top",
+        end: "+=100%",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true
+      }
+    })
+      .fromTo(".mission-content",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      )
+      .to(".mission-content",
+        { opacity: 0, y: -50, duration: 0.5 },
+        "+=0.5"
+      );
+
+    // Experience Section - Pinned with multiple items
+    const experienceItems = gsap.utils.toArray('.experience-item');
+    const experienceCount = experienceItems.length;
+
+    const experienceTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: experienceSection,
+        start: "top top",
+        end: `+=${experienceCount * 100}%`,
+        scrub: 1,
+        pin: true,
+        pinSpacing: true
       }
     });
 
-    // Skill tags animation
-    gsap.utils.toArray('.skill-tag').forEach((tag: any) => {
-      gsap.from(tag, {
-        scrollTrigger: {
-          trigger: tag.closest('.resume-section'),
-          start: "top 60%",
-          toggleActions: "play none none reset"
-        },
+    // Initial state - hide all items
+    gsap.set(experienceItems, { opacity: 0, y: 100 });
+
+    experienceItems.forEach((item: any, index) => {
+      const isLast = index === experienceItems.length - 1;
+
+      // Animate in
+      experienceTl.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      }, index * 1);
+
+      // Animate skill tags
+      experienceTl.from(item.querySelectorAll('.skill-tag'), {
         scale: 0,
         opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-        delay: 0.8
-      });
+        duration: 0.2,
+        stagger: 0.05,
+        ease: "back.out(1.7)"
+      }, index * 1 + 0.2);
+
+      // Animate out (except for last item)
+      if (!isLast) {
+        experienceTl.to(item, {
+          opacity: 0,
+          y: -100,
+          duration: 0.3,
+          ease: "power2.in"
+        }, index * 1 + 0.7);
+      }
     });
 
     return () => {
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, []);
+  }, [data]);
 
   const formatDate = (date: Date | null) => {
     if (!date) return "Present";
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long'
     });
   };
 
@@ -87,81 +138,104 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
     <div ref={containerRef} className="resume-interactive">
       <div id="resume-wrapper" className="relative">
         {/* Vision Section */}
-        <section 
-          ref={addToSectionRefs}
-          className="resume-section min-h-screen flex items-center py-20 px-8 bg-white"
+        <section
+          ref={visionRef}
+          className="resume-section vision-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="max-w-4xl mx-auto">
-            <Typography variant="h2" className="animate-child text-4xl md:text-6xl font-light text-gray-800 mb-8">
+          <div className="section-title absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+            Intro
+          </div>
+          <PersonalIntro />
+        </section>
+        {/* Vision Section */}
+        <section
+          ref={visionRef}
+          className="resume-section vision-section min-h-screen flex items-center justify-center relative"
+        >
+          <div className="section-title absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+            Vision
+          </div>
+          <div className="vision-content max-w-5xl mx-auto px-8 text-center">
+            <Typography variant="h1" className="text-4xl md:text-6xl font-light text-gray-800 mb-8 leading-tight">
               Vision
             </Typography>
-            <Typography variant="lead" className="animate-child text-xl md:text-2xl text-gray-600 leading-relaxed">
+            <Typography variant="lead" className="text-xl md:text-2xl text-gray-700 leading-relaxed">
               {data.vision.visionStatement}
             </Typography>
           </div>
         </section>
 
         {/* Mission Section */}
-        <section 
-          ref={addToSectionRefs}
-          className="resume-section min-h-screen flex items-center py-20 px-8"
+        <section
+          ref={missionRef}
+          className="resume-section mission-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="max-w-4xl mx-auto">
-            <Typography variant="h2" className="animate-child text-4xl md:text-6xl font-light text-gray-800 mb-8">
+          <div className="section-title absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+            Mission
+          </div>
+          <div className="mission-content max-w-5xl mx-auto px-8 text-center">
+            <Typography variant="h1" className="text-4xl md:text-6xl font-light text-gray-800 mb-8 leading-tight">
               Mission
             </Typography>
-            <Typography variant="lead" className="animate-child text-xl md:text-2xl text-gray-600 leading-relaxed">
+            <Typography variant="lead" className="text-xl md:text-2xl text-gray-700 leading-relaxed">
               {data.mission.missionStatement}
             </Typography>
           </div>
         </section>
 
-        {/* Experience Sections */}
-        {data.experience.map((job, index) => (
-          <section
-            key={`${job.employer}-${index}`}
-            ref={addToSectionRefs}
-            className="resume-section experience min-h-screen flex items-center py-20 px-8"
-          >
-            <div className="max-w-4xl mx-auto w-full">
-              <div className="animate-child mb-6">
-                <Typography variant="h2" className="text-3xl md:text-5xl font-light text-gray-800 mb-2">
-                  {job.role}
-                </Typography>
-                <Typography variant="h3" className="text-xl md:text-2xl text-blue-600 font-medium mb-4">
-                  {job.employer}
-                </Typography>
-                <Typography variant="h4" className="text-lg text-gray-500">
-                  {formatDate(job.tenure[0])} – {formatDate(job.tenure[1])}
-                </Typography>
-              </div>
+        {/* Experience Section */}
+        <section
+          ref={experienceRef}
+          className="resume-section experience-section min-h-screen flex items-center justify-center relative"
+        >
+          <div className="section-title absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+            Experience
+          </div>
+          <div className="subsections w-full">
+            {data.experience.map((job, index) => (
+              <div key={`${job.employer}-${index}`} className="experience-item absolute inset-0 flex items-center justify-center px-8">
+                <div className="max-w-5xl mx-auto w-full">
+                  <div className="mb-8">
+                    <Typography variant="h2" className="text-3xl md:text-5xl font-light text-gray-800 mb-3 leading-tight">
+                      {job.role}
+                    </Typography>
+                    <Typography variant="h3" className="text-xl md:text-2xl text-blue-600 font-medium mb-2">
+                      {job.employer}
+                    </Typography>
+                    <Typography variant="h4" className="text-lg text-gray-500 mb-6">
+                      {formatDate(job.tenure[0])} – {formatDate(job.tenure[1])}
+                    </Typography>
+                  </div>
 
-              <ul className="animate-child space-y-4 mb-8">
-                {job.notes.map((note, noteIndex) => (
-                  <li key={noteIndex} className="text-lg text-gray-600 leading-relaxed flex items-start">
-                    <span className="text-blue-500 mr-4 text-lg">•</span><span>{note}</span>
-                  </li>
-                ))}
-              </ul>
+                  <ul className="space-y-4 mb-8">
+                    {job.notes.map((note, noteIndex) => (
+                      <li key={noteIndex} className="text-lg text-gray-600 leading-relaxed flex items-start">
+                        <span className="text-blue-500 mr-4 text-lg flex-shrink-0">•</span>
+                        <span>{note}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-              <div className="animate-child">
-                <Typography variant="h5" className="text-lg font-medium text-gray-700 mb-4">
-                  Technologies & Skills
-                </Typography>
-                <div className="flex flex-wrap gap-3">
-                  {job.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="skill-tag px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium duration-200"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <div>
+                    <Typography variant="h5" className="text-lg font-medium text-gray-700 mb-4">
+                      Technologies & Skills
+                    </Typography>
+                    <div className="flex flex-wrap gap-3">
+                      {job.skills.map((skill, skillIndex) => (
+                        <span
+                          key={skillIndex}
+                          className="skill-tag px-4 py-2 backdrop-blur-sm text-gray-700 rounded-full text-sm font-medium border border-gray-200 shadow-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );

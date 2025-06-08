@@ -5,7 +5,7 @@ export const resumeData: ResumePage = {
     visionStatement: "An African continent which empowers its people to contribute intellectually and culturally to human achievement."
   },
   mission: {
-    missionStatement: "To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of human life."
+    missionStatement: "To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of urban life."
   },
   experience: [
     {

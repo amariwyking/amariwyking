@@ -5,7 +5,6 @@ import { resumeData } from "@/app/lib/resume-data";
 export default function LandingPage() {
   return (
     <div>
-      <PersonalIntro />
       <ResumeInteractive data={resumeData} />
     </div>
   );
