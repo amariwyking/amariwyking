@@ -17,6 +17,7 @@
 /build
 
 # misc
+CLAUDE.md
 .DS_Store
 *.pem
 
@@ -39,3 +40,6 @@ next-env.d.ts
 # utility directories
 /gallery photos
 /public/gallery_photos/CaptureOne
+
+# VSCode
+/.vscode
