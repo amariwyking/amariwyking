@@ -40,13 +40,15 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         end: "+=100%",
         scrub: 1,
         pin: true,
-        pinSpacing: true
+        pinSpacing: true,
+        snap: { snapTo: "labels" }
       }
     })
       .fromTo(".vision-content",
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 0.5 }
       )
+      .addLabel("visionAnimation")
       .to(".vision-content",
         { opacity: 0, y: -50, duration: 0.5 },
         "+=0.5"
@@ -60,13 +62,15 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         end: "+=100%",
         scrub: 1,
         pin: true,
-        pinSpacing: true
+        pinSpacing: true,
+        snap: { snapTo: "labels" }
       }
     })
       .fromTo(".mission-content",
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 0.5 }
       )
+      .addLabel("visionAnimation")
       .to(".mission-content",
         { opacity: 0, y: -50, duration: 0.5 },
         "+=0.5"
@@ -83,7 +87,11 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         end: `+=${experienceCount * 100}%`,
         scrub: 1,
         pin: true,
-        pinSpacing: true
+        pinSpacing: true,
+        snap: {
+          snapTo: "labels",
+          duration: { min: 0.5, max: 1 },
+        }
       }
     });
 
@@ -94,12 +102,13 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
       const isLast = index === experienceItems.length - 1;
 
       // Animate in
-      experienceTl.to(item, {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      }, index * 1);
+      experienceTl
+        .to(item, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        }, index * 1);
 
       // Animate skill tags
       experienceTl.from(item.querySelectorAll('.skill-tag'), {
@@ -109,6 +118,8 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         stagger: 0.05,
         ease: "back.out(1.7)"
       }, index * 1 + 0.2);
+
+      experienceTl.addLabel(`experienceAnimationGroup${index}`)
 
       // Animate out (except for last item)
       if (!isLast) {
