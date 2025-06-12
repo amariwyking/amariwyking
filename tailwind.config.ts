@@ -1,4 +1,5 @@
 import { mtConfig } from "@material-tailwind/react";
+import { Manuale } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -23,6 +24,11 @@ const config: Config = {
       '9xl': '5.625rem'
     },
     extend: {
+      fontFamily: {
+        workSans: ['var(--font-work-sans)'],
+        kodeMono: ['var(--font-kode-mono)'],
+        manuale: ['var(--font-manuale)'],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
