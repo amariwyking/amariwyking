@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Work_Sans, Kode_Mono, Manuale } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/nav/NavBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
+})
+
+const kodeMono = Kode_Mono({
+  subsets: ['latin'],
+  variable: '--font-kode-mono',
+})
+
+const manuale = Manuale({
+  subsets: ['latin'],
+  variable: '--font-manuale',
+})
 
 export const metadata: Metadata = {
   title: "Amari Wyking",
@@ -16,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full overflow-scroll">
+    <html lang="en" className={`${kodeMono.variable} ${workSans.variable} ${manuale.variable} h-full overflow-scroll`}>
       <body>
         {/* <header className="absolute lg:fixed w-full z-50">
           <NavBar />
