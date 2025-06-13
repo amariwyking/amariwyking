@@ -29,16 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kodeMono.variable} ${workSans.variable} ${manuale.variable} h-full overflow-scroll`}>
-      <body>
-        {/* <header className="absolute lg:fixed w-full z-50">
-          <NavBar />
-        </header> */}
-        <main>
-          <div className="flex flex-col h-full min-h-screen">
-            {children}
-          </div>
-        </main>
+    <html lang="en" className={`${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}>
+      <body className="min-h-screen">
+          {children}
       </body>
     </html>
   );
