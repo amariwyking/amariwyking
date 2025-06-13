@@ -6,7 +6,7 @@ const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'selector',
+  darkMode: 'media',
   theme: {
     fontSize: {
       xs: '0.625rem',
