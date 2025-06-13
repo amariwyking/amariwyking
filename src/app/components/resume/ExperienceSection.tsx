@@ -59,7 +59,7 @@ export default function ExperienceSection({ experience, index, className = "" }:
           <ul className="space-y-6">
             {experience.notes.map((note, noteIndex) => (
               <li key={noteIndex} className="exp-note flex items-start text-lg md:text-xl text-gray-700">
-                <span className="text-blue-500 mr-4 mt-1 text-2xl flex-shrink-0">•adfa</span>
+                <span className="text-blue-500 mr-4 mt-1 text-2xl shrink-0">•adfa</span>
                 <span>{note}</span>
               </li>
             ))}
@@ -74,7 +74,7 @@ export default function ExperienceSection({ experience, index, className = "" }:
             {experience.skills.map((skill, skillIndex) => (
               <span
                 key={skillIndex}
-                className="skill-tag px-4 py-2 bg-white/80 backdrop-blur-sm text-gray-700 rounded-full text-sm font-medium border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-200 cursor-default"
+                className="skill-tag px-4 py-2 bg-white/80 backdrop-blur-xs text-gray-700 rounded-full text-sm font-medium border border-gray-200 hover:bg-white hover:scale-105 transition-all duration-200 cursor-default"
               >
                 {skill}
               </span>

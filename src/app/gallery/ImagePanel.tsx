@@ -9,7 +9,7 @@ export default function ImagePanel() {
         <div className='flex flex-col'>
             <div>
                 <img
-                    className="h-auto max-w-screen-xl object-cover object-center"
+                    className="h-auto max-w-(--breakpoint-xl) object-cover object-center"
                     src="https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/Loft%20on%20West%204th-fPQs0movvK8VSXAtYSErhVHktFzJMa.jpg"
                     alt="nature image"
                 />

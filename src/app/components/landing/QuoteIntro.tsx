@@ -132,7 +132,7 @@ export default function QuoteIntro({ onComplete }: QuoteIntroProps) {
   return (
     <div
       ref={containerRef}
-      className="quote-intro fixed inset-0 z-[9999] bg-black flex items-center justify-center px-8"
+      className="quote-intro fixed inset-0 z-9999 bg-black flex items-center justify-center px-8"
       aria-hidden="true"
     >
       <div className="max-w-4xl mx-auto text-left">

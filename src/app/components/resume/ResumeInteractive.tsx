@@ -153,7 +153,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={visionRef}
           className="resume-section vision-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kodeMono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
             Intro
           </div>
           <PersonalIntro />
@@ -163,14 +163,14 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={visionRef}
           className="resume-section vision-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kodeMono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
             Vision
           </div>
           <div className="vision-content max-w-5xl mx-auto px-8 text-center">
             <Typography variant="h1" className=" text-4xl md:text-6xl text-gray-800 mb-8 leading-tight">
               Vision
             </Typography>
-            <Typography variant="lead" className="font-workSans text-xl md:text-2xl text-gray-700 leading-relaxed">
+            <Typography variant="lead" className="font-work-sans text-xl md:text-2xl text-gray-700 leading-relaxed">
               {data.vision.visionStatement}
             </Typography>
           </div>
@@ -181,7 +181,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={missionRef}
           className="resume-section mission-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kodeMono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
             Mission
           </div>
           <div className="mission-content max-w-5xl mx-auto px-8 text-center">
@@ -199,7 +199,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={experienceRef}
           className="resume-section experience-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kodeMono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
             Experience
           </div>
           <div className="subsections w-full">
@@ -221,7 +221,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
                   <ul className="space-y-4 mb-8">
                     {job.notes.map((note, noteIndex) => (
                       <li key={noteIndex} className="text-lg text-gray-600 leading-relaxed flex items-start">
-                        <span className="text-blue-500 mr-4 text-lg flex-shrink-0">•</span>
+                        <span className="text-blue-500 mr-4 text-lg shrink-0">•</span>
                         <span>{note}</span>
                       </li>
                     ))}
@@ -235,7 +235,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
                       {job.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="skill-tag px-4 py-2 backdrop-blur-sm text-gray-700 rounded-full text-sm font-medium border border-gray-200 shadow-sm"
+                          className="skill-tag px-4 py-2 backdrop-blur-xs text-gray-700 rounded-full text-sm font-medium border border-gray-200 shadow-xs"
                         >
                           {skill}
                         </span>
