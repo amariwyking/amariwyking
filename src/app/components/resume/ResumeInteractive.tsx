@@ -17,6 +17,7 @@ interface ResumeInteractiveProps {
 
 export default function ResumeInteractive({ data = resumeData }: ResumeInteractiveProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLElement>(null);
   const visionRef = useRef<HTMLElement>(null);
   const missionRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
@@ -148,10 +149,10 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
   return (
     <div ref={containerRef} className="resume-interactive">
       <div id="resume-wrapper" className="relative">
-        {/* Vision Section */}
+        {/* Intro Section */}
         <section
-          ref={visionRef}
-          className="resume-section vision-section min-h-screen flex items-center justify-center relative"
+          ref={introRef}
+          className="resume-section intro-section min-h-screen flex items-center justify-center relative"
         >
           <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
             Intro
