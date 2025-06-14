@@ -4,10 +4,11 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Typography } from '@material-tailwind/react';
 import { resumeData } from '@/app/lib/resume-data';
+import { projectData } from '@/app/lib/project-data';
 import { ResumePage } from '@/app/types/resume';
 import PersonalIntro from '../landing/PersonalIntro';
+import ProjectCard from './ProjectCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,15 +21,18 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
   const introRef = useRef<HTMLElement>(null);
   const visionRef = useRef<HTMLElement>(null);
   const missionRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
+  const projectCardsRef = useRef<HTMLDivElement[]>([]);
 
   useGSAP(() => {
     const container = containerRef.current;
     const visionSection = visionRef.current;
     const missionSection = missionRef.current;
+    const projectsSection = projectsRef.current;
     const experienceSection = experienceRef.current;
 
-    if (!container || !visionSection || !missionSection || !experienceSection) return;
+    if (!container || !visionSection || !missionSection || !projectsSection || !experienceSection) return;
 
     // Clear previous ScrollTriggers
     ScrollTrigger.getAll().forEach(st => st.kill());
@@ -73,6 +77,28 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
       )
       .addLabel("visionAnimation")
       .to(".mission-content",
+        { opacity: 0, y: -50, duration: 0.5 },
+        "+=0.5"
+      );
+
+    // Projects Section - Pinned
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: projectsSection,
+        start: "top top",
+        end: "+=100%",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true,
+        snap: { snapTo: "labels" }
+      }
+    })
+      .fromTo(".projects-content",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      )
+      .addLabel("projectsAnimation")
+      .to(".projects-content",
         { opacity: 0, y: -50, duration: 0.5 },
         "+=0.5"
       );
@@ -168,12 +194,12 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
             Vision
           </div>
           <div className="vision-content max-w-5xl mx-auto px-8 text-center">
-            <Typography variant="h1" className=" text-4xl md:text-6xl text-gray-800 mb-8 leading-tight">
+            <p className="text-4xl md:text-6xl text-gray-800 mb-8 leading-tight">
               Vision
-            </Typography>
-            <Typography variant="lead" className="font-work-sans text-xl md:text-2xl text-gray-700 leading-relaxed">
+            </p>
+            <p className="font-work-sans text-xl md:text-2xl text-gray-700 leading-relaxed">
               {data.vision.visionStatement}
-            </Typography>
+            </p>
           </div>
         </section>
 
@@ -186,12 +212,29 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
             Mission
           </div>
           <div className="mission-content max-w-5xl mx-auto px-8 text-center">
-            <Typography variant="h1" className="text-4xl md:text-6xl font-light text-gray-800 mb-8 leading-tight">
+            <p className="text-4xl md:text-6xl font-light text-gray-800 mb-8 leading-tight">
               Mission
-            </Typography>
-            <Typography variant="lead" className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+            </p>
+            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
               {data.mission.missionStatement}
-            </Typography>
+            </p>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section
+          ref={projectsRef}
+          className="resume-section projects-section min-h-screen flex items-center justify-center relative"
+        >
+          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
+            Projects
+          </div>
+          <div className="projects-content w-full px-8">
+            <div className="projects w-full h-[60vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-items-center">
+              {projectData.map((project, index) => (
+                <ProjectCard key={index} project={project} />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -208,15 +251,15 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
               <div key={`${job.employer}-${index}`} className="experience-item absolute inset-0 flex items-center justify-center px-8">
                 <div className="max-w-5xl mx-auto w-full">
                   <div className="mb-8">
-                    <Typography variant="h2" className="text-3xl md:text-5xl font-light text-gray-800 mb-3 leading-tight">
+                    <p className="text-3xl md:text-5xl font-light text-gray-800 mb-3 leading-tight">
                       {job.role}
-                    </Typography>
-                    <Typography variant="h3" className="text-xl md:text-2xl text-blue-600 font-medium mb-2">
+                    </p>
+                    <p className="text-xl md:text-2xl text-blue-600 font-medium mb-2">
                       {job.employer}
-                    </Typography>
-                    <Typography variant="h4" className="text-lg text-gray-500 mb-6">
+                    </p>
+                    <p className="text-lg text-gray-500 mb-6">
                       {formatDate(job.tenure[0])} – {formatDate(job.tenure[1])}
-                    </Typography>
+                    </p>
                   </div>
 
                   <ul className="space-y-4 mb-8">
@@ -229,9 +272,9 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
                   </ul>
 
                   <div>
-                    <Typography variant="h5" className="text-lg font-medium text-gray-700 mb-4">
+                    <p className="text-lg font-medium text-gray-700 mb-4">
                       Technologies & Skills
-                    </Typography>
+                    </p>
                     <div className="flex flex-wrap gap-3">
                       {job.skills.map((skill, skillIndex) => (
                         <span
