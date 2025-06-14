@@ -62,7 +62,5 @@ export type ExperienceEntry = {
 };
 
 export type ResumePage = {
-  vision: Vision;
-  mission: Mission;
   experience: ExperienceEntry[];
 };

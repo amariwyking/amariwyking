@@ -6,11 +6,13 @@ import NavBar from "./components/nav/NavBar";
 const workSans = Work_Sans({
   subsets: ['latin'],
   variable: '--font-work-sans',
+  weight: ['400'],
 })
 
 const kodeMono = Kode_Mono({
   subsets: ['latin'],
   variable: '--font-kode-mono',
+  weight: ['400', '500', '600', '700'],
 })
 
 const manuale = Manuale({

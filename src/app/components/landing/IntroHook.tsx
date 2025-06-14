@@ -69,8 +69,8 @@ export default function IntroHook() {
 
     return (
         <div className="order-1">
-            <Typography className="hook font-bold text-center text-clip leading-tight tracking-normal text-gray-800 dark:text-gray-100 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
-                just another human<span ref={suffixRef} className="suffix text-gray-400 dark:text-gray-500 whitespace-nowrap">ist</span>
+            <Typography className="hook font-bold text-center text-clip leading-tight tracking-normal text-gray-800 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
+                just another human<span ref={suffixRef} className="suffix text-gray-400 whitespace-nowrap">ist</span>
                 <br />
                 {/* <span className="ellipsis">•••</span> */}
                 {/* <br />

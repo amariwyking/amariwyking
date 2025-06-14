@@ -94,7 +94,7 @@ export default function MissionSection({ mission, className = "" }: MissionSecti
           variant="lead" 
           className="mission-statement text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide"
         >
-          {mission.missionStatement}
+          To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of urban life.
         </Typography>
       </div>
     </section>

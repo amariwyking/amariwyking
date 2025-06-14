@@ -92,16 +92,15 @@ export default function HeroName() {
     }, [originalText]);
 
     return (
-        <div className="h-fit flex items-center justify-center">
-            <Typography
+        <div className="">
+            <p
                 ref={nameRef}
-                className="name font-bold text-center text-clip leading-tight tracking-normal text-gray-800 dark:text-gray-100 mx-auto my-6 w-full text-9xl select-none"
-                role="heading"
+                className="name font-kode-mono font-medium text-center leading-[1.15] tracking-normal text-green-600 mx-auto my-6 w-full text-9xl"
                 aria-level={1}
                 aria-label="Amari Wyking"
             >
                 AMARI WYKING
-            </Typography>
+            </p>
         </div>
     );
 }

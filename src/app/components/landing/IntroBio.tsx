@@ -3,12 +3,12 @@ import { Typography } from "@material-tailwind/react";
 export default function IntroBio() {
     return (
         <div className="justify-self-start mx-auto col-span-1 md:col-span-2 order-3">
-            <p className="mx-8 md:mx-auto mt-6 text-left text-base text-gray-600 dark:text-gray-400 md:text-lg lg:text-2xl ">
-                Currently exploring how data can be leveraged to characterize and solve for urban challenges as a student at the New York University Center for Urban Science + Progress.
-
-                Aiming to make major contributions towards the development of smart cities on the African continent.
+            <p className="font-work-sans mx-8 md:mx-auto mt-6 text-left text-base text-gray-600 md:text-lg lg:text-2xl ">
+                I'm a software engineer with a strong focus on data-driven systems and urban technology. My background spans full-stack development, mobile applications, and machine learning, shaped by industry experience at leading tech companies and graduate research at the NYU Center for Urban Science + Progress.
+                <br /><br />
+                I bring a product-oriented mindset to technical challenges, with a particular interest in building scalable tools that improve how complex systems—especially cities—operate and adapt. Whether it be digital products or researching urban problems, I love digging into problems that sit at the edge of software, data, and the real world.
             </p>
-        </div>
+        </div >
 
     )
 }
