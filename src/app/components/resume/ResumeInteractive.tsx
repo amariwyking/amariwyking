@@ -9,6 +9,7 @@ import { projectData } from '@/app/lib/project-data';
 import { ResumePage } from '@/app/types/resume';
 import PersonalIntro from '../landing/PersonalIntro';
 import ProjectCard from './ProjectCard';
+import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -180,9 +181,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={introRef}
           className="resume-section intro-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
-            Intro
-          </div>
+          <SectionTitle title="Intro" />
           <PersonalIntro />
         </section>
         {/* Vision Section */}
@@ -190,15 +189,10 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={visionRef}
           className="resume-section vision-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
-            Vision
-          </div>
+          <SectionTitle title="Vision" />
           <div className="vision-content max-w-5xl mx-auto px-8 text-center">
-            <p className="text-4xl md:text-6xl text-gray-800 mb-8 leading-tight">
-              Vision
-            </p>
-            <p className="font-work-sans text-xl md:text-2xl text-gray-700 leading-relaxed">
-              {data.vision.visionStatement}
+            <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
+              A global society that empowers <span className="keyword">all</span> of its people to <span className="keyword">contribute</span> <span className="keyword">intellectually</span> and <span className="keyword">culturally</span> to human achievement.
             </p>
           </div>
         </section>
@@ -208,15 +202,10 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={missionRef}
           className="resume-section mission-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
-            Mission
-          </div>
+          <SectionTitle title="Mission" />
           <div className="mission-content max-w-5xl mx-auto px-8 text-center">
-            <p className="text-4xl md:text-6xl font-light text-gray-800 mb-8 leading-tight">
-              Mission
-            </p>
-            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
-              {data.mission.missionStatement}
+            <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
+              Leverage my skillset in support of the deployment of data-centric technologies that bolster the sustainability of urban life in sub-Saharan Africa.
             </p>
           </div>
         </section>
@@ -226,9 +215,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={projectsRef}
           className="resume-section projects-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
-            Projects
-          </div>
+          <SectionTitle title="Projects" />
           <div className="projects-content w-full px-8">
             <div className="projects w-full h-[60vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-items-center">
               {projectData.map((project, index) => (
@@ -243,43 +230,39 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={experienceRef}
           className="resume-section experience-section min-h-screen flex items-center justify-center relative"
         >
-          <div className="section-title font-kode-mono absolute top-8 left-8 text-6xl md:text-8xl font-extralight text-gray-800 opacity-20 pointer-events-none">
-            Experience
-          </div>
+            <SectionTitle title="Experience" />
           <div className="subsections w-full">
             {data.experience.map((job, index) => (
               <div key={`${job.employer}-${index}`} className="experience-item absolute inset-0 flex items-center justify-center px-8">
                 <div className="max-w-5xl mx-auto w-full">
-                  <div className="mb-8">
-                    <p className="text-3xl md:text-5xl font-light text-gray-800 mb-3 leading-tight">
-                      {job.role}
-                    </p>
-                    <p className="text-xl md:text-2xl text-blue-600 font-medium mb-2">
+                    <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-gray-600 mb-3 leading-tight">
                       {job.employer}
                     </p>
-                    <p className="text-lg text-gray-500 mb-6">
-                      {formatDate(job.tenure[0])} – {formatDate(job.tenure[1])}
+                    <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-green-600 font-medium mb-2">
+                      {job.role}
                     </p>
-                  </div>
+                    <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-gray-400 mb-6">
+                      {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
+                    </p>
 
                   <ul className="space-y-4 mb-8">
                     {job.notes.map((note, noteIndex) => (
-                      <li key={noteIndex} className="text-lg text-gray-600 leading-relaxed flex items-start">
-                        <span className="text-blue-500 mr-4 text-lg shrink-0">•</span>
+                      <li key={noteIndex} className="text-sm sm:text-lg md:text-xl font-work-sans text-gray-600 leading-relaxed flex items-start">
+                        <span className="mr-4 text-lg shrink-0">•</span>
                         <span>{note}</span>
                       </li>
                     ))}
                   </ul>
 
                   <div>
-                    <p className="text-lg font-medium text-gray-700 mb-4">
+                    <p className="text-sm sm:text-lg font-kode-mono font-[400] text-gray-600 mb-4">
                       Technologies & Skills
                     </p>
                     <div className="flex flex-wrap gap-3">
                       {job.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="skill-tag px-4 py-2 backdrop-blur-xs text-gray-700 rounded-full text-sm font-medium border border-gray-200 shadow-xs"
+                          className="skill-tag font-kode-mono px-2 py-1 sm:px-4 sm:py-2 text-gray-500 text-xs sm:text-sm font-medium border border-gray-200"
                         >
                           {skill}
                         </span>

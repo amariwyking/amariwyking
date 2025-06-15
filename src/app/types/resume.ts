@@ -70,7 +70,5 @@ export interface Project {
 }
 
 export type ResumePage = {
-  vision: Vision;
-  mission: Mission;
   experience: ExperienceEntry[];
 };

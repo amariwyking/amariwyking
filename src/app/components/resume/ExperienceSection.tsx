@@ -36,10 +36,10 @@ export default function ExperienceSection({ experience, index, className = "" }:
         <div className="exp-header mb-10">
           <div className="flex items-start justify-between mb-6">
             <div>
-              <Typography variant="h1" className="text-4xl md:text-6xl font-light text-gray-800 mb-3 leading-tight">
+              <Typography variant="h1" className="text-4xl md:text-6xl text-gray-800 mb-3 leading-tight">
                 {experience.role}
               </Typography>
-              <Typography variant="h2" className="text-2xl md:text-3xl text-gray-700 font-medium mb-2">
+              <Typography variant="h2" className="text-2xl md:text-3xl text-gray-700 font- mb-2">
                 {experience.employer}
               </Typography>
               <Typography variant="h3" className="text-lg md:text-xl text-gray-600">
@@ -59,7 +59,7 @@ export default function ExperienceSection({ experience, index, className = "" }:
           <ul className="space-y-6">
             {experience.notes.map((note, noteIndex) => (
               <li key={noteIndex} className="exp-note flex items-start text-lg md:text-xl text-gray-700">
-                <span className="text-blue-500 mr-4 mt-1 text-2xl shrink-0">•adfa</span>
+                <span className="text-green-600 mr-4 mt-1 text-2xl shrink-0">•adfa</span>
                 <span>{note}</span>
               </li>
             ))}

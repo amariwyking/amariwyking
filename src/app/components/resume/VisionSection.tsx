@@ -31,7 +31,7 @@ export default function VisionSection({ vision, className = "" }: VisionSectionP
           variant="lead" 
           className="vision-text text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide"
         >
-          {vision.visionStatement}
+          A global society that empowers <span className="text-green-400">all</span> of its people to contribute intellectually and culturally to human achievement.
         </Typography>
       </div>
     </section>

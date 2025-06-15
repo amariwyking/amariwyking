@@ -1,12 +1,6 @@
 import { ResumePage } from '@/app/types/resume';
 
 export const resumeData: ResumePage = {
-  vision: {
-    visionStatement: "An African continent which empowers its people to contribute intellectually and culturally to human achievement."
-  },
-  mission: {
-    missionStatement: "To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of urban life."
-  },
   experience: [
     {
       employer: "Idaho National Laboratory",
@@ -28,7 +22,7 @@ export const resumeData: ResumePage = {
         "Implemented scalable data preprocessing workflow using Dask and high-performance computing to handle large multi-modal infrasound for anomaly detection model training",
         "Evaluated efficacy of LSTM networks vs support vector machines for detecting anomalous events in nuclear solvent extraction testbed",
       ],
-      skills: ["Java", "Anaconda", "Dask", "High-performance computing", "Deep learning"]
+      skills: ["Python", "Anaconda", "Dask", "High-performance computing", "Deep learning"]
     },
     {
       employer: "Apple",
