@@ -81,7 +81,7 @@ export default function NamePlate() {
     }, [originalText]);
 
     return (
-        <div className="">
+        <div className="order-1">
             <p
                 ref={nameRef}
                 className="name font-kode-mono font-medium text-left leading-[1.15] tracking-normal text-green-600 mx-auto my-6 w-full text-9xl"

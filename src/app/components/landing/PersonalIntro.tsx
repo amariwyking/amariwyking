@@ -1,6 +1,5 @@
-import NamePlate from "./HeroName";
+import NamePlate from "./NamePlate";
 import IntroBio from "./IntroBio";
-import IntroHook from "./IntroHook";
 import ProfilePic from "./ProfilePic";
 
 export default function PersonalIntro() {
