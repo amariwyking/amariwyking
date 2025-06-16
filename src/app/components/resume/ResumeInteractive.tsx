@@ -210,7 +210,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
   };
 
   return (
-    <div ref={containerRef} className="resume-interactive">
+    <div ref={containerRef} className="resume-interactive overflow-x-hidden">
       <div id="resume-wrapper" className="relative">
         {/* Intro Section */}
         <section
