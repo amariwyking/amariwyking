@@ -24,7 +24,6 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
   const missionRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
-  const projectCardsRef = useRef<HTMLDivElement[]>([]);
 
   useGSAP(() => {
     const container = containerRef.current;
@@ -76,33 +75,70 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 0.5 }
       )
-      .addLabel("visionAnimation")
+      .addLabel("missionAnimation")
       .to(".mission-content",
         { opacity: 0, y: -50, duration: 0.5 },
         "+=0.5"
       );
 
-    // Projects Section - Pinned
-    gsap.timeline({
+    // Projects Section - Card Stack Animation
+    const time = 2;
+    const projectCards = gsap.utils.toArray('.project-card');
+    
+    // Set initial 3D properties for cards
+    gsap.set(projectCards, {
+      transformStyle: "preserve-3d",
+      transformPerspective: 1000,
+      transformOrigin: "center top"
+    });
+
+    const projectsTl = gsap.timeline({
       scrollTrigger: {
         trigger: projectsSection,
         start: "top top",
-        end: "+=100%",
-        scrub: 1,
+        end: `+=${window.innerHeight}px top`,
+        scrub: true,
         pin: true,
         pinSpacing: true,
-        snap: { snapTo: "labels" }
       }
-    })
-      .fromTo(".projects-content",
-        { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 0.5 }
-      )
-      .addLabel("projectsAnimation")
-      .to(".projects-content",
-        { opacity: 0, y: -50, duration: 0.5 },
-        "+=0.5"
-      );
+    });
+
+    // Phase 1: Cards animate in from right with 3D rotation
+    projectsTl.from(projectCards, {
+      opacity: 0,
+      x: () => window.innerWidth,
+      rotationY: -100,
+      duration: time / 2,
+      stagger: time
+    });
+
+    // Phase 2: All cards except last one scale down and fade
+    projectsTl.to(
+      projectCards.slice(0, -1), // All except last
+      {
+        opacity: 0,
+        scale: 0.9,
+        duration: time / 2,
+        stagger: {
+          each: time
+        }
+      },
+      time // Start when first phase completes
+    );
+
+    // Phase 3: Move scaled cards left off-screen
+    projectsTl.to(
+      projectCards.slice(0, -1), // All except last
+      {
+        x: () => -window.innerWidth,
+        rotationY: 100,
+        duration: time,
+        stagger: {
+          each: time
+        }
+      },
+      time + 0.2
+    );
 
     // Experience Section - Pinned with multiple items
     const experienceItems = gsap.utils.toArray('.experience-item');
@@ -184,6 +220,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           <SectionTitle title="Intro" />
           <PersonalIntro />
         </section>
+
         {/* Vision Section */}
         <section
           ref={visionRef}
@@ -217,10 +254,19 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         >
           <SectionTitle title="Projects" />
           <div className="projects-content w-full px-8">
-            <div className="projects w-full h-[60vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-items-center">
-              {projectData.map((project, index) => (
-                <ProjectCard key={index} project={project} />
-              ))}
+            <div className="projects-stack relative w-full h-[60vh] flex items-center justify-center">
+            {/* Card stack container - using CSS Grid to stack cards */}
+              <div className="grid w-full max-w-lg h-fit" style={{ gridTemplateAreas: '"stack"' }}>
+                {projectData.map((project, index) => (
+                  <div
+                    key={index}
+                    className="project-card"
+                    style={{ gridArea: 'stack' }}
+                  >
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -230,20 +276,20 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           ref={experienceRef}
           className="resume-section experience-section min-h-screen flex items-center justify-center relative"
         >
-            <SectionTitle title="Experience" />
+          <SectionTitle title="Experience" />
           <div className="subsections w-full">
             {data.experience.map((job, index) => (
               <div key={`${job.employer}-${index}`} className="experience-item absolute inset-0 flex items-center justify-center px-8">
                 <div className="max-w-5xl mx-auto w-full">
-                    <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-gray-600 mb-3 leading-tight">
-                      {job.employer}
-                    </p>
-                    <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-green-600 font-medium mb-2">
-                      {job.role}
-                    </p>
-                    <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-gray-400 mb-6">
-                      {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
-                    </p>
+                  <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-gray-600 mb-3 leading-tight">
+                    {job.employer}
+                  </p>
+                  <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-green-600 font-medium mb-2">
+                    {job.role}
+                  </p>
+                  <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-gray-400 mb-6">
+                    {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
+                  </p>
 
                   <ul className="space-y-4 mb-8">
                     {job.notes.map((note, noteIndex) => (
