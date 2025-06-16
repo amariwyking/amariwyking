@@ -256,7 +256,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           <div className="projects-content w-full px-8">
             <div className="projects-stack relative w-full h-[60vh] flex items-center justify-center">
             {/* Card stack container - using CSS Grid to stack cards */}
-              <div className="grid w-full max-w-lg h-fit" style={{ gridTemplateAreas: '"stack"' }}>
+              <div className="grid w-full max-w-2xl h-fit" style={{ gridTemplateAreas: '"stack"' }}>
                 {projectData.map((project, index) => (
                   <div
                     key={index}
