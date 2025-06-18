@@ -12,8 +12,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <h5 className="text-md md:text-xl font-bold tracking-wider ">
           {project.name}
         </h5>
-        <div className="w-full h-[2px] my-2 bg-green-600"></div>
-        <p className="text-sm md:text-base tracking-tighter line-clamp-2">
+        <div className="w-full h-[2px] my-2 sm:my-6 md:bg-green-600"></div>
+        <p className="font-work-sans text-md md:text-base tracking-tighter">
           {project.description}
         </p>
       </div>

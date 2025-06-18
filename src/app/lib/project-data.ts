@@ -2,45 +2,52 @@ import { Project } from "@/app/types/resume";
 
 export const projectData: Project[] = [
   {
-    name: "Urban Data Visualizer",
-    description: "Interactive web app exploring spatial patterns in urban migration using satellite imagery",
-    imageLink: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&h=300&fit=crop",
-    techStack: ["GSAP", "Python"],
-    projectLink: "https://example.com/urban-viz"
+    name: "Ready to Move? Urban Climate Migration in the US",
+    description: "Analyzes the societal impacts of climate-induced migration, using Erie County as a case study to examine population forecasts and their impact on urban socioeconomic indicators like employment, education, and housing, providing insights for policy development and urban preparedness strategies.",
+    imageLink: "",
+    techStack: ["Geographic information systems"],
+    projectLink: ""
   },
   {
-    name: "Climate Risk Dashboard",
-    description: "Real-time dashboard tracking extreme weather events and vulnerability metrics",
-    imageLink: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=300&fit=crop",
-    techStack: ["PostgreSQL", "TailwindCSS"],
-    projectLink: "https://example.com/climate-dashboard"
+    name: "Transformer Models for Candidate Selection",
+    description: "Explores the effectiveness of pre-trained transformer models and large language models in optimizing the selection of job candidates and quantifying the importance of various skills, comparing their performance to human evaluators.",
+    imageLink: "",
+    techStack: ["Python", "Natural language processing", "Deep learning"],
+    projectLink: ""
   },
   {
-    name: "Smart Transportation Hub",
-    description: "AI-powered platform optimizing public transit routes and schedules",
-    imageLink: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
-    techStack: ["TypeScript", "Node.js", "MongoDB",],
-    projectLink: "https://example.com/transport-hub"
+    name: "Capacitated Vehicle Routing for Environmental Savings",
+    description: "Evaluates the effectiveness and environmental consequences of rapid grocery delivery services like Blinkit, focusing on capacitated vehicle routing to optimize deliveries from 'dark stores' in urban areas for environmental savings.",
+    imageLink: "",
+    techStack: ["Python", "Data Visualization", "Geographic information systems"],
+    projectLink: ""
   },
   {
-    name: "Renewable Energy Tracker",
-    description: "Comprehensive monitoring system for solar and wind energy production",
-    imageLink: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop",
-    techStack: ["GraphQL", "Docker"],
-    projectLink: "https://example.com/energy-tracker"
+    name: "Data-Driven Charging Network Analysis",
+    description: "Reconstructs an electric vehicle charging network from session data using Graphical Lasso and develops a dashboard for analyzing charger usage and informing deployment strategies.",
+    imageLink: "",
+    techStack: ["Python", "Plotly Dash", "Data Visualization", "Electric Vehicle"],
+    projectLink: ""
   },
   {
-    name: "Digital Health Platform",
-    description: "Telemedicine application connecting patients with healthcare providers",
-    imageLink: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
-    techStack: ["Firebase", "AWS"],
-    projectLink: "https://example.com/health-platform"
+    name: "SmogBusters: Air Quality & Mobility",
+    description: "Explores the relationship between hyperlocal air quality, pedestrian mobility, and public health, aiming to enable citizens to avoid air pollution during non-motorized commutes.",
+    imageLink: "",
+    techStack: ["Python", "Geographic information systems", "Data Visualization"],
+    projectLink: ""
   },
   {
-    name: "Community Garden Network",
-    description: "Social platform connecting urban gardeners and sharing resources",
-    imageLink: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
-    techStack: ["Next.js"],
-    projectLink: "https://example.com/garden-network"
-  }
+    name: "Flood Risk in New York: A Socioeconomic Investigation",
+    description: "Investigates the effectiveness of vulnerability indexes (National Risk Index and Social Vulnerability Index) for flood preparedness in New York City, particularly in the context of equity, by comparing them with socioeconomic data and NYC 311 flood complaints.",
+    imageLink: "",
+    techStack: ["Python", "Geographic information systems", "Data Visualization"],
+    projectLink: ""
+  },
+  {
+    name: "South Bronx Solar Generation Capacity",
+    description: "Analyzes the solar generation potential of the Southwest Bronx Con Edison power district using GIS data from OpenStreetMap and USGS LiDAR, calculating Sky View Factor and total building footprint area to assess solar power contributions to district demand.",
+    imageLink: "",
+    techStack: ["Geographic information systems", "Python"],
+    projectLink: ""
+  },
 ];
