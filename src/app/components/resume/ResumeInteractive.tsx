@@ -231,9 +231,9 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           className="resume-section vision-section min-h-screen flex items-center justify-center relative"
         >
           <SectionTitle title="Vision" />
-          <div className="vision-content max-w-5xl mx-auto px-8 text-center">
+          <div className="vision-content max-w-3xl mx-auto px-8 text-center">
             <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
-              A global society that empowers <span className="keyword">all</span> of its people to <span className="keyword">contribute</span> <span className="keyword">intellectually</span> and <span className="keyword">culturally</span> to human achievement.
+              A world where cities thrive without compromising our planet's future.
             </p>
           </div>
         </section>
@@ -244,9 +244,9 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
           className="resume-section mission-section min-h-screen flex items-center justify-center relative"
         >
           <SectionTitle title="Mission" />
-          <div className="mission-content max-w-5xl mx-auto px-8 text-center">
+          <div className="mission-content max-w-6xl mx-auto px-8 text-center">
             <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
-              Leverage my skillset in support of the deployment of data-centric technologies that bolster the sustainability of urban life in sub-Saharan Africa.
+              To support the deployment of data-centric technologies that bolster the sustainability of urban life.
             </p>
           </div>
         </section>
