@@ -92,11 +92,15 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
       transformOrigin: "center top"
     });
 
+    // scroll factor
+    const isMobile = window.innerWidth < 768;
+    const scrollFactor = isMobile ? 1 : 2;
+
     const projectsTl = gsap.timeline({
       scrollTrigger: {
         trigger: projectsSection,
         start: "top top",
-        end: `+=${window.innerHeight}px top`,
+        end: `+=${window.innerHeight * scrollFactor}px top`,
         scrub: true,
         pin: true,
         pinSpacing: true,
