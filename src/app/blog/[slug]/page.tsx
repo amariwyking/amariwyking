@@ -1,6 +1,5 @@
 import { getArticleBySlug, loadBlogPosts } from "@/app/lib/load-blog-posts"
 import { Blog } from "@/app/types/blogs";
-import { Typography } from "@material-tailwind/react";
 import Markdown from "markdown-to-jsx";
 
 export async function generateStaticParams() {

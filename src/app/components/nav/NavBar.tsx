@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
     Button,
     IconButton,
-    Typography,
     Collapse,
     Navbar,
 } from "@material-tailwind/react";
@@ -35,15 +35,13 @@ function NavList() {
             {LINKS.map(({ icon: Icon, title, href }) => (
                 <li key={title}>
                     <div className="px-4 ring-0 hover:ring-2 ring-primary rounded-full duration-300">
-                        <Typography
-                            as="a"
+                        <Link
                             href={href}
-                            type="small"
                             className="flex items-center gap-x-2 p-1 text-surface-foreground"
                         >
                             <Icon className="h-4 w-4" />
                             {title}
-                        </Typography>
+                        </Link>
                     </div>
                 </li>
             ))}
@@ -64,14 +62,12 @@ export default function NavBar() {
     return (
         <Navbar className="flex flex-col lg:mt-6 py-2 z-10 bg-white rounded-xs lg:ring-1 ring-secondary shadow-md max-w-(--breakpoint-xl) transition-all lg:flex-row lg:w-fit lg:rounded-full lg:justify-center lg:mx-auto lg:my-8">
             <div className="flex items-center w-full">
-                <Typography
-                    as="a"
+                <Link
                     href="/"
-                    type="small"
                     className="ml-2 mx-4 lg:mx-8 block py-1 font-mono font-semibold text-foreground"
                 >
                     Amari Wyking
-                </Typography>
+                </Link>
                 <hr className="hidden h-5 w-px border-l-2 border-t-0 border-secondary-dark lg:block" />
                 <IconButton
                     size="sm"

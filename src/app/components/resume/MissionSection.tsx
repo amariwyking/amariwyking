@@ -4,7 +4,6 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Typography } from '@material-tailwind/react';
 import { Mission } from '@/app/types/resume';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -84,18 +83,12 @@ export default function MissionSection({ mission, className = "" }: MissionSecti
       className={`min-h-screen flex items-center py-20 px-8 ${className}`}
     >
       <div className="mission-content max-w-5xl mx-auto">
-        <Typography 
-          variant="h1" 
-          className="mission-title text-5xl md:text-7xl font-light text-gray-800 mb-12 leading-tight"
-        >
+        <h1 className="mission-title text-5xl md:text-7xl font-light text-gray-800 mb-12 leading-tight">
           Mission
-        </Typography>
-        <Typography 
-          variant="lead" 
-          className="mission-statement text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide"
-        >
+        </h1>
+        <p className="mission-statement text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide">
           To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of urban life.
-        </Typography>
+        </p>
       </div>
     </section>
   );
