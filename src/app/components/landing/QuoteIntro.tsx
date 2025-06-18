@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { useRef, useLayoutEffect } from 'react';
-import { Typography } from '@material-tailwind/react';
 
 gsap.registerPlugin(SplitText);
 
@@ -137,24 +136,24 @@ export default function QuoteIntro({ onComplete }: QuoteIntroProps) {
     >
       <div className="max-w-4xl mx-auto text-left">
         <div className="flex flex-col space-y-4">
-          <Typography
+          <p
             ref={clause1Ref}
             className="text-white text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed"
           >
             {clause1}
-          </Typography>
-          <Typography
+          </p>
+          <p
             ref={clause2Ref}
             className="text-white text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed"
           >
             {clause2}
-          </Typography>
-          <Typography
+          </p>
+          <p
             ref={clause3Ref}
             className="text-white text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed"
           >
             {clause3}
-          </Typography>
+          </p>
         </div>
         <cite
           ref={attributionRef}

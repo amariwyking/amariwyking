@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Work_Sans, Kode_Mono, Manuale } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/nav/NavBar";
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -31,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}>
+    <html lang="en" className={`bg-zinc-100 ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}>
       <body className="min-h-screen">
           {children}
       </body>

@@ -3,7 +3,6 @@
 import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
-import { Typography } from '@material-tailwind/react';
 import { useRef } from 'react';
 
 
@@ -69,7 +68,7 @@ export default function IntroHook() {
 
     return (
         <div className="order-1">
-            <Typography className="hook font-bold text-center text-clip leading-tight tracking-normal text-gray-800 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
+            <p className="hook font-bold text-center text-clip leading-tight tracking-normal text-gray-800 mx-auto my-6 w-full text-2xl lg:max-w-3xl lg:text-5xl">
                 just another human<span ref={suffixRef} className="suffix text-gray-400 whitespace-nowrap">ist</span>
                 <br />
                 {/* <span className="ellipsis">•••</span> */}
@@ -79,7 +78,7 @@ export default function IntroHook() {
                 building software
                 <br />
                 embracing life */}
-            </Typography>
+            </p>
         </div>
 
     )

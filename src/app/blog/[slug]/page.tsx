@@ -1,6 +1,5 @@
 import { getArticleBySlug, loadBlogPosts } from "@/app/lib/load-blog-posts"
 import { Blog } from "@/app/types/blogs";
-import { Typography } from "@material-tailwind/react";
 import Markdown from "markdown-to-jsx";
 
 export async function generateStaticParams() {
@@ -30,13 +29,27 @@ export default async function Page({
     }
 
     return (
-        <div className="px-12 lg:px-36">
+        <div className="px-12 lg:px-36 py-8 md:py-12 lg:py-24">
             <div>
             </div>
             <div className="flex flex-col h-full justify-center items-center">
                 <div className="w-fit">
-                    <Markdown className="prose">
-                        {`<h1>${blogPost?.title}</h1>` + content}
+                    <Markdown className="
+                                        font-manuale
+                                        prose
+                                        prose-zinc
+                                        sm:prose-sm
+                                        base:prose-base
+                                        lg:prose-lg
+                                        xl:prose-xl
+                                        2xl:prose-2xl
+                                        prose-h1:font-kode-mono
+                                        prose-headings:font-work-sans
+                                        "
+                    >
+                        {`<h1 className="text-2xl">${blogPost?.title}</h1>` + 
+                        `<div className="w-full h-0.5 bg-zinc-900"><div>`+
+                        content}
                     </Markdown>
                 </div>
             </div>

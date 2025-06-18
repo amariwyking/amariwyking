@@ -61,6 +61,14 @@ export type ExperienceEntry = {
   type?: 'work' | 'project' | 'education'; // categorization for filtering
 };
 
+export interface Project {
+  name: string;
+  description: string;
+  projectLink?: string;
+  imageLink?: string;
+  techStack: Skill[];
+}
+
 export type ResumePage = {
   experience: ExperienceEntry[];
 };
