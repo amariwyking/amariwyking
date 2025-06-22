@@ -1,51 +1,30 @@
-# Amari Wyking Garrett
+```
+    ___                         _    _       __      __   _                
+   /   |  ____ ___  ____ ______(_)  | |     / /_  __/ /__(_)___  ____ _    
+  / /| | / __ `__ \/ __ `/ ___/ /   | | /| / / / / / //_/ / __ \/ __ `/    
+ / ___ |/ / / / / / /_/ / /  / /    | |/ |/ / /_/ / ,< / / / / / /_/ /     
+/_/  |_/_/ /_/ /_/\__,_/_/  /_/     |__/|__/\__, /_/|_/_/_/ /_/\__, /      
+                                           /____/             /____/       
+```
+Full-Stack Engineer passionate about building intuitive web experiences and exploring the intersection of technology and urbanization.
 
-##  About Me
-Urban tech innovator leveraging AI/ML to solve complex city challenges. Passionate about data-driven solutions for transportation, safety, and environmental issues. Interested in developing intuitive applications and conducting impactful research to improve urban life. Combines strong software engineering skills with growing expertise in urban informatics to create innovative, sustainable solutions for 21st-century cities.
+## Professional Background
 
-## Education
+I've contributed to projects at **Meta**, **Apple**, **Microsoft**, and **Idaho National Laboratory**, working on everything from ML visualization tools to iOS experiences to Minecraft and even battery simulation frameworks.
 
-* New York University (Sept. 2023 - Present)
-	+ M.S. Applied Urban Science & Informatics (Expected 2025)
-* North Carolina Agricultural and Technical State University (Aug. 2019 - May 2023)
-	+ B.S. cum laude Computer Science (2023)
+## What You'll Find Here
 
-## Employment
+My repositories showcase a diverse range of projects spanning multiple domains:
 
-* Idaho National Laboratory (May 2024 - Aug. 2024)
-	+ Data Science Intern
-* Idaho National Laboratory (Aug. 2023 - May 2023)
-	+ Data Science Intern
-* Apple (May 2022 - Aug. 2022)
-	+ Software Engineering Intern
-* Meta (May 2021 - Aug. 2021)
-	+ Software Engineering Intern
-* Meta (June 2020 - Aug. 2020)
-	+ Software Engineering Intern
-* Method Group (Mar. 2019 - May 2019)
-	+ IT Intern
-* Microsoft (June 2018 - Aug. 2018)
-	+ Video Game Development Intern
+- **Web Development**: Full-stack applications, my personal website with GSAP animations, and interactive data visualization dashboards
+- **Mobile Applications**: Native Android apps built with Java and modern development practices
+- **Computer Vision & Robotics**: Drone control system for DJI Tello using computer vision to autonomously follow a human
+- **Machine Learning & AI**: ML notebooks exploring various algorithms, neural networks, and data science experiments
+- **Geospatial Analysis**: Google Earth Engine scripts for satellite data processing and environmental analysis
+- **Academic Research**: Projects from my NYU Applied Urban Science & Informatics program combining technology and urban planning
 
-## Awards
+From autonomous drones to urban data analysis, these projects reflect my curiosity about how technology can solve real-world problems across different scales and domains.
 
-* The National GEM Consortium - GEM Fellowship (2023)
-* Thurgood Marshall College Fund - Apple HBCU Scholar (2022)
-* CUSP - Global Data Dive: Transport, Safety, Air Quality, and Health (2024)
-	+ 1st Place - NYU CUSP
-* NYU CUSP - Inaugural CUSP Local Data Dive (2023)
-	+ People's Choice Award
-* NCAT College of Engineering - HackNCAT 4.0 (2021)
-	+ 1st Place - Disney
-* Meta - BiT Hackathon (2018)
-	+ 1st Place
-* Meta - BiT Hackathon (2017)
-	+ Judge's Award
-* Meta - Seattle Environmental Justice Hackathon (2017)
-	+ Most Creative Project
+*Pinned repositories below highlight some of my favorite projects - feel free to explore and [reach out](https://www.linkedin.com/in/amariwyking/) with any questions!*
 
-## Volunteering
-
-* Soronko Academy (Mar. 2019 - May 2019)
-	+ Teaching Assistant
-	+ Introduced 40+ women and children to basic computer skills and how to design websites by teaching the basics of HTML & CSS
+To learn more about me visit my [Personal Site](https://amariwyking.vercel.app/).
