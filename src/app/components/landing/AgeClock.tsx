@@ -13,6 +13,10 @@ const dsDigit = localFont({
     src: '../../fonts/DS-DIGIT.woff2',
 });
 
+const digitalSevenMonoItalic = localFont({
+    src: '../../fonts/digital-7-mono-italic.woff2',
+});
+
 interface Age {
     years: number,
     months: number,
@@ -29,7 +33,7 @@ export function AgeClock() {
 
     // Parse the birthdate string into a Date object, zoned to America/New_York
     const birthdate = toZonedTime(birthdateString, timeZone);
-    
+
     // State to hold the broken-down age components for display
     const [age, setAge] = useState<Age | null>(null);
 
@@ -64,23 +68,34 @@ export function AgeClock() {
         calculateAndSetAge();
 
         // Set an interval that continuously increments the age
-        setInterval(calculateAndSetAge, 10);
+        setInterval(calculateAndSetAge, 1000);
     }, []);
 
     if (!age) {
         return <div> Calculating age...</div>
     }
 
+    const formattedYears = String(age.years).padStart(2, ' ');
+    const formattedMonths = String(age.months).padStart(2, ' ');
+    const formattedDays = String(age.days).padStart(2, ' ');
     const formattedHours = String(age.hours).padStart(2, '0');
     const formattedMinutes = String(age.minutes).padStart(2, '0');
     const formattedSeconds = String(age.seconds).padStart(2, '0');
     const formattedMilliseconds = String(age.milliseconds).padStart(3, '0');
 
     return (
-        <div>
-            <p className={`${dsDigit.className} text-green-600`}>
-                {age.years} yrs. | {age.months} mos. | {age.days} days | {formattedHours}:{formattedMinutes}:{formattedSeconds}.{formattedMilliseconds}
+        <div className={`flex flex-col ${digitalSevenMonoItalic.className} text-green-600`}>
+            <p className="w-full text-sm mb-2 text-center">
+                {formattedYears} yrs | {formattedMonths} mos | {formattedDays} days
             </p>
+            <div className="flex flex-col justify-center text-center gap-y-2">
+                <p className="justify-center bg-zinc-800 px-4 border-2 border-zinc-500 rounded-xs text-4xl text-shadow-lg/70 text-shadow-green-800">
+                    {formattedHours}:{formattedMinutes}:{formattedSeconds}
+                </p>
+                <p className="uppercase w-full h-fit py-4 p-2 text-sm rounded-xs bg-green-600 font-work-sans text-zinc-100">
+                    EVERY SECOND COUNTS
+                </p>
+            </div>
         </div>
     );
 }
