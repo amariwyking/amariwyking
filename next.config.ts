@@ -17,8 +17,7 @@ const nextConfig: NextConfig = {
 };
 
 const withCivicAuth = createCivicAuthPlugin({
-  clientId: '54545817-b989-48e1-a7e0-0af35d5ff315',
-  baseUrl: 'https://amariwyking.vercel.app'
+  clientId: '54545817-b989-48e1-a7e0-0af35d5ff315'
 });
 
 export default withCivicAuth(nextConfig)

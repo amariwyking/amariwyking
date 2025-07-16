@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useEffect, useRef, useState } from 'react';
-import { useUser } from '@civic/auth/react';
 import { UserButton } from '@civic/auth/react'
 
 // Register GSAP plugins
@@ -48,8 +47,11 @@ export default function NamePlate() {
         const firstName = nameElement.querySelector('.word1') as HTMLParagraphElement;
 
         const handleClick = (event: MouseEvent) => {
+            console.log('First name clicked')
             setAuthIsVisible(prevIsVisible => !prevIsVisible);
         }
+
+        firstName?.addEventListener('click', handleClick);
 
         splitTextRef.current = splitInstance;
 
@@ -96,9 +98,12 @@ export default function NamePlate() {
 
     // useGSAP for initializing the auth animation timeline (runs once)
     useGSAP(() => {
+        console.log(`Auth animation triggered | Visibility: ${authIsVisible}`);
+
         const authElement = authRef.current;
         if (!authElement) return;
 
+        console.log("Creating GSAP timeline for authElement...")
 
         // Create the timeline, initially hidden/reversed
         const tl = gsap.timeline({ paused: true, reversed: true }); // Start reversed
