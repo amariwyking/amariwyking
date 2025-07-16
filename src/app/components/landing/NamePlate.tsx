@@ -4,7 +4,9 @@ import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useUser } from '@civic/auth/react';
+import { UserButton } from '@civic/auth/react'
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrambleTextPlugin, SplitText);
@@ -13,6 +15,9 @@ gsap.registerPlugin(ScrambleTextPlugin, SplitText);
 const defaultChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 export default function NamePlate() {
+    // Initialize a state variable to track visibility of the auth login button
+    const [authIsVisible, setAuthIsVisible] = useState<boolean>(false);
+
     // Ref to track the paragraph element
     const nameRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +27,14 @@ export default function NamePlate() {
     // Original text content
     const originalText = "AMARI WYKING GARRETT";
 
-    // GSAP animations setup
+    // Ref to select the auth button element
+    const authRef = useRef<HTMLDivElement>(null);
+
+    // Ref to store the *persistent* auth animation timeline
+    const authTimelineRef = useRef<gsap.core.Timeline | null>(null);
+
+
+    // GSAP animations setup for name plate and initial scramble
     useGSAP(() => {
         const nameElement = nameRef.current;
         if (!nameElement) return;
@@ -33,24 +45,28 @@ export default function NamePlate() {
             charsClass: "char"
         });
 
-        // Store reference for cleanup to prevent memory leaks
+        const firstName = nameElement.querySelector('.word1') as HTMLParagraphElement;
+
+        const handleClick = (event: MouseEvent) => {
+            setAuthIsVisible(prevIsVisible => !prevIsVisible);
+        }
+
         splitTextRef.current = splitInstance;
 
-        // Initialize scrambled state - replace each character with random binary digits
-        // This creates the initial scrambled appearance before entrance animation
         const chars = nameElement.querySelectorAll('.char');
+
+        console.log(chars)
+
+        firstName?.addEventListener('click', handleClick);
 
         chars.forEach(char => {
             const originalChar = char.textContent || '';
-            // Preserve spaces and special characters, only scramble letters/numbers
             if (originalChar !== ' ' && originalChar !== ':') {
                 char.textContent = defaultChars[Math.floor(Math.random() * defaultChars.length)];
             }
         });
 
-        // Create timeline for coordinated animations
         const tl = gsap.timeline();
-
         const originalWords = originalText.split(" ")
 
         splitInstance.words.forEach((word, index) => {
@@ -63,7 +79,7 @@ export default function NamePlate() {
                     tweenLength: false,
                 }
             }, index === 0 ? "" : "<");
-        })
+        });
 
         tl.to(".word3", {
             opacity: 0.3,
@@ -71,17 +87,57 @@ export default function NamePlate() {
             ease: "power2.inOut",
         }, "+=0.1")
 
-
-        // Cleanup function
         return () => {
             if (splitTextRef.current) {
                 splitTextRef.current.revert();
             }
         };
-    }, [originalText]);
+    }, []);
+
+    // useGSAP for initializing the auth animation timeline (runs once)
+    useGSAP(() => {
+        const authElement = authRef.current;
+        if (!authElement) return;
+
+
+        // Create the timeline, initially hidden/reversed
+        const tl = gsap.timeline({ paused: true, reversed: true }); // Start reversed
+        tl.to(authElement, {
+            duration: 0.5, // Shorter duration for quick toggle
+            opacity: 1.0,
+            x: 0, // Assume it might slide in/out
+            ease: "power2.inOut"
+        });
+
+        // Store the timeline instance in the ref
+        authTimelineRef.current = tl;
+
+        // Set initial state for auth element (hidden)
+        gsap.set(authElement, { opacity: 0, x: -20, visibility: 'hidden' });
+
+    }, { scope: authRef, dependencies: [] });
+
+    // useEffect to control the auth animation timeline based on authIsVisible state
+    useEffect(() => {
+        if (authTimelineRef.current) {
+            authTimelineRef.current.reversed(!authIsVisible);
+        }
+    }, [authIsVisible]);
+
+    useEffect(() => {
+        if (authTimelineRef.current) {
+            if (authIsVisible) {
+                authTimelineRef.current.play();
+            } else {
+                authTimelineRef.current.reverse();
+            }
+        }
+    }, [authIsVisible]);
+
 
     return (
-        <div className="flex order-1 justify-center items-center">
+        <div className="flex flex-row order-1">
+
             <p
                 ref={nameRef}
                 className="name w-full font-kode-mono font-medium text-center sm:text-left leading-[1.15] tracking-normal text-green-600 text-4xl md:text-7xl lg:text-9xl"
@@ -90,6 +146,10 @@ export default function NamePlate() {
             >
                 AMARI WYKING GARRETT
             </p>
+            {/* The auth div, controlled by the timeline */}
+            <div ref={authRef} className="mt-4">
+                <UserButton className="userButton w-fit rounded-sm border-2 border-amber-300" />
+            </div>
         </div>
     );
 }
