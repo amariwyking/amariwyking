@@ -107,18 +107,26 @@ export default function NamePlate() {
 
         // Create the timeline, initially hidden/reversed
         const tl = gsap.timeline({ paused: true, reversed: true }); // Start reversed
+
+        // Set initial state for auth element (hidden)
+        gsap.set(authElement, { 
+            opacity: 0,
+            x: -20,
+            display: "none"
+        });
+
         tl.to(authElement, {
             duration: 0.5, // Shorter duration for quick toggle
             opacity: 1.0,
             x: 0, // Assume it might slide in/out
-            ease: "power2.inOut"
+            ease: "power2.inOut",
+            display: "block"
         });
 
         // Store the timeline instance in the ref
         authTimelineRef.current = tl;
 
-        // Set initial state for auth element (hidden)
-        gsap.set(authElement, { opacity: 0, x: -20, visibility: 'hidden' });
+
 
     }, { scope: authRef, dependencies: [] });
 
