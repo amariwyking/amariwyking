@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useEffect, useRef, useState } from 'react';
-import { UserButton } from '@civic/auth/react'
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrambleTextPlugin, SplitText);
@@ -14,9 +13,6 @@ gsap.registerPlugin(ScrambleTextPlugin, SplitText);
 const defaultChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 export default function NamePlate() {
-    // Initialize a state variable to track visibility of the auth login button
-    const [authIsVisible, setAuthIsVisible] = useState<boolean>(false);
-
     // Ref to track the paragraph element
     const nameRef = useRef<HTMLDivElement>(null);
 
@@ -25,13 +21,6 @@ export default function NamePlate() {
 
     // Original text content
     const originalText = "AMARI WYKING GARRETT";
-
-    // Ref to select the auth button element
-    const authRef = useRef<HTMLDivElement>(null);
-
-    // Ref to store the *persistent* auth animation timeline
-    const authTimelineRef = useRef<gsap.core.Timeline | null>(null);
-
 
     // GSAP animations setup for name plate and initial scramble
     useGSAP(() => {
@@ -44,22 +33,11 @@ export default function NamePlate() {
             charsClass: "char"
         });
 
-        const firstName = nameElement.querySelector('.word1') as HTMLParagraphElement;
-
-        const handleClick = (event: MouseEvent) => {
-            console.log('First name clicked')
-            setAuthIsVisible(prevIsVisible => !prevIsVisible);
-        }
-
-        firstName?.addEventListener('click', handleClick);
-
         splitTextRef.current = splitInstance;
 
         const chars = nameElement.querySelectorAll('.char');
 
         console.log(chars)
-
-        firstName?.addEventListener('click', handleClick);
 
         chars.forEach(char => {
             const originalChar = char.textContent || '';
@@ -96,58 +74,6 @@ export default function NamePlate() {
         };
     }, []);
 
-    // useGSAP for initializing the auth animation timeline (runs once)
-    useGSAP(() => {
-        console.log(`Auth animation triggered | Visibility: ${authIsVisible}`);
-
-        const authElement = authRef.current;
-        if (!authElement) return;
-
-        console.log("Creating GSAP timeline for authElement...")
-
-        // Create the timeline, initially hidden/reversed
-        const tl = gsap.timeline({ paused: true, reversed: true }); // Start reversed
-
-        // Set initial state for auth element (hidden)
-        gsap.set(authElement, { 
-            opacity: 0,
-            x: -20,
-            display: "none"
-        });
-
-        tl.to(authElement, {
-            duration: 0.5, // Shorter duration for quick toggle
-            opacity: 1.0,
-            x: 0, // Assume it might slide in/out
-            ease: "power2.inOut",
-            display: "block"
-        });
-
-        // Store the timeline instance in the ref
-        authTimelineRef.current = tl;
-
-
-
-    }, { scope: authRef, dependencies: [] });
-
-    // useEffect to control the auth animation timeline based on authIsVisible state
-    useEffect(() => {
-        if (authTimelineRef.current) {
-            authTimelineRef.current.reversed(!authIsVisible);
-        }
-    }, [authIsVisible]);
-
-    useEffect(() => {
-        if (authTimelineRef.current) {
-            if (authIsVisible) {
-                authTimelineRef.current.play();
-            } else {
-                authTimelineRef.current.reverse();
-            }
-        }
-    }, [authIsVisible]);
-
-
     return (
         <div className="flex flex-row order-1">
 
@@ -159,10 +85,6 @@ export default function NamePlate() {
             >
                 AMARI WYKING GARRETT
             </p>
-            {/* The auth div, controlled by the timeline */}
-            <div ref={authRef} className="mt-4">
-                <UserButton className="userButton w-fit rounded-sm border-2 border-amber-300" />
-            </div>
         </div>
     );
 }
