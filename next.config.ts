@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
 const withCivicAuth = createCivicAuthPlugin({
   clientId: '54545817-b989-48e1-a7e0-0af35d5ff315',
   loginUrl: '/auth',
+  loginSuccessUrl: '/admin'
 });
 
 export default withCivicAuth(nextConfig)

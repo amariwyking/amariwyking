@@ -34,7 +34,7 @@ export default function RootLayout({
 
     <html lang="en" className={`bg-zinc-100 ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}>
       <body className="min-h-screen">
-        <CivicAuthProvider>
+        <CivicAuthProvider displayMode="iframe" iframeMode="embedded">
           {children}
         </CivicAuthProvider>
       </body>
