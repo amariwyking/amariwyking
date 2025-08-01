@@ -9,9 +9,6 @@ export default function Admin() {
                     <Link href="/gallery/upload" className="rounded-lg bg-green-600 px-5 py-3 text-base font-medium text-zinc-50 hover:scale-105 transition-all duration-200">
                         Upload to Gallery
                     </Link>
-                    <Link href="/admin/blog/new" className="rounded-lg bg-green-600 px-5 py-3 text-base font-medium text-zinc-50 hover:scale-105 transition-all duration-200">
-                        Create New Post
-                    </Link>
                 </div>
             </div>
         </section>
