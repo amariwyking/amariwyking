@@ -1,9 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { upload } from '@vercel/blob/client';
 import { TablesInsert } from '@/app/types/database';
+import { createProject } from '@/actions/project';
 import SkillsInput from './SkillsInput';
 import ImageUploadPreview from './ImageUploadPreview';
+import { v4 as uuidv4 } from 'uuid';
 
 interface ImageData {
   file: File;
@@ -14,6 +17,18 @@ interface ImageData {
 interface FormErrors {
   title?: string;
   description?: string;
+  project_end_date?: string;
+  skills?: string;
+  images?: string;
+  general?: string;
+}
+
+interface ImageUploadStatus {
+  uploading: boolean;
+  uploaded: boolean;
+  failed: boolean;
+  blobUrl?: string;
+  error?: string;
 }
 
 export default function ProjectUploadForm() {
@@ -25,8 +40,10 @@ export default function ProjectUploadForm() {
   });
 
   const [images, setImages] = useState<ImageData[]>([]);
+  const [imageUploadStatus, setImageUploadStatus] = useState<Record<string, ImageUploadStatus>>({});
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<string>('');
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -70,7 +87,7 @@ export default function ProjectUploadForm() {
     const newImages: ImageData[] = Array.from(files).slice(0, 10 - images.length).map(file => ({
       file,
       caption: '',
-      id: Math.random().toString(36).substr(2, 9)
+      id: uuidv4()
     }));
 
     setImages(prev => [...prev, ...newImages]);
@@ -86,35 +103,139 @@ export default function ProjectUploadForm() {
     setImages(prev => prev.filter(img => img.id !== id));
   };
 
+  const uploadImageToBlob = async (image: ImageData): Promise<string> => {
+    setImageUploadStatus(prev => ({
+      ...prev,
+      [image.id]: { uploading: true, uploaded: false, failed: false }
+    }));
+
+    try {
+      const fileExtension = image.file.name.split('.').pop();
+      const blob = await upload(`${image.id}.${fileExtension}`, image.file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+      });
+
+      setImageUploadStatus(prev => ({
+        ...prev,
+        [image.id]: { uploading: false, uploaded: true, failed: false, blobUrl: blob.url }
+      }));
+
+      return blob.url;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Upload failed';
+      setImageUploadStatus(prev => ({
+        ...prev,
+        [image.id]: { uploading: false, uploaded: false, failed: true, error: errorMessage }
+      }));
+      throw new Error(`Failed to upload ${image.file.name}: ${errorMessage}`);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setErrors({});
+    setUploadProgress('Preparing submission...');
 
-    const submissionData = {
-      project: formData,
-      images: images.map(img => ({
-        file: img.file,
-        caption: img.caption,
-        filename: img.file.name,
-        size: img.file.size,
-        type: img.file.type
-      }))
-    };
+    try {
+      // Step 1: Upload all images to Vercel Blob storage first
+      let imageData: Array<{ id: string; caption: string | null; blobUrl: string }> = [];
+      
+      if (images.length > 0) {
+        setUploadProgress(`Uploading ${images.length} image(s)...`);
+        
+        const uploadPromises = images.map(uploadImageToBlob);
+        const uploadResults = await Promise.allSettled(uploadPromises);
+        
+        // Check for any failed uploads
+        const failedUploads = uploadResults.filter(result => result.status === 'rejected');
+        if (failedUploads.length > 0) {
+          const failedMessages = failedUploads.map((result, index) => 
+            `Image ${index + 1}: ${result.reason?.message || 'Upload failed'}`
+          );
+          throw new Error(`Some images failed to upload:\n${failedMessages.join('\n')}`);
+        }
+        
+        // Get successful upload URLs
+        const imageUrls = uploadResults
+          .filter(result => result.status === 'fulfilled')
+          .map(result => (result as PromiseFulfilledResult<string>).value);
+        
+        // Combine image data with blob URLs
+        imageData = images.map((image, index) => ({
+          id: image.id,
+          caption: image.caption || null,
+          blobUrl: imageUrls[index]
+        }));
+      }
 
-    console.log('Form submission data:', submissionData);
+      // Step 2: Create project with complete data including blob URLs
+      setUploadProgress('Creating project...');
 
-    setTimeout(() => {
+      const projectData = {
+        title: formData.title,
+        description: formData.description,
+        project_end_date: formData.project_end_date || null,
+        skills: formData.skills || [],
+        imageData: imageData
+      };
+
+      const result = await createProject(projectData);
+
+      if (!result.success) {
+        if (result.errors) {
+          const newErrors: FormErrors = {};
+          result.errors.forEach(error => {
+            newErrors[error.field as keyof FormErrors] = error.message;
+          });
+          setErrors(newErrors);
+        } else {
+          setErrors({ general: result.message });
+        }
+        return;
+      }
+
+      // Success - clear form and show success message
+      setFormData({
+        title: '',
+        description: '',
+        project_end_date: null,
+        skills: []
+      });
+      setImages([]);
+      setImageUploadStatus({});
+      setUploadProgress('');
+      alert('Project created successfully!');
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+      setErrors({ general: errorMessage });
+    } finally {
       setIsSubmitting(false);
-      alert('Form submitted successfully! Check console for data.');
-    }, 1000);
+      setUploadProgress('');
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Upload New Project</h1>
+      
+      {errors.general && (
+        <div className="mb-4 p-4 bg-red-50 border border-red-300 rounded-md">
+          <p className="text-sm text-red-600">{errors.general}</p>
+        </div>
+      )}
+
+      {uploadProgress && (
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-300 rounded-md">
+          <p className="text-sm text-blue-600">{uploadProgress}</p>
+        </div>
+      )}
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -126,7 +247,7 @@ export default function ProjectUploadForm() {
             id="title"
             value={formData.title}
             onChange={(e) => handleInputChange('title', e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 ${
+            className={`w-full px-3 py-2 border rounded-md shadow-sm text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 ${
               errors.title ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="e.g., My Awesome Web App"
@@ -145,7 +266,7 @@ export default function ProjectUploadForm() {
             rows={4}
             value={formData.description}
             onChange={(e) => handleInputChange('description', e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-y ${
+            className={`w-full px-3 py-2 border rounded-md shadow-sm text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-y ${
               errors.description ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Provide a detailed description of the project..."
@@ -164,18 +285,26 @@ export default function ProjectUploadForm() {
             id="project_end_date"
             value={formData.project_end_date || ''}
             onChange={(e) => handleInputChange('project_end_date', e.target.value || null)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 ${
+              errors.project_end_date ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {errors.project_end_date && (
+            <p className="mt-1 text-sm text-red-600">{errors.project_end_date}</p>
+          )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-zinc-600 mb-2">
             Skills
           </label>
           <SkillsInput
             skills={formData.skills || []}
             onChange={handleSkillsChange}
           />
+          {errors.skills && (
+            <p className="mt-1 text-sm text-red-600">{errors.skills}</p>
+          )}
         </div>
 
         <div>
@@ -235,6 +364,10 @@ export default function ProjectUploadForm() {
                 ))}
               </div>
             )}
+            
+            {errors.images && (
+              <p className="mt-2 text-sm text-red-600">{errors.images}</p>
+            )}
           </div>
         </div>
 
@@ -248,7 +381,7 @@ export default function ProjectUploadForm() {
                 : 'bg-emerald-600 hover:bg-emerald-700 text-white'
             }`}
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Project'}
+            {isSubmitting ? (uploadProgress || 'Submitting...') : 'Submit Project'}
           </button>
         </div>
       </form>

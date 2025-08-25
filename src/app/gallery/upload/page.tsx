@@ -25,7 +25,7 @@ export default function GalleryUploadPage() {
 
               const newBlob = await upload(file.name, file, {
                 access: 'public',
-                handleUploadUrl: '/api/gallery/upload',
+                handleUploadUrl: '/api/upload',
               });
 
               setBlob(newBlob);
