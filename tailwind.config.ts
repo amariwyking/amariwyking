@@ -1,11 +1,9 @@
-import { Manuale } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'media',
   theme: {
     fontSize: {
       xs: '0.625rem',

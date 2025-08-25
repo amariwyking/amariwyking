@@ -10,7 +10,7 @@ export default function Admin() {
                         Upload to Gallery
                     </Link>
                     <div className="flex gap-6">
-                    <Link href="/projects/upload" className="rounded-lg bg-green-600 px-5 py-3 text-base font-medium text-zinc-50 hover:scale-105 transition-all duration-200">
+                    <Link href="/projects/upload" className="rounded-lg bg-primary px-5 py-3 text-base font-medium text-zinc-50 hover:scale-105 transition-all duration-200">
                         Upload a Project
                     </Link>
                 </div>

@@ -11,7 +11,7 @@ export default function ProfilePic() {
                     fill
                 />
                 <div 
-                    className="absolute inset-0 bg-zinc-100"
+                    className="absolute inset-0 bg-background"
                     style={{
                         mask: "url('/image_frame.svg')",
                         maskSize: "contain",
