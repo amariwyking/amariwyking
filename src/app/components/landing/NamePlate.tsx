@@ -79,7 +79,7 @@ export default function NamePlate() {
 
             <p
                 ref={nameRef}
-                className="name w-full font-kode-mono font-medium text-center sm:text-left leading-[1.15] tracking-normal text-green-600 text-4xl md:text-7xl lg:text-9xl"
+                className="name w-full font-kode-mono font-medium text-center sm:text-left leading-[1.15] tracking-normal text-primary text-4xl md:text-7xl lg:text-9xl"
                 aria-level={1}
                 aria-label="Amari Wyking Garrett"
             >
