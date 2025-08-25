@@ -49,3 +49,24 @@
 @utility text-balance {
   text-wrap: balance;
 }
+
+/* Upload Form Styles */
+
+@layer components {
+  .upload-form label,
+  .upload-form h1,
+  .upload-form h2,
+  .upload-form h3,
+  .upload-form h4,
+  .upload-form h5,
+  .upload-form h6 {
+    @apply font-kode-mono;
+  }
+}
+
+@layer components {
+  .upload-form input,
+  .upload-form textarea {
+    @apply font-kode-mono;
+  }
+}

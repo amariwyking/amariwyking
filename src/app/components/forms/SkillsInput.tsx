@@ -82,7 +82,7 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
           value={inputValue}
           onChange={(e) => handleInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={skills.length === 0 ? "Type a skill and press Enter or comma to add" : "Add another skill..."}
+          placeholder={skills.length === 0 ? "e.g., Python, Typescript, Pandas, etc." : "Add another skill..."}
           className="flex-1 min-w-[200px] outline-none bg-transparent"
           maxLength={50}
         />
