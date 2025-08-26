@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { TablesInsert } from "@/app/types/database"
-import { createClient } from "@/utils/supabase/server"
+import { createAdminClient } from "@/utils/supabase/admin"
 
 interface ProjectImageData {
     id: string
@@ -45,7 +45,7 @@ const validateDate = (dateStr: string): boolean => {
 }
 
 export const createProject = async (projectData: ProjectData): Promise<CreateProjectResponse> => {
-    const supabase = await createClient()
+    const supabase = await createAdminClient()
     const errors: ValidationError[] = []
 
     // Enhanced server-side validation
