@@ -11,9 +11,9 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
-    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.8.1",
+    "@tsparticles/slim": "^3.9.1",
     "@vercel/blob": "^0.23.4",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
