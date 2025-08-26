@@ -48,18 +48,18 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
   };
 
   return (
-    <div className="space-y-2">
-      <div className="flex flex-wrap gap-2 p-3 border border-gray-300 rounded-md min-h-[42px] focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-emerald-500">
+    <div className="space-y-2 min-w-0 max-w-full">
+      <div className="flex flex-wrap gap-2 p-3 border border-border rounded-md min-h-[42px] focus-within:ring-2 focus-within:ring-ring focus-within:border-input bg-background min-w-0 max-w-full overflow-hidden">
         {skills.map((skill, index) => (
           <span
             key={index}
-            className="inline-flex items-center px-2 py-1 bg-emerald-100 text-emerald-800 text-sm font-medium rounded-md"
+            className="inline-flex items-center px-2 py-1 bg-primary/10 text-primary text-sm font-medium rounded-md max-w-full overflow-hidden"
           >
-            {skill}
+            <span className="truncate">{skill}</span>
             <button
               type="button"
               onClick={() => removeSkill(skill)}
-              className="ml-1 text-emerald-600 hover:text-emerald-800 focus:outline-none"
+              className="ml-1 text-primary/70 hover:text-primary focus:outline-none"
               aria-label={`Remove ${skill}`}
             >
               <svg
@@ -83,16 +83,16 @@ export default function SkillsInput({ skills, onChange }: SkillsInputProps) {
           onChange={(e) => handleInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={skills.length === 0 ? "e.g., Python, Typescript, Pandas, etc." : "Add another skill..."}
-          className="flex-1 min-w-[200px] outline-none bg-transparent"
+          className="flex-1 min-w-0 max-w-full outline-none bg-transparent text-foreground"
           maxLength={50}
         />
       </div>
       
       {error && (
-        <p className="text-sm text-red-600">{error}</p>
+        <p className="text-sm text-destructive">{error}</p>
       )}
       
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-muted-foreground">
         Press Enter or comma to add a skill. Press Backspace to remove the last skill.
       </p>
     </div>

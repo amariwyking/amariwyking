@@ -7,6 +7,7 @@ import { createProject } from '@/actions/project';
 import SkillsInput from './SkillsInput';
 import ImageUploadPreview from './ImageUploadPreview';
 import { v4 as uuidv4 } from 'uuid';
+import { CloudUpload } from 'iconoir-react';
 
 interface ImageData {
   file: File;
@@ -222,25 +223,25 @@ export default function ProjectUploadForm() {
   };
 
   return (
-    <div className="upload-form">
-      <div className="max-w-7xl p-6 shadow-lg rounded-sm">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Upload New Project</h1>
+    <div className="w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 overflow-hidden">
+      <div className="w-full max-w-4xl mx-auto min-w-0">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 font-kode-mono">Upload New Project</h1>
 
         {errors.general && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-300 rounded-md">
-            <p className="text-sm text-red-600">{errors.general}</p>
+          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-destructive/10 border border-destructive/20 rounded-md">
+            <p className="text-sm sm:text-base text-destructive font-kode-mono">{errors.general}</p>
           </div>
         )}
 
         {uploadProgress && (
-          <div className="mb-4 p-4 bg-blue-50 border border-blue-300 rounded-md">
-            <p className="text-sm text-blue-600">{uploadProgress}</p>
+          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-md">
+            <p className="text-sm sm:text-base text-primary font-kode-mono">{uploadProgress}</p>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 min-w-0">
+          <div className="min-w-0">
+            <label htmlFor="title" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
               Project Title *
             </label>
             <input
@@ -248,35 +249,37 @@ export default function ProjectUploadForm() {
               id="title"
               value={formData.title}
               onChange={(e) => handleInputChange('title', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 ${errors.title ? 'border-red-500' : 'border-gray-300'
+              className={`w-full max-w-full min-w-0 px-3 sm:px-4 py-3 sm:py-2 text-sm sm:text-base border rounded-md text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-input ${errors.title ? 'border-destructive' : 'border-border'
                 }`}
               placeholder="e.g., My Awesome Web App"
+              style={{ fontFamily: 'var(--font-work-sans)' }}
             />
             {errors.title && (
-              <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.title}</p>
             )}
           </div>
 
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="min-w-0">
+            <label htmlFor="description" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
               Project Description *
             </label>
             <textarea
               id="description"
-              rows={4}
+              rows={5}
               value={formData.description}
               onChange={(e) => handleInputChange('description', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md text-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-y ${errors.description ? 'border-red-500' : 'border-gray-300'
+              className={`w-full max-w-full min-w-0 px-3 sm:px-4 py-3 sm:py-2 text-sm sm:text-base border rounded-md text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-input resize-y ${errors.description ? 'border-destructive' : 'border-border'
                 }`}
               placeholder="Provide a detailed description of the project..."
+              style={{ fontFamily: 'var(--font-work-sans)' }}
             />
             {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.description}</p>
             )}
           </div>
 
-          <div>
-            <label htmlFor="project_end_date" className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="min-w-0">
+            <label htmlFor="project_end_date" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
               Project End Date
             </label>
             <input
@@ -284,58 +287,47 @@ export default function ProjectUploadForm() {
               id="project_end_date"
               value={formData.project_end_date || ''}
               onChange={(e) => handleInputChange('project_end_date', e.target.value || null)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 ${errors.project_end_date ? 'border-red-500' : 'border-gray-300'
+              className={`w-full max-w-1/2 min-w-0 px-3 sm:px-4 py-3 sm:py-2 text-sm sm:text-base border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-input text-foreground [&::-webkit-calendar-picker-indicator]:opacity-50 [&::-webkit-calendar-picker-indicator]:cursor-pointer ${errors.project_end_date ? 'border-destructive' : 'border-border'
                 }`}
+              style={{ colorScheme: 'light dark' }}
             />
             {errors.project_end_date && (
-              <p className="mt-1 text-sm text-red-600">{errors.project_end_date}</p>
+              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.project_end_date}</p>
             )}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-zinc-600 mb-2">
+          <div className="min-w-0">
+            <label className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
               Skills
             </label>
-            <SkillsInput
-              skills={formData.skills || []}
-              onChange={handleSkillsChange}
-            />
+            <div className="min-w-0">
+              <SkillsInput
+                skills={formData.skills || []}
+                onChange={handleSkillsChange}
+              />
+            </div>
             {errors.skills && (
-              <p className="mt-1 text-sm text-red-600">{errors.skills}</p>
+              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.skills}</p>
             )}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="min-w-0">
+            <label className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
               Project Images
             </label>
             <div className="space-y-4">
               <div className="flex items-center justify-center w-full">
                 <label
                   htmlFor="images"
-                  className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                  className="flex flex-col items-center justify-center w-full h-32 sm:h-40 border-2 border-border border-dashed rounded-lg cursor-pointer bg-muted hover:bg-muted/80 transition-colors"
                 >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg
-                      className="w-8 h-8 mb-4 text-gray-500"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 20 16"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                      />
-                    </svg>
-                    <p className="mb-2 text-sm text-gray-500">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
+                    <CloudUpload className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4"/>
+                    <p className="mb-2 text-sm sm:text-base text-muted-foreground text-center px-2 font-work-sans">
                       <span className="font-semibold">Click to upload</span> or drag and drop
                     </p>
-                    <p className="text-xs text-gray-500">PNG, JPG, WEBP or GIF (MAX. 5MB each)</p>
-                    <p className="text-xs text-gray-500">{images.length}/10 images uploaded</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground text-center px-2 font-kode-mono">PNG, JPG, WEBP or GIF (MAX. 5MB each)</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground font-kode-mono">{images.length}/10 images uploaded</p>
                   </div>
                   <input
                     id="images"
@@ -350,7 +342,7 @@ export default function ProjectUploadForm() {
               </div>
 
               {images.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {images.map((image) => (
                     <ImageUploadPreview
                       key={image.id}
@@ -364,21 +356,21 @@ export default function ProjectUploadForm() {
               )}
 
               {errors.images && (
-                <p className="mt-2 text-sm text-red-600">{errors.images}</p>
+                <p className="mt-2 text-sm sm:text-base text-destructive font-kode-mono">{errors.images}</p>
               )}
             </div>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-end pt-4 sm:pt-6">
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`px-6 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 ${isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed text-white'
-                  : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-2 text-sm sm:text-base rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring transition-colors ${isSubmitting
+                  ? 'bg-muted cursor-not-allowed text-muted-foreground'
+                  : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                 }`}
             >
-              {isSubmitting ? (uploadProgress || 'Submitting...') : 'Submit Project'}
+              <span className="font-work-sans">{isSubmitting ? (uploadProgress || 'Submitting...') : 'Submit Project'}</span>
             </button>
           </div>
         </form>
