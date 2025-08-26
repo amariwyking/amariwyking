@@ -232,7 +232,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         >
           <SectionTitle title="Vision" />
           <div className="vision-content max-w-3xl mx-auto px-8 text-center">
-            <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
+            <p className="font-work-sans text-xl md:text-4xl leading-relaxed">
               A world where cities thrive without compromising our planet&apos;s future.
             </p>
           </div>
@@ -245,7 +245,7 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
         >
           <SectionTitle title="Mission" />
           <div className="mission-content max-w-6xl mx-auto px-8 text-center">
-            <p className="font-work-sans text-xl md:text-4xl text-gray-600 leading-relaxed">
+            <p className="font-work-sans text-xl md:text-4xl text-foreground leading-relaxed">
               To support the deployment of data-centric technologies that bolster the sustainability of urban life.
             </p>
           </div>
@@ -285,19 +285,19 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
             {data.experience.map((job, index) => (
               <div key={`${job.employer}-${index}`} className="experience-item absolute inset-0 flex items-center justify-center px-8">
                 <div className="max-w-5xl mx-auto w-full">
-                  <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-gray-600 mb-3 leading-tight">
+                  <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-foreground mb-3 leading-tight">
                     {job.employer}
                   </p>
-                  <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-green-600 font-medium mb-2">
+                  <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-primary font-medium mb-2">
                     {job.role}
                   </p>
-                  <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-gray-400 mb-6">
+                  <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
                     {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
                   </p>
 
                   <ul className="space-y-4 mb-8">
                     {job.notes.map((note, noteIndex) => (
-                      <li key={noteIndex} className="text-sm sm:text-lg md:text-xl font-work-sans text-gray-600 leading-relaxed flex items-start">
+                      <li key={noteIndex} className="text-sm sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start">
                         <span className="mr-4 text-lg shrink-0">•</span>
                         <span>{note}</span>
                       </li>
@@ -305,14 +305,14 @@ export default function ResumeInteractive({ data = resumeData }: ResumeInteracti
                   </ul>
 
                   <div>
-                    <p className="text-sm sm:text-lg font-kode-mono font-[400] text-gray-600 mb-4">
+                    <h6 className="font-kode-mono font-[400] mb-4">
                       Technologies & Skills
-                    </p>
+                    </h6>
                     <div className="flex flex-wrap gap-3">
                       {job.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="skill-tag font-kode-mono px-2 py-1 sm:px-4 sm:py-2 text-gray-500 text-xs sm:text-sm font-medium border border-gray-200"
+                          className="skill-tag font-kode-mono px-2 py-1 sm:px-4 sm:py-2 bg-muted text-muted-foreground text-base font-medium rounded-sm border-2 border-border"
                         >
                           {skill}
                         </span>

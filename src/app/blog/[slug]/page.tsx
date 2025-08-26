@@ -37,7 +37,7 @@ export default async function Page({
                     <Markdown className="
                                         font-manuale
                                         prose
-                                        prose-zinc
+                                        prose-foreground
                                         sm:prose-sm
                                         base:prose-base
                                         lg:prose-lg
@@ -45,10 +45,27 @@ export default async function Page({
                                         2xl:prose-2xl
                                         prose-h1:font-kode-mono
                                         prose-headings:font-work-sans
+                                        prose-headings:text-foreground
+                                        prose-p:text-foreground
+                                        prose-strong:text-foreground
+                                        prose-li:text-foreground
+                                        prose-ul:text-foreground
+                                        prose-ol:text-foreground
+                                        prose-th:text-foreground
+                                        prose-td:text-foreground
+                                        prose-code:text-muted-foreground
+                                        prose-code:bg-muted
+                                        prose-pre:bg-muted
+                                        prose-pre:text-foreground
+                                        prose-blockquote:text-muted-foreground
+                                        prose-blockquote:border-border
+                                        prose-a:text-primary
+                                        prose-a:no-underline
+                                        hover:prose-a:text-primary/80
                                         "
                     >
-                        {`<h1 className="text-2xl">${blogPost?.title}</h1>` + 
-                        `<div className="w-full h-0.5 bg-zinc-900"><div>`+
+                        {`<h1 className="text-2xl text-foreground">${blogPost?.title}</h1>` + 
+                        `<div className="w-full h-0.5 bg-border"><div>`+
                         content}
                     </Markdown>
                 </div>

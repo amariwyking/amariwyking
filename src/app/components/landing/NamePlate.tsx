@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrambleTextPlugin, SplitText);
@@ -22,7 +22,7 @@ export default function NamePlate() {
     // Original text content
     const originalText = "AMARI WYKING GARRETT";
 
-    // GSAP animations setup
+    // GSAP animations setup for name plate and initial scramble
     useGSAP(() => {
         const nameElement = nameRef.current;
         if (!nameElement) return;
@@ -33,24 +33,20 @@ export default function NamePlate() {
             charsClass: "char"
         });
 
-        // Store reference for cleanup to prevent memory leaks
         splitTextRef.current = splitInstance;
 
-        // Initialize scrambled state - replace each character with random binary digits
-        // This creates the initial scrambled appearance before entrance animation
         const chars = nameElement.querySelectorAll('.char');
+
+        console.log(chars)
 
         chars.forEach(char => {
             const originalChar = char.textContent || '';
-            // Preserve spaces and special characters, only scramble letters/numbers
             if (originalChar !== ' ' && originalChar !== ':') {
                 char.textContent = defaultChars[Math.floor(Math.random() * defaultChars.length)];
             }
         });
 
-        // Create timeline for coordinated animations
         const tl = gsap.timeline();
-
         const originalWords = originalText.split(" ")
 
         splitInstance.words.forEach((word, index) => {
@@ -63,7 +59,7 @@ export default function NamePlate() {
                     tweenLength: false,
                 }
             }, index === 0 ? "" : "<");
-        })
+        });
 
         tl.to(".word3", {
             opacity: 0.3,
@@ -71,20 +67,19 @@ export default function NamePlate() {
             ease: "power2.inOut",
         }, "+=0.1")
 
-
-        // Cleanup function
         return () => {
             if (splitTextRef.current) {
                 splitTextRef.current.revert();
             }
         };
-    }, [originalText]);
+    }, []);
 
     return (
-        <div className="flex order-1 justify-center items-center">
+        <div className="flex flex-row order-1">
+
             <p
                 ref={nameRef}
-                className="name w-full font-kode-mono font-medium text-center sm:text-left leading-[1.15] tracking-normal text-green-600 text-4xl md:text-7xl lg:text-9xl"
+                className="name w-full font-kode-mono font-medium text-center sm:text-left leading-[1.15] tracking-normal text-primary text-4xl md:text-7xl lg:text-9xl"
                 aria-level={1}
                 aria-label="Amari Wyking Garrett"
             >

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Work_Sans, Kode_Mono, Manuale } from "next/font/google";
 import "./globals.css";
+import { CivicAuthProvider } from "@civic/auth/nextjs";
+import { ThemeProvider } from "next-themes";
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -30,9 +32,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`bg-zinc-100 ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}>
-      <body className="min-h-screen">
-          {children}
+
+    <html lang="en" className={`bg-background ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen" suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <CivicAuthProvider displayMode="iframe" iframeMode="embedded">
+            {children}
+          </CivicAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

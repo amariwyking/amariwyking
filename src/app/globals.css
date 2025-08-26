@@ -26,26 +26,88 @@
     from 180deg at 50% 50%,
     var(--tw-gradient-stops)
   );
+
+  /* Design System Colors - Use light mode values, dark mode handled by CSS */
+  --color-background: var(--color-stone-50);
+  --color-foreground: var(--color-stone-900);
+  --color-card: var(--color-zinc-50);
+  --color-card-foreground: var(--color-stone-800);
+  --color-primary: var(--color-emerald-600);
+  --color-primary-foreground: var(--color-zinc-50);
+  --color-muted: var(--color-stone-100);
+  --color-muted-foreground: var(--color-stone-600);
+  --color-border: var(--color-stone-200);
+  --color-input: var(--color-stone-100);
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-zinc-50);
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+/* TailwindCSS v4 Dark Mode - Manual class-based switching */
+@theme {
+  /* Light mode colors (default) */
+  --color-background-light: var(--color-stone-50);
+  --color-foreground-light: var(--color-stone-900);
+  --color-card-light: var(--color-zinc-50);
+  --color-card-foreground-light: var(--color-stone-800);
+  --color-primary-light: var(--color-emerald-600);
+  --color-primary-foreground-light: var(--color-zinc-50);
+  --color-muted-light: var(--color-stone-100);
+  --color-muted-foreground-light: var(--color-stone-600);
+  --color-border-light: var(--color-stone-200);
+  --color-input-light: var(--color-stone-100);
+  --color-destructive-light: var(--color-red-600);
+  --color-destructive-foreground-light: var(--color-zinc-50);
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+  /* Dark mode colors */
+  --color-background-dark: var(--color-stone-950);
+  --color-foreground-dark: var(--color-stone-50);
+  --color-card-dark: var(--color-stone-900);
+  --color-card-foreground-dark: var(--color-stone-100);
+  --color-primary-dark: var(--color-emerald-400);
+  --color-primary-foreground-dark: var(--color-stone-950);
+  --color-muted-dark: var(--color-stone-800);
+  --color-muted-foreground-dark: var(--color-stone-400);
+  --color-border-dark: var(--color-stone-800);
+  --color-input-dark: var(--color-stone-800);
+  --color-destructive-dark: var(--color-red-500);
+  --color-destructive-foreground-dark: var(--color-stone-50);
+
+  /* Dynamic color assignments based on theme */
+  --color-background: light-dark(var(--color-background-light), var(--color-background-dark));
+  --color-foreground: light-dark(var(--color-foreground-light), var(--color-foreground-dark));
+  --color-card: light-dark(var(--color-card-light), var(--color-card-dark));
+  --color-card-foreground: light-dark(var(--color-card-foreground-light), var(--color-card-foreground-dark));
+  --color-primary: light-dark(var(--color-primary-light), var(--color-primary-dark));
+  --color-primary-foreground: light-dark(var(--color-primary-foreground-light), var(--color-primary-foreground-dark));
+  --color-muted: light-dark(var(--color-muted-light), var(--color-muted-dark));
+  --color-muted-foreground: light-dark(var(--color-muted-foreground-light), var(--color-muted-foreground-dark));
+  --color-border: light-dark(var(--color-border-light), var(--color-border-dark));
+  --color-input: light-dark(var(--color-input-light), var(--color-input-dark));
+  --color-destructive: light-dark(var(--color-destructive-light), var(--color-destructive-dark));
+  --color-destructive-foreground: light-dark(var(--color-destructive-foreground-light), var(--color-destructive-foreground-dark));
 }
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+/* Upload Form Styles */
+
+@layer components {
+  .upload-form label,
+  .upload-form h1,
+  .upload-form h2,
+  .upload-form h3,
+  .upload-form h4,
+  .upload-form h5,
+  .upload-form h6 {
+    @apply font-kode-mono;
+  }
+}
+
+@layer components {
+  .upload-form input,
+  .upload-form textarea {
+    @apply font-kode-mono;
+  }
 }

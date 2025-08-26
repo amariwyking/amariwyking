@@ -17,7 +17,7 @@
 /build
 
 # misc
-CLAUDE.md
+.utility
 .DS_Store
 *.pem
 
@@ -43,3 +43,6 @@ next-env.d.ts
 
 # VSCode
 /.vscode
+
+# Claude
+.claude/
