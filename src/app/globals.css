@@ -30,14 +30,16 @@
   /* Design System Colors - Use light mode values, dark mode handled by CSS */
   --color-background: var(--color-stone-50);
   --color-foreground: var(--color-stone-900);
-  --color-card: var(--color-white);
+  --color-card: var(--color-zinc-50);
   --color-card-foreground: var(--color-stone-800);
   --color-primary: var(--color-emerald-600);
-  --color-primary-foreground: var(--color-white);
+  --color-primary-foreground: var(--color-zinc-50);
   --color-muted: var(--color-stone-100);
   --color-muted-foreground: var(--color-stone-600);
   --color-border: var(--color-stone-200);
   --color-input: var(--color-stone-100);
+  --color-destructive: var(--color-red-600);
+  --color-destructive-foreground: var(--color-zinc-50);
 }
 
 /* TailwindCSS v4 Dark Mode - Manual class-based switching */
@@ -45,14 +47,16 @@
   /* Light mode colors (default) */
   --color-background-light: var(--color-stone-50);
   --color-foreground-light: var(--color-stone-900);
-  --color-card-light: var(--color-white);
+  --color-card-light: var(--color-zinc-50);
   --color-card-foreground-light: var(--color-stone-800);
   --color-primary-light: var(--color-emerald-600);
-  --color-primary-foreground-light: var(--color-white);
+  --color-primary-foreground-light: var(--color-zinc-50);
   --color-muted-light: var(--color-stone-100);
   --color-muted-foreground-light: var(--color-stone-600);
   --color-border-light: var(--color-stone-200);
   --color-input-light: var(--color-stone-100);
+  --color-destructive-light: var(--color-red-600);
+  --color-destructive-foreground-light: var(--color-zinc-50);
 
   /* Dark mode colors */
   --color-background-dark: var(--color-stone-950);
@@ -65,6 +69,8 @@
   --color-muted-foreground-dark: var(--color-stone-400);
   --color-border-dark: var(--color-stone-800);
   --color-input-dark: var(--color-stone-800);
+  --color-destructive-dark: var(--color-red-500);
+  --color-destructive-foreground-dark: var(--color-stone-50);
 
   /* Dynamic color assignments based on theme */
   --color-background: light-dark(var(--color-background-light), var(--color-background-dark));
@@ -77,6 +83,8 @@
   --color-muted-foreground: light-dark(var(--color-muted-foreground-light), var(--color-muted-foreground-dark));
   --color-border: light-dark(var(--color-border-light), var(--color-border-dark));
   --color-input: light-dark(var(--color-input-light), var(--color-input-dark));
+  --color-destructive: light-dark(var(--color-destructive-light), var(--color-destructive-dark));
+  --color-destructive-foreground: light-dark(var(--color-destructive-foreground-light), var(--color-destructive-foreground-dark));
 }
 
 @utility text-balance {
