@@ -1,7 +1,24 @@
 import { handleUpload, HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
+import { requireAdminAuth, AuthenticationError } from "@/utils/auth";
 
 export async function POST(request: Request): Promise<NextResponse> {
+    try {
+        // Authenticate admin user first
+        await requireAdminAuth();
+    } catch (error) {
+        if (error instanceof AuthenticationError) {
+            return NextResponse.json(
+                { error: 'Unauthorized: Admin access required' },
+                { status: 401 }
+            );
+        }
+        return NextResponse.json(
+            { error: 'Authentication failed' },
+            { status: 401 }
+        );
+    }
+
     const body = (await request.json()) as HandleUploadBody;
 
     try {
@@ -13,8 +30,7 @@ export async function POST(request: Request): Promise<NextResponse> {
                 /* clientPayload */
             ) => {
                 // Generate a client token for the browser to upload the file
-                // ⚠️ Authenticate and authorize users before generating the token.
-                // Otherwise, you're allowing anonymous uploads.
+                // Authentication has been verified at the route level
 
                 return {
                     allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/raf'],

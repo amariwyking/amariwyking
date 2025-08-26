@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { TablesInsert } from "@/app/types/database"
 import { createAdminClient } from "@/utils/supabase/admin"
+import { requireAdminAuth, AuthenticationError } from "@/utils/auth"
 
 interface ProjectImageData {
     id: string
@@ -45,6 +46,24 @@ const validateDate = (dateStr: string): boolean => {
 }
 
 export const createProject = async (projectData: ProjectData): Promise<CreateProjectResponse> => {
+    // Authenticate admin user first
+    try {
+        await requireAdminAuth();
+    } catch (error) {
+        if (error instanceof AuthenticationError) {
+            return {
+                success: false,
+                message: 'Unauthorized: Admin access required',
+                errors: [{ field: 'auth', message: error.message }]
+            };
+        }
+        return {
+            success: false,
+            message: 'Authentication error occurred',
+            errors: [{ field: 'auth', message: 'Authentication failed' }]
+        };
+    }
+
     const supabase = await createAdminClient()
     const errors: ValidationError[] = []
 

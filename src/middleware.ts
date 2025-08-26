@@ -18,6 +18,8 @@ export default withAuth((request) => {
 
 export const config = {
   matcher: [
+    '/api/upload/:path*',
+    '/api/images/update-caption/:path*',
     '/(.*upload.*)',
     '/admin',
     '/(admin.*)',

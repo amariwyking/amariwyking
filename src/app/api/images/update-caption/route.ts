@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/utils/supabase/admin';
+import { requireAdminAuth, AuthenticationError } from '@/utils/auth';
 
 export async function POST(request: NextRequest) {
   try {
+    // Authenticate admin user first
+    await requireAdminAuth();
+
     const { imageId, caption } = await request.json();
 
     if (!imageId) {
@@ -30,6 +34,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error in update-caption route:', error);
+    
+    if (error instanceof AuthenticationError) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin access required' },
+        { status: 401 }
+      );
+    }
+    
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
