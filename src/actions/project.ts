@@ -135,6 +135,7 @@ export const createProject = async (projectData: ProjectData): Promise<CreatePro
             description,
             project_end_date: projectData.project_end_date || null,
             skills: validSkills.length > 0 ? validSkills : null,
+            images: validImageData.map(image => image.id)
         }
         
         const { data: insertedProject, error: projectError } = await supabase
