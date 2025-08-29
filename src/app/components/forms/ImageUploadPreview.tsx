@@ -43,13 +43,13 @@ export default function ImageUploadPreview({
 
   if (error) {
     return (
-      <div className="border border-red-300 rounded-lg p-4 bg-red-50">
+      <div className="border border-border rounded-lg p-4 bg-card">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-medium text-red-800">{image.name}</p>
+          <p className="text-sm font-medium text-destructive">{image.name}</p>
           <button
             type="button"
             onClick={onRemove}
-            className="text-red-600 hover:text-red-800 focus:outline-none"
+            className="text-destructive"
             aria-label="Remove image"
           >
             <svg
@@ -66,26 +66,26 @@ export default function ImageUploadPreview({
             </svg>
           </button>
         </div>
-        <p className="text-sm text-red-600">{error}</p>
+        <p className="text-sm text-destructive">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm">
+    <div className="border border-border rounded-lg p-4 bg-card">
       <div className="flex items-start justify-between mb-3">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-900 truncate" title={image.name}>
+        <div className="flex-1 overflow-hidden">
+          <p className="text-sm max-w-2/3 font-medium text-card-foreground truncate" title={image.name}>
             {image.name}
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-card-foreground">
             {formatFileSize(image.size)} • {image.type}
           </p>
         </div>
         <button
           type="button"
           onClick={onRemove}
-          className="ml-2 text-gray-400 hover:text-gray-600 focus:outline-none"
+          className="ml-2 text-card-foreground hover:text-destructive focus:outline-none transition-all"
           aria-label="Remove image"
         >
           <svg
@@ -108,13 +108,13 @@ export default function ImageUploadPreview({
           <img
             src={previewUrl}
             alt="Preview"
-            className="w-full h-32 object-cover rounded-md border border-gray-200"
+            className="w-full h-32 object-cover rounded-md border border-border"
           />
         </div>
       )}
 
       <div>
-        <label htmlFor={`caption-${image.name}`} className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor={`caption-${image.name}`} className="block text-sm font-medium text-card-foreground mb-1">
           Caption
         </label>
         <input
@@ -123,10 +123,10 @@ export default function ImageUploadPreview({
           value={caption}
           onChange={(e) => onCaptionChange(e.target.value)}
           placeholder="Add a caption for this image..."
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+          className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:border-primary text-sm"
           maxLength={255}
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-card-foreground mt-1">
           {caption.length}/255 characters
         </p>
       </div>
