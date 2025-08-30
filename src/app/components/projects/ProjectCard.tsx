@@ -22,11 +22,19 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
   const widthLine = rootElement.querySelector('.scroll-width-line');
   const details = rootElement.querySelector('.project-details');
 
+  const wiperWidthDuration = 0.5
+
   if (title && widthLine && details) {
     tl.from(title, { opacity: 0, y: 50, duration: 0.5 })
       .fromTo(widthLine,
-        { width: '0%' },
-        { width: '100%', ease: 'power2.out', duration: 1 }
+        {
+          width: '0%'
+        },
+        {
+          width: '100%',
+          ease: 'power2.in',
+          duration: wiperWidthDuration
+        }
       )
       .to(widthLine, {
         // Use a function-based value to calculate the exact y position
@@ -34,7 +42,7 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
           const cardBounds = rootElement.getBoundingClientRect();
           const lineBounds = widthLine.getBoundingClientRect();
           // The difference is the y value needed to move the line from its top to the card's bottom
-          return (cardBounds.bottom - lineBounds.top) - (lineBounds.height / 2);
+          return (cardBounds.bottom - lineBounds.top) - (lineBounds.height / 2) + 16;
         },
         ease: 'power2.inOut',
         duration: 1
@@ -47,15 +55,21 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
       .to(widthLine, {
         width: '0%',
         ease: 'power2.in',
-        duration: 1
+        duration: wiperWidthDuration
       })
-      .to({}, {duration:5})
+      .to({}, { duration: 5 })
       ;
   } else if (widthLine && rootElement) {
     // Fallback if other elements are not found, still animate the line
     tl.fromTo(widthLine,
-      { width: '0%' },
-      { width: '100%', ease: 'power2.out' }
+      {
+        width: '0%'
+      },
+      {
+        width: '100%',
+        ease: 'power2.out',
+        duration: wiperWidthDuration
+      }
     )
       .to(widthLine, {
         y: () => {
@@ -69,7 +83,7 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
       .to(widthLine, {
         width: '0%',
         ease: 'power2.in',
-        duration: 1
+        duration: wiperWidthDuration
       });
   }
 

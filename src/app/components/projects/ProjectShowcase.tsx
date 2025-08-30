@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 ScrollTrigger.normalizeScroll(true);
 
-export default function ProjectShowcase({ 
+export default function ProjectShowcase({
   projects,
 }: ProjectShowcaseProps) {
   useGSAP(() => {
@@ -19,7 +19,7 @@ export default function ProjectShowcase({
 
     // Create ScrollTrigger for each project section
     const projectSections = gsap.utils.toArray('.project-section');
-    
+
     projectSections.forEach((section: any) => {
       // Find the root element of the child card within this section
       const projectCardElement = section.querySelector('.project-card');
@@ -27,15 +27,15 @@ export default function ProjectShowcase({
       if (projectCardElement) {
         // Get the complete animation timeline from the new function
         const childTimeline = getProjectCardTimeline(projectCardElement);
-        
+
         ScrollTrigger.create({
           trigger: section,
-          start: "top top",
+          start: "center center",
           end: "+=100%",
           pin: true,
           pinSpacing: true,
-          scrub: 1,
           animation: childTimeline,
+          onEnterBack: self => self.kill(),
         });
       }
     });
@@ -56,7 +56,7 @@ export default function ProjectShowcase({
   return (
     <section className="project-showcase">
       {projects.map((project) => (
-        <div 
+        <div
           key={project.id}
           className="project-section w-full min-h-svh flex items-center px-6 sm:px-12 lg:px-24 py-8"
         >
