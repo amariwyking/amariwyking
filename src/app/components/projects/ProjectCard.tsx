@@ -49,6 +49,7 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
         ease: 'power2.in',
         duration: 1
       })
+      .to({}, {duration:5})
       ;
   } else if (widthLine && rootElement) {
     // Fallback if other elements are not found, still animate the line
