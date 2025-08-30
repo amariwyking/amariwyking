@@ -36,66 +36,37 @@ export default function SkillCarousel({
     return needsAnimation;
   }, []);
 
-  // GSAP ScrollTrigger implementation
+  // GSAP Animation
   useGSAP(() => {
     if (!containerRef.current || !autoPlay) return;
 
-    // Wait for next frame to ensure DOM is ready
-    requestAnimationFrame(() => {
-      const needsAnimation = checkAnimationNeeded();
-      if (!needsAnimation) return;
+    const initLoop = () => {
+      if (!checkAnimationNeeded()) return;
 
-      // Select skill elements within this specific carousel
       const skills = gsap.utils.toArray(containerRef.current!.querySelectorAll('.skill'));
-      
       if (skills.length === 0) return;
 
-      // Create the horizontal loop with infinite repeat and spacing
-      const loop = horizontalLoop(skills, { 
-        paused: true, 
+      const loop = horizontalLoop(skills, {
+        paused: false, // Start playing right away
         speed: 0.25,
-        repeat: -1,  // Infinite loop
-        paddingRight: 8 // Add spacing between last and first element
+        repeat: -1,
+        paddingRight: 8,
       });
       
       loopRef.current = loop;
+    };
 
-      // Create ScrollTrigger for viewport-based control
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top bottom-=10%",
-        end: "bottom top+=10%",
-        onEnter: () => {
-          if (autoPlay) {
-            loop.play();
-          }
-        },
-        onLeave: () => {
-          loop.pause();
-        },
-        onEnterBack: () => {
-          if (autoPlay) {
-            loop.play();
-          }
-        },
-        onLeaveBack: () => {
-          loop.pause();
-        }
-      });
-    });
+    // Use a small delay to ensure the DOM is fully rendered and widths are calculated correctly.
+    const timeoutId = setTimeout(initLoop, 100);
 
     return () => {
+      clearTimeout(timeoutId);
       if (loopRef.current) {
         loopRef.current.kill?.();
         loopRef.current = null;
       }
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.trigger === containerRef.current) {
-          trigger.kill();
-        }
-      });
     };
-  }, [autoPlay]);
+  }, [autoPlay, checkAnimationNeeded]);
 
 
   // Handle resize
