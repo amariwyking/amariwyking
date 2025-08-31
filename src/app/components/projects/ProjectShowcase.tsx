@@ -1,28 +1,26 @@
 "use client";
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { ProjectShowcaseProps } from '@/app/types/project-showcase';
-import ProjectCard, { getProjectCardTimeline } from './ProjectCard';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { ProjectShowcaseProps } from "@/app/types/project-showcase";
+import ProjectCard, { getProjectCardTimeline } from "./ProjectCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
 ScrollTrigger.normalizeScroll(true);
 
-export default function ProjectShowcase({
-  projects,
-}: ProjectShowcaseProps) {
+export default function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   useGSAP(() => {
     // Clear previous ScrollTriggers
-    ScrollTrigger.getAll().forEach(st => st.kill());
+    ScrollTrigger.getAll().forEach((st) => st.kill());
 
     // Create ScrollTrigger for each project section
-    const projectSections = gsap.utils.toArray('.project-section');
+    const projectSections = gsap.utils.toArray(".project-section");
 
     projectSections.forEach((section: any) => {
       // Find the root element of the child card within this section
-      const projectCardElement = section.querySelector('.project-card');
+      const projectCardElement = section.querySelector(".project-card");
 
       if (projectCardElement) {
         // Get the complete animation timeline from the new function
@@ -31,18 +29,15 @@ export default function ProjectShowcase({
         ScrollTrigger.create({
           trigger: section,
           snap: {
-            snapTo: 'labels',
+            snapTo: "labels",
             duration: { min: 0.5, max: 1 },
-            ease: 'power2.inOut'
+            ease: "power2.inOut",
           },
-          start: "top middle",
-          end: "+=30%",
-          pin: true,
-          pinSpacing: true,
+          start: "top 60%",
           animation: childTimeline,
           onEnterBack: (self) => {
             if (!self.isActive) {
-              self.kill()
+              self.kill();
             }
           },
         });
@@ -50,14 +45,16 @@ export default function ProjectShowcase({
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [projects]);
 
   if (projects.length === 0) {
     return (
       <section className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground font-kode-mono">No projects to display</p>
+        <p className="text-muted-foreground font-kode-mono">
+          No projects to display
+        </p>
       </section>
     );
   }
@@ -69,9 +66,7 @@ export default function ProjectShowcase({
           key={project.id}
           className="project-section w-full min-h-svh flex items-center px-6 sm:px-12 lg:px-24 py-8"
         >
-          <ProjectCard
-            project={project}
-          />
+          <ProjectCard project={project} />
         </div>
       ))}
     </section>
