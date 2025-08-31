@@ -25,7 +25,8 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
   const wiperWidthDuration = 0.5
 
   if (title && widthLine && details) {
-    tl.from(title, { opacity: 0, y: 50, duration: 0.5 })
+    tl
+      .from(title, { opacity: 0, y: 50, duration: 0.5 })
       .fromTo(widthLine,
         {
           width: '0%'
@@ -57,7 +58,6 @@ export function getProjectCardTimeline(rootElement: HTMLElement): gsap.core.Time
         ease: 'power2.in',
         duration: wiperWidthDuration
       })
-      .to({}, { duration: 5 })
       ;
   } else if (widthLine && rootElement) {
     // Fallback if other elements are not found, still animate the line

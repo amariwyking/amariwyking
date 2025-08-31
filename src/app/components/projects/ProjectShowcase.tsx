@@ -30,12 +30,21 @@ export default function ProjectShowcase({
 
         ScrollTrigger.create({
           trigger: section,
-          start: "center center",
-          end: "+=100%",
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.5, max: 1 },
+            ease: 'power2.inOut'
+          },
+          start: "top middle",
+          end: "+=30%",
           pin: true,
           pinSpacing: true,
           animation: childTimeline,
-          onEnterBack: self => self.kill(),
+          onEnterBack: (self) => {
+            if (!self.isActive) {
+              self.kill()
+            }
+          },
         });
       }
     });
