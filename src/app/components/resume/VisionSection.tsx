@@ -1,30 +1,56 @@
 "use client";
 
-import { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { Vision } from '@/app/types/resume';
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface VisionSectionProps {
-  vision: Vision;
-  className?: string;
-}
+export default function VisionSection() {
+  const visionRef = useRef<HTMLElement>(null);
 
-export default function VisionSection({ vision, className = "" }: VisionSectionProps) {
+  useGSAP(() => {
+    const visionSection = visionRef.current;
+
+    if (!visionSection) return;
+
+    // Create GSAP context for proper cleanup
+    const ctx = gsap.context(() => {
+      // Vision Section - Pinned
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: visionSection,
+            start: "top 30%",
+            end: "+=100%",
+          },
+        })
+        .fromTo(
+          ".vision-content",
+          { opacity: 0, y: 100 },
+          { opacity: 1, y: 0, duration: 0.5 }
+        )
+        .addLabel("visionAnimation")
+        // .to(".vision-content", { opacity: 0, y: -50, duration: 0.5 }, "+=0.5");
+    }, visionRef);
+
+    return () => {
+      ctx.revert(); // Only kills ScrollTriggers created within this context
+    };
+  }, []);
+
   return (
-    <section 
-      className={`min-h-screen flex items-center py-20 px-8 ${className}`}
-      style={{ backgroundSize: '200% 200%', backgroundPosition: '50% 0%' }}
+    <section
+      ref={visionRef}
+      className="resume-section vision-section min-h-screen flex items-center justify-center relative"
     >
-      <div className="max-w-5xl mx-auto">
-        <h1 className="vision-text text-5xl md:text-7xl font-light text-gray-800 mb-12 leading-tight">
-          Vision
-        </h1>
-        <p className="vision-text text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide">
-          A global society that empowers <span className="text-green-400">all</span> of its people to contribute intellectually and culturally to human achievement.
+      <SectionTitle title="Vision" />
+      <div className="vision-content max-w-3xl mx-auto px-8 text-center">
+        <p className="font-work-sans text-xl md:text-4xl leading-relaxed">
+          A world where cities thrive without compromising our planet&apos;s
+          future.
         </p>
       </div>
     </section>

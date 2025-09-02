@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ProjectShowcaseProps } from "@/app/types/project-showcase";
 import ProjectCard, { getProjectCardTimeline } from "./ProjectCard";
+import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,40 +13,40 @@ ScrollTrigger.normalizeScroll(true);
 
 export default function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   useGSAP(() => {
-    // Clear previous ScrollTriggers
-    ScrollTrigger.getAll().forEach((st) => st.kill());
+    // Create GSAP context for proper cleanup
+    const ctx = gsap.context(() => {
+      // Create ScrollTrigger for each project section
+      const projectSections = gsap.utils.toArray(".project-section");
 
-    // Create ScrollTrigger for each project section
-    const projectSections = gsap.utils.toArray(".project-section");
+      projectSections.forEach((section: any) => {
+        // Find the root element of the child card within this section
+        const projectCardElement = section.querySelector(".project-card");
 
-    projectSections.forEach((section: any) => {
-      // Find the root element of the child card within this section
-      const projectCardElement = section.querySelector(".project-card");
+        if (projectCardElement) {
+          // Get the complete animation timeline from the new function
+          const childTimeline = getProjectCardTimeline(projectCardElement);
 
-      if (projectCardElement) {
-        // Get the complete animation timeline from the new function
-        const childTimeline = getProjectCardTimeline(projectCardElement);
-
-        ScrollTrigger.create({
-          trigger: section,
-          snap: {
-            snapTo: "labels",
-            duration: { min: 0.5, max: 1 },
-            ease: "power2.inOut",
-          },
-          start: "top 60%",
-          animation: childTimeline,
-          onEnterBack: (self) => {
-            if (!self.isActive) {
-              self.kill();
-            }
-          },
-        });
-      }
+          ScrollTrigger.create({
+            trigger: section,
+            snap: {
+              snapTo: "labels",
+              duration: { min: 0.5, max: 1 },
+              ease: "power2.inOut",
+            },
+            start: "top 60%",
+            animation: childTimeline,
+            onEnterBack: (self) => {
+              if (!self.isActive) {
+                self.kill();
+              }
+            },
+          });
+        }
+      });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ctx.revert(); // Only kills ScrollTriggers created within this context
     };
   }, [projects]);
 
@@ -60,15 +61,17 @@ export default function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   }
 
   return (
-    <section className="project-showcase">
-      {projects.map((project) => (
-        <div
-          key={project.id}
-          className="project-section w-full min-h-svh flex items-center px-6 sm:px-12 lg:px-24 py-8"
-        >
-          <ProjectCard project={project} />
-        </div>
-      ))}
-    </section>
+    <>
+      <section className="project-showcase">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            className="project-section w-full min-h-svh flex items-center px-6 sm:px-12 lg:px-24 py-8"
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </section>
+    </>
   );
 }

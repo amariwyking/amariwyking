@@ -1,93 +1,56 @@
 "use client";
 
-import { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { Mission } from '@/app/types/resume';
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface MissionSectionProps {
-  mission: Mission;
-  className?: string;
-}
-
-export default function MissionSection({ mission, className = "" }: MissionSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
+export default function MissionSection() {
+  const missionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const missionSection = missionRef.current;
 
-    // Main section animation
-    gsap.from(section, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none reset"
-      },
-      opacity: 0,
-      scale: 0.95,
-      duration: 1.5,
-      ease: "power2.out"
-    });
+    if (!missionSection) return;
 
-    // Title animation with split effect
-    const title = section.querySelector('.mission-title');
-    gsap.from(title, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top 75%",
-        toggleActions: "play none none reset"
-      },
-      opacity: 0,
-      x: -100,
-      duration: 1.2,
-      ease: "back.out(1.7)",
-      delay: 0.3
-    });
+    // Create GSAP context for proper cleanup
+    const ctx = gsap.context(() => {
+      // Mission Section - Pinned
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: missionSection,
+            start: "top 30%",
+            end: "+=100%",
+          },
+        })
+        .fromTo(
+          ".mission-content",
+          { opacity: 0, y: 100 },
+          { opacity: 1, y: 0, duration: 0.5 }
+        )
+        .addLabel("missionAnimation");
+      // .to(".mission-content", { opacity: 0, y: -50, duration: 0.5 }, "+=0.5");
+    }, missionRef);
 
-    // Statement animation
-    const statement = section.querySelector('.mission-statement');
-    gsap.from(statement, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top 70%",
-        toggleActions: "play none none reset"
-      },
-      opacity: 0,
-      x: 100,
-      duration: 1.2,
-      ease: "back.out(1.7)",
-      delay: 0.6
-    });
-
-    // Floating animation on scroll
-    gsap.to(section.querySelector('.mission-content'), {
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      },
-      y: -30,
-      ease: "none"
-    });
-
+    return () => {
+      ctx.revert(); // Only kills ScrollTriggers created within this context
+    };
   }, []);
 
   return (
-    <section 
-      ref={sectionRef}
-      className={`min-h-screen flex items-center py-20 px-8 ${className}`}
+    <section
+      ref={missionRef}
+      className="resume-section mission-section min-h-screen flex items-center justify-center relative"
     >
-      <div className="mission-content max-w-5xl mx-auto">
-        <h1 className="mission-title text-5xl md:text-7xl font-light text-gray-800 mb-12 leading-tight">
-          Mission
-        </h1>
-        <p className="mission-statement text-2xl md:text-3xl text-gray-700 leading-relaxed font-light tracking-wide">
-          To develop a skillset and network that will support the development of data-centric technologies that bolster the sustainability of urban life.
+      <SectionTitle title="Mission" />
+      <div className="mission-content max-w-6xl mx-auto px-8 text-center">
+        <p className="font-work-sans text-xl md:text-4xl text-foreground leading-relaxed">
+          To support the deployment of data-centric technologies that bolster
+          the sustainability of urban life.
         </p>
       </div>
     </section>

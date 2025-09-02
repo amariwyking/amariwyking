@@ -1,97 +1,23 @@
-"use client";
+import { createServerSideClient } from "@/utils/supabase/server";
+import LandingPageWrapper from "./components/landing/LandingPageWrapper";
+import {
+  sampleProjects,
+  transformProjectForShowcase,
+} from "./lib/project-showcase-data";
+import ProjectShowcase from "./components/projects/ProjectShowcase";
 
-import { useState, useEffect, useMemo } from "react";
-import QuoteIntro from "./components/landing/QuoteIntro";
-import LandingPage from "./components/landing/LandingPage";
+export default async function Home() {
+  const supabase = await createServerSideClient();
+  const { data: projects } = await supabase.from("project").select();
 
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim"
-import { Container, ISourceOptions, MoveDirection, OutMode } from "@tsparticles/engine";
-
-import colors from 'tailwindcss/colors'
-
-export default function Home() {
-  const [showIntro, setShowIntro] = useState(false);
-  const [init, setInit] = useState(false);
-
-  console.log(colors.zinc['400'])
-
-  useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisited");
-
-    if (hasVisited === "true") {
-      setShowIntro(false);
-    } else {
-      setShowIntro(true);
-      localStorage.setItem("hasVisited", "true");
-    }
-  }, []);
-
-  const handleIntroComplete = () => {
-    setShowIntro(false);
-  };
-
-  // On the first render, initialize the tsParticles engine
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => { setInit(true) });
-  }, []);
-
-  const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
-  };
-
-  const options: ISourceOptions = useMemo(
-    () => ({
-      background: {
-        color: {
-          value: "fff",
-        },
-      },
-      fpsLimit: 120,
-      particles: {
-        color: {
-          value: "#9f9fa9",
-          // value: colors.zinc['400'],
-        },
-        move: {
-          direction: MoveDirection.none,
-          enable: true,
-          outModes: {
-            default: OutMode.out,
-          },
-          random: false,
-          speed: 1,
-          straight: false,
-        },
-        number: {
-          density: {
-            enable: true,
-          },
-          value: 100,
-        },
-        opacity: {
-          value: 0.5,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: { min: 1, max: 3 },
-        },
-      },
-      detectRetina: true,
-    }), []);
+  // Transform database projects to showcase format
+  const showcaseProjects = projects?.length
+    ? projects.map(transformProjectForShowcase)
+    : sampleProjects; // Use sample data as fallback
 
   return (
     <>
-      <Particles id="tsparticles" particlesLoaded={particlesLoaded} options={options} />
-      {showIntro ? (
-        <QuoteIntro onComplete={handleIntroComplete} />
-      ) : (
-        <LandingPage />
-      )}
+      <LandingPageWrapper projectData={showcaseProjects} />
     </>
   );
 }
