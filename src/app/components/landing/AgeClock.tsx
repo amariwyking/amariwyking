@@ -69,7 +69,7 @@ export function AgeClock() {
 
         // Set an interval that continuously increments the age
         setInterval(calculateAndSetAge, 1000);
-    }, []);
+    });
 
     if (!age) {
         return <div> Calculating age...</div>
