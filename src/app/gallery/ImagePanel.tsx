@@ -1,17 +1,18 @@
 'use client';
 
 import { Festive } from 'next/font/google';
-import image from '/sample.jpg'
 import Image from 'next/image'
 
 export default function ImagePanel() {
     return (
         <div className='flex flex-col'>
             <div>
-                <img
+                <Image
                     className="h-auto max-w-(--breakpoint-xl) object-cover object-center"
                     src="https://hmaruxdkibsjvhit.public.blob.vercel-storage.com/Loft%20on%20West%204th-fPQs0movvK8VSXAtYSErhVHktFzJMa.jpg"
                     alt="nature image"
+                    width={1200}
+                    height={800}
                 />
             </div>
 
