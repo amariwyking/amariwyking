@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ImageUploadPreviewProps {
   image: File;
@@ -112,10 +113,13 @@ export default function ImageUploadPreview({
 
       {previewUrl && (
         <div className="mb-3">
-          <img
+          <Image
             src={previewUrl}
             alt="Preview"
+            width={400}
+            height={128}
             className="w-full h-32 object-cover rounded-md border border-border"
+            unoptimized
           />
         </div>
       )}
