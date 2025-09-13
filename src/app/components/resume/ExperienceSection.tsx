@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ResumePage as ExperienceData } from "@/app/types/resume";
 import SectionTitle from "../landing/SectionTitle";
+import SkillChip from "../shared/SkillChip";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,7 +63,7 @@ export default function ExperienceSection({ experienceData }: ExperienceSectionP
 
         // Animate skill tags
         experienceTl.from(
-          item.querySelectorAll(".skill-tag"),
+          item.querySelectorAll(".skill"),
           {
             scale: 0,
             opacity: 0,
@@ -145,12 +146,7 @@ export default function ExperienceSection({ experienceData }: ExperienceSectionP
                 </h6>
                 <div className="flex flex-wrap gap-3">
                   {job.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="skill-tag font-kode-mono px-2 py-1 sm:px-4 sm:py-2 bg-muted text-muted-foreground text-base font-medium rounded-sm border-2 border-border"
-                    >
-                      {skill}
-                    </span>
+                    <SkillChip key={skillIndex} skill={skill} />
                   ))}
                 </div>
               </div>
