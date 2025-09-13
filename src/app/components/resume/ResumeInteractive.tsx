@@ -23,8 +23,6 @@ export default function ResumeInteractive(props: ResumeInteractiveProps) {
   const introRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
 
-
-
   return (
     <div ref={containerRef} className="resume-interactive overflow-x-hidden">
       <div id="resume-wrapper" className="relative">

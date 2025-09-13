@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ResumePage as ExperienceData } from "@/app/types/resume";
 import SectionTitle from "../landing/SectionTitle";
+import SkillChip from "../shared/SkillChip";
+import SkillCarousel from "../shared/SkillCarousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +15,9 @@ interface ExperienceSectionProps {
   experienceData: ExperienceData;
 }
 
-export default function ExperienceSection({ experienceData }: ExperienceSectionProps) {
+export default function ExperienceSection({
+  experienceData,
+}: ExperienceSectionProps) {
   const experienceRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -58,19 +62,6 @@ export default function ExperienceSection({ experienceData }: ExperienceSectionP
             ease: "power2.out",
           },
           index * 1
-        );
-
-        // Animate skill tags
-        experienceTl.from(
-          item.querySelectorAll(".skill-tag"),
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 0.2,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          index * 1 + 0.2
         );
 
         experienceTl.addLabel(`experienceAnimationGroup${index}`);
@@ -131,7 +122,7 @@ export default function ExperienceSection({ experienceData }: ExperienceSectionP
                 {job.notes.map((note, noteIndex) => (
                   <li
                     key={noteIndex}
-                    className="text-sm sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
+                    className="text-md sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
                   >
                     <span className="mr-4 text-lg shrink-0">•</span>
                     <span>{note}</span>
@@ -144,14 +135,11 @@ export default function ExperienceSection({ experienceData }: ExperienceSectionP
                   Technologies & Skills
                 </h6>
                 <div className="flex flex-wrap gap-3">
-                  {job.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="skill-tag font-kode-mono px-2 py-1 sm:px-4 sm:py-2 bg-muted text-muted-foreground text-base font-medium rounded-sm border-2 border-border"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <SkillCarousel
+                    skillsData={job.skills}
+                    autoPlay={true}
+                    className="h-10"
+                  />
                 </div>
               </div>
             </div>

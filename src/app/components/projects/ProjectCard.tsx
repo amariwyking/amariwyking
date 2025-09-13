@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { gsap } from 'gsap';
 import { ProjectCardProps } from '@/app/types/project-showcase';
-import SkillCarousel from './SkillCarousel';
+import SkillCarousel from '../shared/SkillCarousel';
 import ProjectDetails from './ProjectDetails';
 
 /**
