@@ -27,7 +27,7 @@
     var(--tw-gradient-stops)
   );
 
-  /* Design System Colors - Use light mode values, dark mode handled by CSS */
+  /* Design System Colors with light mode and dark mode values defined */
   --color-background: var(--color-stone-50);
   --color-foreground: var(--color-stone-900);
   --color-card: var(--color-zinc-50);
@@ -40,10 +40,7 @@
   --color-input: var(--color-stone-100);
   --color-destructive: var(--color-red-600);
   --color-destructive-foreground: var(--color-zinc-50);
-}
 
-/* TailwindCSS v4 Dark Mode - Manual class-based switching */
-@theme {
   /* Light mode colors (default) */
   --color-background-light: var(--color-stone-50);
   --color-foreground-light: var(--color-stone-900);
@@ -95,19 +92,14 @@
 
 @layer components {
   .upload-form label,
+  .upload-form input,
+  .upload-form textarea,
   .upload-form h1,
   .upload-form h2,
   .upload-form h3,
   .upload-form h4,
   .upload-form h5,
   .upload-form h6 {
-    @apply font-kode-mono;
-  }
-}
-
-@layer components {
-  .upload-form input,
-  .upload-form textarea {
     @apply font-kode-mono;
   }
 }
