@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdminAuth, AuthenticationError } from "@/utils/auth";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { TablesInsert } from "@/app/types/supabase";
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
@@ -53,7 +54,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
 
     // Create the collection
-    const collectionData = {
+    const collectionData: TablesInsert<"gallery_collection"> = {
       name: name.trim(),
       description: description?.trim() || null,
       cover_photo_id: cover_photo_id || null,
