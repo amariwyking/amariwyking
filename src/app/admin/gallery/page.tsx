@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PlusCircle } from 'iconoir-react';
 import FormLayout from '@/app/components/shared/forms/FormLayout';
+import FormActionButton from '@/app/components/shared/forms/FormActionButton';
 import { Tables } from '@/app/types/supabase';
 
 type Collection = Tables<'gallery_collection'> & {
@@ -59,12 +60,13 @@ export default function GalleryManagementPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <p className="text-destructive font-kode-mono mb-4">{error}</p>
-            <button
+            <FormActionButton
+              variant="primary"
+              size="md"
               onClick={fetchCollections}
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-work-sans"
             >
               Try Again
-            </button>
+            </FormActionButton>
           </div>
         </div>
       </FormLayout>
@@ -152,21 +154,25 @@ export default function GalleryManagementPage() {
 
                   {/* Action Buttons */}
                   <div className="flex gap-2">
-                    <Link
-                      href={`/admin/gallery/${collection.id}/edit`}
-                      className="flex-1 px-3 py-2 bg-primary text-primary-foreground text-sm rounded-md hover:bg-primary/90 transition-colors text-center font-work-sans"
-                    >
-                      Edit
+                    <Link href={`/admin/gallery/${collection.id}/edit`} className="flex-1">
+                      <FormActionButton
+                        variant="primary"
+                        size="sm"
+                        fullWidth
+                      >
+                        Edit
+                      </FormActionButton>
                     </Link>
-                    <button
+                    <FormActionButton
+                      variant="destructive"
+                      size="sm"
                       onClick={() => {
                         // TODO: Implement delete functionality
                         console.log('Delete collection:', collection.id);
                       }}
-                      className="px-3 py-2 bg-destructive text-destructive-foreground text-sm rounded-md hover:bg-destructive/90 transition-colors font-work-sans"
                     >
                       Delete
-                    </button>
+                    </FormActionButton>
                   </div>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import FormField from '@/app/components/shared/forms/FormField';
 import FormErrorMessage from '@/app/components/shared/forms/FormErrorMessage';
 import FormProgressIndicator from '@/app/components/shared/forms/FormProgressIndicator';
 import SubmitButton from '@/app/components/shared/forms/SubmitButton';
+import FormActionButton from '@/app/components/shared/forms/FormActionButton';
 
 interface FormData {
   name: string;
@@ -160,13 +161,13 @@ export default function CreateCollectionPage() {
         </FormField>
 
         <div className="flex gap-4 pt-4">
-          <button
-            type="button"
+          <FormActionButton
+            variant="secondary"
+            size="md"
             onClick={() => router.back()}
-            className="px-6 py-2 text-sm border border-border rounded-md text-foreground bg-background hover:bg-muted transition-colors font-work-sans"
           >
             Cancel
-          </button>
+          </FormActionButton>
 
           <SubmitButton
             isSubmitting={isSubmitting}
