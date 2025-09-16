@@ -6,8 +6,13 @@ import { TablesInsert } from '@/app/types/database';
 import { createProject } from '@/actions/project';
 import SkillsInput from './SkillsInput';
 import ImageUploadPreview from './ImageUploadPreview';
+import FormLayout from '../shared/forms/FormLayout';
+import FormField from '../shared/forms/FormField';
+import FormErrorMessage from '../shared/forms/FormErrorMessage';
+import FormProgressIndicator from '../shared/forms/FormProgressIndicator';
+import FileDropZone from '../shared/forms/FileDropZone';
+import SubmitButton from '../shared/forms/SubmitButton';
 import { v4 as uuidv4 } from 'uuid';
-import { CloudUpload } from 'iconoir-react';
 
 interface ImageData {
   file: File;
@@ -223,27 +228,17 @@ export default function ProjectUploadForm() {
   };
 
   return (
-    <div className="w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 overflow-hidden">
-      <div className="w-full max-w-4xl mx-auto min-w-0">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6 sm:mb-8 font-kode-mono">Upload New Project</h1>
+    <FormLayout title="Upload New Project">
+      {errors.general && (
+        <FormErrorMessage message={errors.general} />
+      )}
 
-        {errors.general && (
-          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-destructive/10 border border-destructive/20 rounded-md">
-            <p className="text-sm sm:text-base text-destructive font-kode-mono">{errors.general}</p>
-          </div>
-        )}
-
-        {uploadProgress && (
-          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-md">
-            <p className="text-sm sm:text-base text-primary font-kode-mono">{uploadProgress}</p>
-          </div>
-        )}
+      {uploadProgress && (
+        <FormProgressIndicator message={uploadProgress} />
+      )}
 
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 min-w-0">
-          <div className="min-w-0">
-            <label htmlFor="title" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
-              Project Title *
-            </label>
+          <FormField label="Project Title" required error={errors.title}>
             <input
               type="text"
               id="title"
@@ -254,15 +249,9 @@ export default function ProjectUploadForm() {
               placeholder="e.g., My Awesome Web App"
               style={{ fontFamily: 'var(--font-work-sans)' }}
             />
-            {errors.title && (
-              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.title}</p>
-            )}
-          </div>
+          </FormField>
 
-          <div className="min-w-0">
-            <label htmlFor="description" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
-              Project Description *
-            </label>
+          <FormField label="Project Description" required error={errors.description}>
             <textarea
               id="description"
               rows={5}
@@ -273,15 +262,9 @@ export default function ProjectUploadForm() {
               placeholder="Provide a detailed description of the project..."
               style={{ fontFamily: 'var(--font-work-sans)' }}
             />
-            {errors.description && (
-              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.description}</p>
-            )}
-          </div>
+          </FormField>
 
-          <div className="min-w-0">
-            <label htmlFor="project_end_date" className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
-              Project End Date
-            </label>
+          <FormField label="Project End Date" error={errors.project_end_date}>
             <input
               type="date"
               id="project_end_date"
@@ -291,55 +274,22 @@ export default function ProjectUploadForm() {
                 }`}
               style={{ colorScheme: 'light dark' }}
             />
-            {errors.project_end_date && (
-              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.project_end_date}</p>
-            )}
-          </div>
+          </FormField>
 
-          <div className="min-w-0">
-            <label className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
-              Skills
-            </label>
-            <div className="min-w-0">
-              <SkillsInput
-                skills={formData.skills || []}
-                onChange={handleSkillsChange}
-              />
-            </div>
-            {errors.skills && (
-              <p className="mt-1 text-sm sm:text-base text-destructive font-kode-mono">{errors.skills}</p>
-            )}
-          </div>
+          <FormField label="Skills" error={errors.skills}>
+            <SkillsInput
+              skills={formData.skills || []}
+              onChange={handleSkillsChange}
+            />
+          </FormField>
 
-          <div className="min-w-0">
-            <label className="block text-sm sm:text-base font-medium text-foreground mb-2 font-kode-mono">
-              Project Images
-            </label>
+          <FormField label="Project Images" error={errors.images}>
             <div className="space-y-4">
-              <div className="flex items-center justify-center w-full">
-                <label
-                  htmlFor="images"
-                  className="flex flex-col items-center justify-center w-full h-32 sm:h-40 border-2 border-border border-dashed rounded-lg cursor-pointer bg-muted hover:bg-muted/80 transition-colors"
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
-                    <CloudUpload className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4"/>
-                    <p className="mb-2 text-sm sm:text-base text-muted-foreground text-center px-2 font-work-sans">
-                      <span className="font-semibold">Click to upload</span> or drag and drop
-                    </p>
-                    <p className="text-xs sm:text-sm text-muted-foreground text-center px-2 font-kode-mono">PNG, JPG, WEBP or GIF (MAX. 5MB each)</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground font-kode-mono">{images.length}/10 images uploaded</p>
-                  </div>
-                  <input
-                    id="images"
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                    disabled={images.length >= 10}
-                  />
-                </label>
-              </div>
+              <FileDropZone
+                onFileSelect={handleImageUpload}
+                maxFiles={10}
+                currentCount={images.length}
+              />
 
               {images.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -355,26 +305,15 @@ export default function ProjectUploadForm() {
                 </div>
               )}
 
-              {errors.images && (
-                <p className="mt-2 text-sm sm:text-base text-destructive font-kode-mono">{errors.images}</p>
-              )}
             </div>
-          </div>
+          </FormField>
 
-          <div className="flex justify-end pt-4 sm:pt-6">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-2 text-sm sm:text-base rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring transition-colors ${isSubmitting
-                  ? 'bg-muted cursor-not-allowed text-muted-foreground'
-                  : 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                }`}
-            >
-              <span className="font-work-sans">{isSubmitting ? (uploadProgress || 'Submitting...') : 'Submit Project'}</span>
-            </button>
-          </div>
+          <SubmitButton
+            isSubmitting={isSubmitting}
+            loadingText={uploadProgress || 'Submitting...'}
+            submitText="Submit Project"
+          />
         </form>
-      </div>
-    </div>
+    </FormLayout>
   );
 }
