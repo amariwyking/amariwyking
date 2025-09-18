@@ -7,6 +7,7 @@ import { Tables, TablesInsert } from "@/app/types/supabase";
 interface GalleryPhotoData {
   blob_url: string;
   filename?: string;
+  photo_name?: string;
   collection_ids?: string[];
 }
 
@@ -107,6 +108,11 @@ export const createGalleryPhoto = async (
         photoData.filename || photoData.blob_url.split("/").pop() || "unknown",
       blob_url: photoData.blob_url,
     };
+
+    // Add photo_name if provided
+    if (photoData.photo_name) {
+      photoDbData.photo_name = photoData.photo_name;
+    }
 
     try {
       // Fetch the image from Vercel Blob to extract EXIF

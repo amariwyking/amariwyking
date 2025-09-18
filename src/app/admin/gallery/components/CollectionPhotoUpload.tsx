@@ -15,6 +15,7 @@ type Photo = Tables<'gallery_photo'>;
 
 interface PhotoData {
   file: File;
+  name: string;
   caption: string;
   id: string;
 }
@@ -50,12 +51,19 @@ export default function CollectionPhotoUpload({
 
     const newPhotos: PhotoData[] = Array.from(files).slice(0, 20 - photos.length).map(file => ({
       file,
+      name: '',
       caption: '',
       id: uuidv4()
     }));
 
     setPhotos(prev => [...prev, ...newPhotos]);
     setError('');
+  };
+
+  const handlePhotoNameChange = (id: string, name: string) => {
+    setPhotos(prev => prev.map(photo =>
+      photo.id === id ? { ...photo, name } : photo
+    ));
   };
 
   const handlePhotoCaptionChange = (id: string, caption: string) => {
@@ -145,6 +153,7 @@ export default function CollectionPhotoUpload({
         const result = await createGalleryPhoto({
           blob_url: blobUrl,
           filename: photo.file.name,
+          photo_name: photo.name.trim() || undefined,
           collection_ids: [collectionId]
         });
 
@@ -214,7 +223,9 @@ export default function CollectionPhotoUpload({
               <div key={photo.id} className="relative">
                 <ImageUploadPreview
                   image={photo.file}
+                  name={photo.name}
                   caption={photo.caption}
+                  onNameChange={(name) => handlePhotoNameChange(photo.id, name)}
                   onCaptionChange={(caption) => handlePhotoCaptionChange(photo.id, caption)}
                   onRemove={() => handlePhotoRemove(photo.id)}
                 />

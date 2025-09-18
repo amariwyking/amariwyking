@@ -393,7 +393,7 @@ export default function EditCollectionPage() {
                 >
                   <Image
                     src={photo.blob_url}
-                    alt={photo.filename}
+                    alt={photo.photo_name || photo.filename}
                     width={200}
                     height={200}
                     className="w-full h-full object-cover"
@@ -516,7 +516,7 @@ export default function EditCollectionPage() {
                   >
                     <Image
                       src={photo.blob_url}
-                      alt={photo.filename}
+                      alt={photo.photo_name || photo.filename}
                       width={150}
                       height={150}
                       className="w-full h-full object-cover"

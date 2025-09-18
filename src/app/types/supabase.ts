@@ -82,6 +82,7 @@ export type Database = {
           filename: string;
           id: string;
           iso: number | null;
+          photo_name: string;
           shutter_speed: string | null;
           updated_at: string | null;
         };
@@ -92,6 +93,7 @@ export type Database = {
           filename: string;
           id?: string;
           iso?: number | null;
+          photo_name?: string;
           shutter_speed?: string | null;
           updated_at?: string | null;
         };
@@ -102,6 +104,7 @@ export type Database = {
           filename?: string;
           id?: string;
           iso?: number | null;
+          photo_name?: string;
           shutter_speed?: string | null;
           updated_at?: string | null;
         };
