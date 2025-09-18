@@ -8,20 +8,25 @@ export async function GET(request: Request): Promise<NextResponse> {
   const limit = searchParams.get("limit");
   const offset = searchParams.get("offset");
 
+  console.log(searchParams);
+
   try {
     const supabase = await createAdminClient();
 
-    let query = supabase
-      .from("gallery_photo")
-      .select("*")
-      .order("created_at", { ascending: false });
+    let query;
 
     // Filter by collection if specified
     if (collectionId) {
-      query = query.eq(
-        "gallery_photo_collection_link.collection_id",
-        collectionId
-      );
+      query = supabase
+        .from("gallery_photo")
+        .select(`*, gallery_photo_collection_link!inner(collection_id)`)
+        .eq("gallery_photo_collection_link.collection_id", collectionId)
+        .order("created_at", { ascending: false });
+    } else {
+      query = supabase
+        .from("gallery_photo")
+        .select("*")
+        .order("created_at", { ascending: false });
     }
 
     // Add pagination if specified
