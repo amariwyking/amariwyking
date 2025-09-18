@@ -21,7 +21,7 @@ export default function FileDropZone({
   disabled = false,
   className = ""
 }: FileDropZoneProps) {
-  const isAtMaxFiles = maxFiles && currentCount >= maxFiles;
+  const isAtMaxFiles = maxFiles !== undefined ? currentCount >= maxFiles : undefined;
   const isDisabled = disabled || isAtMaxFiles;
 
   return (
