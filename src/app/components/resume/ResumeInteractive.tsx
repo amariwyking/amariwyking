@@ -7,6 +7,7 @@ import { ResumePage as ExperienceData } from "@/app/types/resume";
 import PersonalIntro from "../landing/PersonalIntro";
 import ProjectCard from "./ProjectCard";
 import VerticalSectionIndicator from "../shared/VerticalSectionIndicator";
+import MobileSectionIndicator from "../shared/MobileSectionIndicator";
 import { ProjectShowcaseData } from "@/app/types/project-showcase";
 import ProjectShowcase from "../projects/ProjectShowcase";
 import VisionSection from "./VisionSection";
@@ -23,10 +24,9 @@ export default function ResumeInteractive(props: ResumeInteractiveProps) {
   const introRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
 
-  // Define sections for the vertical indicator
+  // Define sections for the section indicators
   const sections = [
     { id: "intro", name: "intro", displayName: "Intro" },
-    { id: "vision", name: "vision", displayName: "Vision" },
     { id: "mission", name: "mission", displayName: "Mission" },
     { id: "projects", name: "projects", displayName: "Projects" },
     { id: "experience", name: "experience", displayName: "Experience" },
@@ -35,8 +35,11 @@ export default function ResumeInteractive(props: ResumeInteractiveProps) {
   return (
     <div ref={containerRef} className="resume-interactive overflow-x-hidden">
       <div id="resume-wrapper" className="relative">
-        {/* Vertical Section Navigation */}
-        <VerticalSectionIndicator sections={sections} />
+        {/* Desktop Section Navigation */}
+        <VerticalSectionIndicator sections={sections} className="hidden lg:flex" />
+
+        {/* Mobile Section Navigation */}
+        <MobileSectionIndicator sections={sections} className="lg:hidden" />
 
         {/* Intro Section */}
         <section
@@ -46,9 +49,6 @@ export default function ResumeInteractive(props: ResumeInteractiveProps) {
         >
           <PersonalIntro />
         </section>
-
-        {/* Vision Section */}
-        <VisionSection />
 
         {/* Mission Section */}
         <MissionSection />

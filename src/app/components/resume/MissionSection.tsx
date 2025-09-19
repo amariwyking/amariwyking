@@ -48,8 +48,8 @@ export default function MissionSection() {
     >
       <div className="mission-content max-w-6xl mx-auto px-8 text-center">
         <p className="font-work-sans text-xl md:text-4xl text-foreground leading-relaxed">
-          To support the deployment of data-centric technologies that bolster
-          the sustainability of urban life.
+          To support the development of technologies that increase
+          the sustainability and enjoyability of urban life.
         </p>
       </div>
     </section>
