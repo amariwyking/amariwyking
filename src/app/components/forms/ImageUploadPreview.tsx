@@ -3,14 +3,18 @@ import Image from "next/image";
 
 interface ImageUploadPreviewProps {
   image: File;
+  name: string;
   caption: string;
+  onNameChange: (name: string) => void;
   onCaptionChange: (caption: string) => void;
   onRemove: () => void;
 }
 
 export default function ImageUploadPreview({
   image,
+  name,
   caption,
+  onNameChange,
   onCaptionChange,
   onRemove,
 }: ImageUploadPreviewProps) {
@@ -124,25 +128,48 @@ export default function ImageUploadPreview({
         </div>
       )}
 
-      <div>
-        <label
-          htmlFor={`caption-${image.name}`}
-          className="block text-sm font-medium text-card-foreground mb-1"
-        >
-          Caption
-        </label>
-        <input
-          type="text"
-          id={`caption-${image.name}`}
-          value={caption}
-          onChange={(e) => onCaptionChange(e.target.value)}
-          placeholder="Add a caption for this image..."
-          className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:border-primary text-sm"
-          maxLength={255}
-        />
-        <p className="text-xs text-card-foreground mt-1">
-          {caption.length}/255 characters
-        </p>
+      <div className="space-y-4">
+        <div>
+          <label
+            htmlFor={`name-${image.name}`}
+            className="block text-sm font-medium text-card-foreground mb-1"
+          >
+            Photo Name
+          </label>
+          <input
+            type="text"
+            id={`name-${image.name}`}
+            value={name}
+            onChange={(e) => onNameChange(e.target.value)}
+            placeholder="Enter a name for this photo (optional)"
+            className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:border-primary text-sm"
+            maxLength={255}
+          />
+          <p className="text-xs text-card-foreground mt-1">
+            {name.length}/255 characters
+          </p>
+        </div>
+
+        <div>
+          <label
+            htmlFor={`caption-${image.name}`}
+            className="block text-sm font-medium text-card-foreground mb-1"
+          >
+            Caption
+          </label>
+          <input
+            type="text"
+            id={`caption-${image.name}`}
+            value={caption}
+            onChange={(e) => onCaptionChange(e.target.value)}
+            placeholder="Add a caption for this image..."
+            className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:border-primary text-sm"
+            maxLength={255}
+          />
+          <p className="text-xs text-card-foreground mt-1">
+            {caption.length}/255 characters
+          </p>
+        </div>
       </div>
     </div>
   );

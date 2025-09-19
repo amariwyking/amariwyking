@@ -83,6 +83,9 @@ export default function Admin() {
                     <h1 className="text-4xl md:text-6xl font-bold text-foreground">Add Content</h1>
                 </div>
                 <div className="flex flex-col gap-6 items-start">
+                    <NavigationItem href="/admin/gallery">
+                        Manage Gallery Collections
+                    </NavigationItem>
                     <NavigationItem href="/gallery/upload">
                         Upload to Gallery
                     </NavigationItem>
