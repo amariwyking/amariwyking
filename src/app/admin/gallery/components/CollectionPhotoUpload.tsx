@@ -45,11 +45,14 @@ export default function CollectionPhotoUpload({
   const [uploadProgress, setUploadProgress] = useState<string>('');
   const [error, setError] = useState<string>('');
 
+  const maxPhotos = 100;
+
+
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
 
-    const newPhotos: PhotoData[] = Array.from(files).slice(0, 20 - photos.length).map(file => ({
+    const newPhotos: PhotoData[] = Array.from(files).slice(0, maxPhotos - photos.length).map(file => ({
       file,
       name: '',
       caption: '',
@@ -211,7 +214,7 @@ export default function CollectionPhotoUpload({
       <div className="space-y-4">
         <FileDropZone
           onFileSelect={handlePhotoUpload}
-          maxFiles={20}
+          maxFiles={maxPhotos}
           currentCount={photos.length}
           fileTypeText="PNG, JPG, WEBP or GIF (MAX. 5MB each)"
           disabled={isSubmitting}
