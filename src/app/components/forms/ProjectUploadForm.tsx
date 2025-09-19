@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 interface ImageData {
   file: File;
   caption: string;
+  name: string;
   id: string;
 }
 
@@ -93,6 +94,7 @@ export default function ProjectUploadForm() {
     const newImages: ImageData[] = Array.from(files).slice(0, 10 - images.length).map(file => ({
       file,
       caption: '',
+      name: '',
       id: uuidv4()
     }));
 
@@ -102,6 +104,12 @@ export default function ProjectUploadForm() {
   const handleImageCaptionChange = (id: string, caption: string) => {
     setImages(prev => prev.map(img =>
       img.id === id ? { ...img, caption } : img
+    ));
+  };
+
+  const handleImageNameChange = (id: string, name: string) => {
+    setImages(prev => prev.map(img =>
+      img.id === id ? { ...img, name } : img
     ));
   };
 
@@ -297,7 +305,9 @@ export default function ProjectUploadForm() {
                     <ImageUploadPreview
                       key={image.id}
                       image={image.file}
+                      name={image.name}
                       caption={image.caption}
+                      onNameChange={(name) => handleImageNameChange(image.id, name)}
                       onCaptionChange={(caption) => handleImageCaptionChange(image.id, caption)}
                       onRemove={() => handleImageRemove(image.id)}
                     />
