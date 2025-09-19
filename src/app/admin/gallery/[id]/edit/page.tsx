@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Plus, X } from "iconoir-react";
+import { ArrowLeft, Plus, Xmark } from "iconoir-react";
 import FormLayout from "@/app/components/shared/forms/FormLayout";
 import FormField from "@/app/components/shared/forms/FormField";
 import FormErrorMessage from "@/app/components/shared/forms/FormErrorMessage";
@@ -417,7 +417,7 @@ export default function EditCollectionPage() {
                       onClick={() => removePhotoFromCollection(photo.id)}
                       className="p-1 bg-destructive text-destructive-foreground rounded hover:bg-destructive/90"
                     >
-                      <X className="w-4 h-4" />
+                      <Xmark className="w-4 h-4" />
                     </button>
                   </div>
 
@@ -495,7 +495,7 @@ export default function EditCollectionPage() {
                 onClick={() => setShowPhotoSelector(false)}
                 className="p-2"
               >
-                <X className="w-5 h-5" />
+                <Xmark className="w-5 h-5" />
               </FormActionButton>
             </div>
 
