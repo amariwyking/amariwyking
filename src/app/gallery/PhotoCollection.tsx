@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { GalleryPhoto } from "../lib/gallery-collections";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { gsap } from "gsap";
@@ -28,7 +28,7 @@ export default function PhotoCollection({
     setCurrentIndex(0);
   }, [photos]);
 
-  const animateToPhoto = (newIndex: number) => {
+  const animateToPhoto = useCallback((newIndex: number) => {
     if (isAnimating || newIndex === currentIndex) return;
 
     setIsAnimating(true);
@@ -55,17 +55,17 @@ export default function PhotoCollection({
         });
       }
     });
-  };
+  }, [isAnimating, currentIndex]);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     const newIndex = currentIndex === 0 ? photos.length - 1 : currentIndex - 1;
     animateToPhoto(newIndex);
-  };
+  }, [currentIndex, photos.length, animateToPhoto]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     const newIndex = currentIndex === photos.length - 1 ? 0 : currentIndex + 1;
     animateToPhoto(newIndex);
-  };
+  }, [currentIndex, photos.length, animateToPhoto]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -79,7 +79,7 @@ export default function PhotoCollection({
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [photos.length, currentIndex, isAnimating]);
+  }, [goToPrevious, goToNext]);
 
   if (!photos || photos.length === 0) {
     return (
@@ -89,7 +89,18 @@ export default function PhotoCollection({
     );
   }
 
-  const currentPhoto = photos[currentIndex];
+  // Defensive array access - ensure currentIndex is within bounds
+  const safeCurrentIndex = Math.max(0, Math.min(currentIndex, photos.length - 1));
+  const currentPhoto = photos[safeCurrentIndex];
+
+  // Additional safety check for currentPhoto
+  if (!currentPhoto) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <p className="text-foreground/60">Unable to load photo</p>
+      </div>
+    );
+  }
 
   return (
     <div
