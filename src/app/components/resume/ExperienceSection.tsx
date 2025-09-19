@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ResumePage as ExperienceData } from "@/app/types/resume";
-import SectionTitle from "../landing/SectionTitle";
 import SkillChip from "../shared/SkillChip";
 import SkillCarousel from "../shared/SkillCarousel";
 
@@ -97,10 +96,10 @@ export default function ExperienceSection({
 
   return (
     <section
+      id="experience"
       ref={experienceRef}
       className="resume-section experience-section min-h-screen flex items-center justify-center relative"
     >
-      <SectionTitle title="Experience" />
       <div className="subsections w-full">
         {experienceData.experience.map((job, index) => (
           <div

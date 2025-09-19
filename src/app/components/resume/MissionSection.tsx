@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,10 +42,10 @@ export default function MissionSection() {
 
   return (
     <section
+      id="mission"
       ref={missionRef}
       className="resume-section mission-section min-h-screen flex items-center justify-center relative"
     >
-      <SectionTitle title="Mission" />
       <div className="mission-content max-w-6xl mx-auto px-8 text-center">
         <p className="font-work-sans text-xl md:text-4xl text-foreground leading-relaxed">
           To support the deployment of data-centric technologies that bolster

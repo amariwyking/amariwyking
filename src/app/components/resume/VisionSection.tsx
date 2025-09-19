@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,10 +42,10 @@ export default function VisionSection() {
 
   return (
     <section
+      id="vision"
       ref={visionRef}
       className="resume-section vision-section min-h-screen flex items-center justify-center relative"
     >
-      <SectionTitle title="Vision" />
       <div className="vision-content max-w-3xl mx-auto px-8 text-center">
         <p className="font-work-sans text-xl md:text-4xl leading-relaxed">
           A world where cities thrive without compromising our planet&apos;s
