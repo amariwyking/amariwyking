@@ -86,7 +86,7 @@ export default function CollectionDrawer({
           className="flex items-center px-3 py-2"
           aria-label={isOpen ? "Close collection menu" : "Open collection menu"}
         >
-          <PlusIcon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 stroke-foreground" />
+          <PlusIcon className="h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-run stroke-foreground" />
         </button>
       </div>
 
