@@ -2,6 +2,7 @@ import React from "react";
 import MainContainer from "../components/MainContainer";
 import { loadBlogPosts } from "../lib/load-blog-posts"
 import BlogPostList from "../components/blogs/BlogPostList";
+import Navigation from "../components/shared/Navigation";
 
 export default async function BlogPage() {
     const header = 'Ideas departed from the isolation of the mind.';
@@ -11,10 +12,13 @@ export default async function BlogPage() {
     const allBlogPosts = loadBlogPosts();
 
     return (
-        <div className="flex justify-center py-16">
-            <MainContainer header={header} description={description}>
-                <BlogPostList blogsList={allBlogPosts} />
-            </MainContainer>
-        </div>
+        <>
+            <Navigation />
+            <div className="flex justify-center py-16">
+                <MainContainer header={header} description={description}>
+                    <BlogPostList blogsList={allBlogPosts} />
+                </MainContainer>
+            </div>
+        </>
     );
 }

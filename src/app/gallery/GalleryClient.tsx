@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import PhotoCollection from "./PhotoCollection";
 import CollectionDrawer from "../components/gallery/CollectionDrawer";
+import Navigation from "../components/shared/Navigation";
 import {
   GalleryPhoto,
   CollectionWithPhotoCount,
@@ -82,6 +83,9 @@ export default function GalleryClient({
 
   return (
     <>
+      {/* Navigation */}
+      <Navigation />
+
       {/* Collection Drawer */}
       <CollectionDrawer
         collections={collections}
