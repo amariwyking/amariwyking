@@ -85,7 +85,7 @@ export default function GalleryClient({ initialPhotos, collections }: GalleryCli
             <div className="bg-background/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-                <span className="text-sm font-medium text-gray-900">Loading collection...</span>
+                <span className="text-sm font-medium text-foreground">Loading collection...</span>
               </div>
             </div>
           </div>
