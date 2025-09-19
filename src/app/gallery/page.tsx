@@ -1,14 +1,17 @@
-import { getPhotosWithData } from "../lib/gallery";
-import PhotoCollection from "./PhotoCollection";
+import GalleryClient from "./GalleryClient";
+import { getFeaturedPhotos, getGalleryCollections } from "../lib/gallery-collections";
 
 export default async function Gallery() {
-    const photosData = await getPhotosWithData()
+    // Fetch initial data on the server
+    const [featuredPhotos, collections] = await Promise.all([
+        getFeaturedPhotos(),
+        getGalleryCollections()
+    ]);
 
     return (
-        <main className="flex min-h-screen flex-col place-content-center py-16">
-            <div className="items-center">
-                <PhotoCollection photosData={photosData}/>
-            </div>
-        </main>
+        <GalleryClient
+            initialPhotos={featuredPhotos}
+            collections={collections}
+        />
     );
 }
