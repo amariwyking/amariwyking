@@ -86,21 +86,23 @@ export default function MobileSectionIndicator({
                   transform active:scale-95
                   ${
                     isActive
-                      ? "bg-primary text-primary-foreground scale-105 shadow-sm"
+                      ? "text-primary scale-105"
                       : "text-foreground/60 hover:text-foreground/90 hover:bg-muted/50"
                   }
                 `}
                 aria-label={`Go to ${section.displayName} section`}
                 aria-current={isActive ? "true" : "false"}
               >
-                <span className="relative z-10 whitespace-nowrap">
+                <span className={`relative z-10 whitespace-nowrap transition-all duration-300 ease-out ${
+                  isActive ? "border-b-2 pb-1 border-primary" : "border-b-2 pb-1 border-transparent"
+                }`}>
                   {section.displayName}
                 </span>
               </button>
 
               {/* Separator dot between sections */}
               {index < sections.length - 1 && (
-                <div className="w-1 h-1 mx-1 rounded-full bg-border/40" />
+                <div className="w-1 h-1 mx-1 rounded-full bg-muted" />
               )}
             </div>
           );
