@@ -227,13 +227,35 @@ export default function EditCollectionPage() {
 
   const removePhotoFromCollection = async (photoId: string) => {
     try {
-      // This would be implemented with a photo-collection link API
+      const response = await fetch(
+        `/api/gallery/photo/${photoId}/collection/${collectionId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to remove photo from collection");
+      }
+
+      // Update local state on successful API call
       setCollectionPhotos((prev) =>
         prev.filter((photo) => photo.id !== photoId)
       );
-      // TODO: Implement actual API call to remove photo from collection
+
+      // If the removed photo was the cover photo, clear it
+      if (formData.cover_photo_id === photoId) {
+        setFormData((prev) => ({ ...prev, cover_photo_id: null }));
+      }
     } catch (error) {
       console.error("Failed to remove photo:", error);
+      setErrors({
+        general:
+          error instanceof Error
+            ? error.message
+            : "Failed to remove photo from collection",
+      });
     }
   };
 
