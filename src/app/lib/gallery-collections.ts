@@ -91,16 +91,12 @@ export async function getPhotosByCollection(
         error: any;
       };
 
-    console.log(photosData);
-
     if (error) {
       console.error("Error fetching photos for collection:", error);
       return [];
     }
 
     const photos: GalleryPhoto[] = (photosData || []).map((item) => item.gallery_photo);
-
-    console.log(photos);
 
     return photos;
   } catch (error) {
