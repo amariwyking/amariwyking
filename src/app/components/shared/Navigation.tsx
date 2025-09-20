@@ -111,7 +111,7 @@ export default function Navigation({ className = "" }: NavigationProps) {
             <div className="relative">
               {/* Menu icon */}
               <div className={`transition-opacity duration-300 ease-out ${!isExpanded ? 'opacity-100' : 'opacity-0 absolute'}`}>
-                <Menu size={24} />
+                <Menu className="w-6 h-6" />
               </div>
               {/* Current page name */}
               <div className={`transition-opacity duration-300 ease-out ${isExpanded ? 'opacity-100' : 'opacity-0 absolute'}`}>
