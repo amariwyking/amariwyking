@@ -114,15 +114,21 @@ export default function ExperienceSection({
                 <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-primary font-medium mb-2">
                   {job.role}
                 </p>
-                <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
+                <p className="text-sm sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
                   {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
                 </p>
-
+                <div className="flex flex-wrap gap-3">
+                  <SkillCarousel
+                    skillsData={job.skills}
+                    autoPlay={true}
+                    className="h-10"
+                  />
+                </div>
                 <ul className="space-y-4 mb-8">
                   {job.notes.map((note, noteIndex) => (
                     <li
                       key={noteIndex}
-                      className="text-md sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
+                      className="text-sm sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
                     >
                       <span className="mr-4 text-lg shrink-0">•</span>
                       <span>{note}</span>
@@ -131,16 +137,9 @@ export default function ExperienceSection({
                 </ul>
 
                 <div>
-                  <h6 className="font-kode-mono font-[400] mb-4">
+                  {/* <h6 className="font-kode-mono font-[400] mb-4">
                     Technologies & Skills
-                  </h6>
-                  <div className="flex flex-wrap gap-3">
-                    <SkillCarousel
-                      skillsData={job.skills}
-                      autoPlay={true}
-                      className="h-10"
-                    />
-                  </div>
+                  </h6> */}
                 </div>
               </div>
             </div>
