@@ -95,56 +95,58 @@ export default function ExperienceSection({
   };
 
   return (
-    <section
-      id="experience"
-      ref={experienceRef}
-      className="resume-section experience-section min-h-screen flex items-center justify-center relative"
-    >
-      <div className="subsections w-full">
-        {experienceData.experience.map((job, index) => (
-          <div
-            key={`${job.employer}-${index}`}
-            className="experience-item absolute inset-0 flex items-center justify-center px-8"
-          >
-            <div className="max-w-5xl mx-auto w-full">
-              <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-foreground mb-3 leading-tight">
-                {job.employer}
-              </p>
-              <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-primary font-medium mb-2">
-                {job.role}
-              </p>
-              <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
-                {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
-              </p>
+    <>
+      <section
+        id="experience"
+        ref={experienceRef}
+        className="resume-section experience-section min-h-screen flex items-center justify-center relative"
+      >
+        <div className="subsections w-full">
+          {experienceData.experience.map((job, index) => (
+            <div
+              key={`${job.employer}-${index}`}
+              className="experience-item absolute inset-0 flex items-center justify-center px-8"
+            >
+              <div className="max-w-5xl mx-auto w-full">
+                <p className="text-xl sm:text-3xl md:text-5xl font-kode-mono font-bold text-foreground mb-3 leading-tight">
+                  {job.employer}
+                </p>
+                <p className="text-md sm:text-xl md:text-2xl font-kode-mono text-primary font-medium mb-2">
+                  {job.role}
+                </p>
+                <p className="text-md sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
+                  {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
+                </p>
 
-              <ul className="space-y-4 mb-8">
-                {job.notes.map((note, noteIndex) => (
-                  <li
-                    key={noteIndex}
-                    className="text-md sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
-                  >
-                    <span className="mr-4 text-lg shrink-0">•</span>
-                    <span>{note}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="space-y-4 mb-8">
+                  {job.notes.map((note, noteIndex) => (
+                    <li
+                      key={noteIndex}
+                      className="text-md sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"
+                    >
+                      <span className="mr-4 text-lg shrink-0">•</span>
+                      <span>{note}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <div>
-                <h6 className="font-kode-mono font-[400] mb-4">
-                  Technologies & Skills
-                </h6>
-                <div className="flex flex-wrap gap-3">
-                  <SkillCarousel
-                    skillsData={job.skills}
-                    autoPlay={true}
-                    className="h-10"
-                  />
+                <div>
+                  <h6 className="font-kode-mono font-[400] mb-4">
+                    Technologies & Skills
+                  </h6>
+                  <div className="flex flex-wrap gap-3">
+                    <SkillCarousel
+                      skillsData={job.skills}
+                      autoPlay={true}
+                      className="h-10"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
