@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import { Menu } from "iconoir-react";
 
 interface NavigationProps {
   className?: string;
@@ -105,9 +106,18 @@ export default function Navigation({ className = "" }: NavigationProps) {
         }`}
       >
         <div className="flex flex-col gap-1 p-3">
-          {/* Current page - always at the top */}
+          {/* Menu icon when collapsed, current page when expanded */}
           <div className={`px-3 py-2 rounded-md font-kode-mono font-medium text-base sm:text-lg md:text-xl text-left whitespace-nowrap ${isExpanded ? 'text-primary' : 'text-foreground/90'}`}>
-            {currentPage?.name || "Home"}
+            <div className="relative">
+              {/* Menu icon */}
+              <div className={`transition-opacity duration-300 ease-out ${!isExpanded ? 'opacity-100' : 'opacity-0 absolute'}`}>
+                <Menu size={24} />
+              </div>
+              {/* Current page name */}
+              <div className={`transition-opacity duration-300 ease-out ${isExpanded ? 'opacity-100' : 'opacity-0 absolute'}`}>
+                {currentPage?.name || "Home"}
+              </div>
+            </div>
           </div>
 
           {/* Other navigation items - only show when expanded */}
