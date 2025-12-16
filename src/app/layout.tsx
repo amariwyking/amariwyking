@@ -5,21 +5,21 @@ import { CivicAuthProvider } from "@civic/auth/nextjs";
 import { ThemeProvider } from "next-themes";
 
 const workSans = Work_Sans({
-  subsets: ['latin'],
-  variable: '--font-work-sans',
-  weight: ['400'],
-})
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  weight: ["400"],
+});
 
 const kodeMono = Kode_Mono({
-  subsets: ['latin'],
-  variable: '--font-kode-mono',
-  weight: ['400', '500', '600', '700'],
-})
+  subsets: ["latin"],
+  variable: "--font-kode-mono",
+  weight: ["400", "500", "600", "700"],
+});
 
 const manuale = Manuale({
-  subsets: ['latin'],
-  variable: '--font-manuale',
-})
+  subsets: ["latin"],
+  variable: "--font-manuale",
+});
 
 export const metadata: Metadata = {
   title: "Amari Wyking",
@@ -32,8 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-
-    <html lang="en" className={`bg-background ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`bg-background ${kodeMono.variable} ${workSans.variable} ${manuale.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <meta name="apple-mobile-web-app-title" content="AW" />
+      </head>
       <body className="min-h-screen" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
