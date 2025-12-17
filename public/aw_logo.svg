@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   version="1.1"
+   viewBox="0 0 8.4667 8.4667"
+   id="svg3"
+   sodipodi:docname="aw_logo.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="12.914186"
+     inkscape:cx="17.151681"
+     inkscape:cy="13.705858"
+     inkscape:window-width="1800"
+     inkscape:window-height="1073"
+     inkscape:window-x="0"
+     inkscape:window-y="40"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g3" />
+  <g
+     transform="matrix(.060278 0 0 .060278 -19.576 .84522)"
+     fill-opacity="0"
+     stroke="#121212"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="5.6444"
+     id="g3">
+    <path
+       d="m335 86.208v-57.883a2.1167 2.1167 135 0 1 2.1167-2.1167h55.767a2.1167 2.1167 45 0 1 2.1167 2.1167v55.767a2.1167 2.1167 45 0 0 2.1167 2.1167h55.767a2.1167 2.1167 135 0 0 2.1167-2.1167v-57.883"
+       stroke-miterlimit="5"
+       class="primary-stroke" />
+    <path
+       d="m355 56.208h20"
+       stroke-miterlimit="0"
+       id="horizontal-path"
+       class="secondary-stroke" />
+    <path
+       d="m425 46.208v20"
+       stroke-miterlimit="0"
+       id="vertical-path"
+       class="secondary-stroke" />
+  </g>
+</svg>
