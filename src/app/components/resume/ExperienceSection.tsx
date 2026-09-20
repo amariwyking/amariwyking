@@ -4,14 +4,15 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ResumePage as ExperienceData } from "@/app/types/resume";
+import { format, parseISO } from "date-fns";
+import type { EXPERIENCE_QUERYResult } from "../../../../sanity.types";
 import SkillChip from "../shared/SkillChip";
 import SkillCarousel from "../shared/SkillCarousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ExperienceSectionProps {
-  experienceData: ExperienceData;
+  experienceData: EXPERIENCE_QUERYResult;
 }
 
 export default function ExperienceSection({
@@ -86,13 +87,10 @@ export default function ExperienceSection({
     };
   }, [experienceData]);
 
-  const formatDate = (date: Date | null) => {
-    if (!date) return "Present";
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-    });
-  };
+  // Sanity dates are "YYYY-MM-DD"; parseISO reads them as local dates so the
+  // month never shifts across timezones. A missing end date means current.
+  const formatDate = (date: string | null) =>
+    date ? format(parseISO(date), "MMMM yyyy") : "Present";
 
   return (
     <>
@@ -102,9 +100,9 @@ export default function ExperienceSection({
         className="resume-section experience-section min-h-screen flex items-center justify-center relative"
       >
         <div className="subsections w-full">
-          {experienceData.experience.map((job, index) => (
+          {experienceData.map((job) => (
             <div
-              key={`${job.employer}-${index}`}
+              key={job._id}
               className="experience-item absolute inset-0 flex items-center justify-center px-8"
             >
               <div className="max-w-5xl mx-auto w-full">
@@ -115,17 +113,17 @@ export default function ExperienceSection({
                   {job.role}
                 </p>
                 <p className="text-sm sm:text-lg md:text-xl font-kode-mono font-normal text-foreground mb-6">
-                  {formatDate(job.tenure[0])} - {formatDate(job.tenure[1])}
+                  {formatDate(job.startDate)} - {formatDate(job.endDate)}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <SkillCarousel
-                    skillsData={job.skills}
+                    skillsData={job.skills ?? []}
                     autoPlay={true}
                     className="h-10"
                   />
                 </div>
                 <ul className="space-y-4 mb-8">
-                  {job.notes.map((note, noteIndex) => (
+                  {(job.notes ?? []).map((note, noteIndex) => (
                     <li
                       key={noteIndex}
                       className="text-sm sm:text-lg md:text-xl font-work-sans text-foreground leading-relaxed flex items-start"

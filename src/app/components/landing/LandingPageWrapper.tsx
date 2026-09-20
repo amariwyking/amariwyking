@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import QuoteIntro from "./QuoteIntro";
 import LandingPage from "./LandingPage";
 import { ProjectShowcaseData } from "@/app/types/project-showcase";
+import type { EXPERIENCE_QUERYResult } from "../../../../sanity.types";
 
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
@@ -17,10 +18,12 @@ import LogoIntro from "./LogoIntro";
 
 interface LandingPageWrapperProps {
   projectData: ProjectShowcaseData[];
+  experienceData: EXPERIENCE_QUERYResult;
 }
 
 export default function LandingPageWrapper({
   projectData,
+  experienceData,
 }: LandingPageWrapperProps) {
   const [showIntro, setShowIntro] = useState(true);
   const [init, setInit] = useState(false);
@@ -105,7 +108,7 @@ export default function LandingPageWrapper({
       {showIntro ? (
         <LogoIntro onComplete={handleIntroComplete} />
       ) : (
-        <LandingPage projectData={projectData} />
+        <LandingPage projectData={projectData} experienceData={experienceData} />
       )}
     </>
   );

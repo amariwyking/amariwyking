@@ -1,11 +1,3 @@
-export type Vision = {
-  visionStatement: string;
-};
-
-export type Mission = {
-  missionStatement: string;
-};
-
 export type Skill =
   | 'Python'
   | 'Java'
@@ -52,15 +44,6 @@ export type Skill =
   | 'Mercurial'
   | 'Undux';
 
-export type ExperienceEntry = {
-  employer: string;
-  role: string;
-  tenure: [Date, Date | null]; // start and end date, null for current positions
-  notes: string[]; // bullet points or summary
-  skills: Skill[]; // list of associated tags
-  type?: 'work' | 'project' | 'education'; // categorization for filtering
-};
-
 export interface Project {
   name: string;
   description: string;
@@ -68,7 +51,3 @@ export interface Project {
   imageLink?: string;
   techStack: Skill[];
 }
-
-export type ResumePage = {
-  experience: ExperienceEntry[];
-};

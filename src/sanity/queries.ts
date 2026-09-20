@@ -14,6 +14,12 @@ export const PROJECTS_QUERY = defineQuery(`
   }
 `);
 
+export const EXPERIENCE_QUERY = defineQuery(`
+  *[_type == "experience"] | order(startDate desc) {
+    _id, employer, role, startDate, endDate, type, notes, skills, question
+  }
+`);
+
 export const COLLECTIONS_QUERY = defineQuery(`
   *[_type == "galleryCollection"] | order(_createdAt desc) {
     _id, name, "slug": slug.current

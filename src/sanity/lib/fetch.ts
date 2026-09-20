@@ -1,11 +1,13 @@
 import type {
   COLLECTIONS_QUERYResult,
+  EXPERIENCE_QUERYResult,
   FEATURED_PHOTOS_QUERYResult,
   PHOTOS_BY_COLLECTION_QUERYResult,
   PROJECTS_QUERYResult,
 } from "../../../sanity.types";
 import {
   COLLECTIONS_QUERY,
+  EXPERIENCE_QUERY,
   FEATURED_PHOTOS_QUERY,
   PHOTOS_BY_COLLECTION_QUERY,
   PROJECTS_QUERY,
@@ -44,6 +46,7 @@ export type GalleryPhoto = Omit<RawPhoto, "exif" | "url"> & {
   exif: PhotoExif;
 };
 export type GalleryCollection = COLLECTIONS_QUERYResult[number];
+export type ExperienceEntry = EXPERIENCE_QUERYResult[number];
 /** One row of PROJECTS_QUERY (distinct from the generated `Project` document type). */
 export type ProjectListItem = PROJECTS_QUERYResult[number];
 
@@ -63,6 +66,10 @@ function toGalleryPhotos(
 
 export async function getProjects(): Promise<PROJECTS_QUERYResult> {
   return client.fetch(PROJECTS_QUERY, {}, fetchOptions());
+}
+
+export async function getExperience(): Promise<EXPERIENCE_QUERYResult> {
+  return client.fetch(EXPERIENCE_QUERY, {}, fetchOptions());
 }
 
 export async function getGalleryCollections(): Promise<COLLECTIONS_QUERYResult> {

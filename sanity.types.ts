@@ -81,6 +81,22 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type Experience = {
+  _id: string;
+  _type: "experience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  employer?: string;
+  role?: string;
+  startDate?: string;
+  endDate?: string;
+  type?: "work" | "project" | "education";
+  notes?: Array<string>;
+  skills?: Array<string>;
+  question?: string;
+};
+
 export type Project = {
   _id: string;
   _type: "project";
@@ -212,6 +228,7 @@ export type AllSanitySchemaTypes =
   | GalleryPhoto
   | SanityImageCrop
   | SanityImageHotspot
+  | Experience
   | Project
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -241,6 +258,19 @@ export type PROJECTS_QUERYResult = Array<{
     caption: string | null;
     alt: string | null;
   }> | null;
+}>;
+// Variable: EXPERIENCE_QUERY
+// Query: *[_type == "experience"] | order(startDate desc) {    _id, employer, role, startDate, endDate, type, notes, skills, question  }
+export type EXPERIENCE_QUERYResult = Array<{
+  _id: string;
+  employer: string | null;
+  role: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  type: "education" | "project" | "work" | null;
+  notes: Array<string> | null;
+  skills: Array<string> | null;
+  question: string | null;
 }>;
 // Variable: COLLECTIONS_QUERY
 // Query: *[_type == "galleryCollection"] | order(_createdAt desc) {    _id, name, "slug": slug.current  }
@@ -287,6 +317,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "project"] | order(featured desc, projectEndDate desc) {\n    _id, title, description, skills, featured, projectEndDate, projectLink,\n    images[]{\n      _key,\n      "url": asset->url,\n      "lqip": asset->metadata.lqip,\n      "dimensions": asset->metadata.dimensions,\n      caption,\n      alt\n    }\n  }\n': PROJECTS_QUERYResult;
+    '\n  *[_type == "experience"] | order(startDate desc) {\n    _id, employer, role, startDate, endDate, type, notes, skills, question\n  }\n': EXPERIENCE_QUERYResult;
     '\n  *[_type == "galleryCollection"] | order(_createdAt desc) {\n    _id, name, "slug": slug.current\n  }\n': COLLECTIONS_QUERYResult;
     '\n  *[_type == "galleryCollection" && slug.current == $slug][0].photos[]->[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n': PHOTOS_BY_COLLECTION_QUERYResult;
     '\n  coalesce(\n    *[_type == "galleryCollection" && slug.current == "featured"][0].photos[]->[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  },\n    *[_type == "galleryPhoto"] | order(_createdAt desc)[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n  )\n': FEATURED_PHOTOS_QUERYResult;
