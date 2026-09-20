@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "sanity schema extract && sanity typegen generate"
+    "typegen": "sanity schema extract && sanity typegen generate",
+    "migrate:sanity": "tsx --env-file=.env.local scripts/migrate-supabase-to-sanity.ts"
   },
   "dependencies": {
     "@civic/auth": "^0.9.0",
@@ -39,6 +40,7 @@
     "styled-components": "^6.5.3"
   },
   "devDependencies": {
+    "@sanity/client": "^7.27.0",
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",
@@ -53,6 +55,7 @@
     "prettier": "^3.6.2",
     "prettier-eslint": "^16.4.2",
     "tailwindcss": "^4.1.10",
+    "tsx": "^4.23.13",
     "turbo": "^2.3.3",
     "typescript": "^5.9.2"
   },
