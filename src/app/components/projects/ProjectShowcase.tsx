@@ -9,10 +9,12 @@ import SectionTitle from "../landing/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
-ScrollTrigger.normalizeScroll(true);
-
 export default function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   useGSAP(() => {
+    // Browser only: ScrollTrigger's core isn't initialised without `window`,
+    // so calling normalizeScroll at module scope throws during prerender.
+    ScrollTrigger.normalizeScroll(true);
+
     // Create GSAP context for proper cleanup
     const ctx = gsap.context(() => {
       // Create ScrollTrigger for each project section
