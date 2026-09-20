@@ -120,7 +120,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {/* Skills */}
           <div className="">
             <SkillCarousel
-              skillsData={project.skills}
+              skillsData={project.skills ?? []}
               autoPlay={true}
               className="h-10"
             />
@@ -139,7 +139,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </div>
 
             <ProjectDetails
-              description={project.description}
+              description={project.description ?? ""}
               isExpanded={showFullDescription}
               wordLimit={30}
             />
@@ -147,11 +147,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
           {/* Project Metadata */}
           <div className="pt-4 border-t border-border space-y-2">
-            {project.project_end_date && (
+            {project.projectEndDate && (
               <div className="flex items-center space-x-2 text-sm text-muted-foreground font-kode-mono">
                 <span>Completed:</span>
-                <time dateTime={project.project_end_date}>
-                  {new Date(project.project_end_date).toLocaleDateString(
+                <time dateTime={project.projectEndDate}>
+                  {new Date(project.projectEndDate).toLocaleDateString(
                     "en-US",
                     {
                       year: "numeric",

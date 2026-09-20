@@ -1,21 +1,19 @@
 "use client";
 
 import { useRef } from "react";
-import { resumeData } from "@/app/lib/resume-data";
-import { projectData } from "@/app/lib/project-data";
-import { ResumePage as ExperienceData } from "@/app/types/resume";
 import PersonalIntro from "../landing/PersonalIntro";
 import ProjectCard from "./ProjectCard";
 import VerticalSectionIndicator from "../shared/VerticalSectionIndicator";
 import MobileSectionIndicator from "../shared/MobileSectionIndicator";
 import { ProjectShowcaseData } from "@/app/types/project-showcase";
+import type { EXPERIENCE_QUERYResult } from "../../../../sanity.types";
 import ProjectShowcase from "../projects/ProjectShowcase";
 import VisionSection from "./VisionSection";
 import MissionSection from "./MissionSection";
 import ExperienceSection from "./ExperienceSection";
 
 interface ResumeInteractiveProps {
-  experienceData: ExperienceData;
+  experienceData: EXPERIENCE_QUERYResult;
   projectData: ProjectShowcaseData[];
 }
 

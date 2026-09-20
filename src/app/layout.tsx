@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Work_Sans, Kode_Mono, Manuale } from "next/font/google";
 import "./globals.css";
-import { CivicAuthProvider } from "@civic/auth/nextjs";
 import { ThemeProvider } from "next-themes";
 
 const workSans = Work_Sans({
@@ -47,9 +46,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CivicAuthProvider displayMode="iframe" iframeMode="embedded">
-            {children}
-          </CivicAuthProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

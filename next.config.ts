@@ -1,6 +1,3 @@
-/** @type {import('next').NextConfig} */
-
-import { createCivicAuthPlugin } from '@civic/auth/nextjs'
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -8,7 +5,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'hmaruxdkibsjvhit.public.blob.vercel-storage.com',
+            hostname: 'cdn.sanity.io',
             port: '',
             pathname: '/**',
           },
@@ -16,10 +13,4 @@ const nextConfig: NextConfig = {
       },
 };
 
-const withCivicAuth = createCivicAuthPlugin({
-  clientId: '54545817-b989-48e1-a7e0-0af35d5ff315',
-  loginUrl: '/auth',
-  loginSuccessUrl: '/admin'
-});
-
-export default withCivicAuth(nextConfig)
+export default nextConfig;

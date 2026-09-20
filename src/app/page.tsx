@@ -1,23 +1,13 @@
-import { createServerSideClient } from "@/utils/supabase/server";
 import LandingPageWrapper from "./components/landing/LandingPageWrapper";
-import {
-  sampleProjects,
-  transformProjectForShowcase,
-} from "./lib/project-showcase-data";
-import ProjectShowcase from "./components/projects/ProjectShowcase";
+import { getExperience, getProjects } from "@/sanity/lib/fetch";
 
 export default async function Home() {
-  const supabase = await createServerSideClient();
-  const { data: projects } = await supabase.from("project").select();
-
-  // Transform database projects to showcase format
-  const showcaseProjects = projects?.length
-    ? projects.map(transformProjectForShowcase)
-    : sampleProjects; // Use sample data as fallback
+  const [projects, experience] = await Promise.all([
+    getProjects(),
+    getExperience(),
+  ]);
 
   return (
-    <>
-      <LandingPageWrapper projectData={showcaseProjects} />
-    </>
+    <LandingPageWrapper projectData={projects} experienceData={experience} />
   );
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { GalleryPhoto } from "../lib/gallery-collections";
+import type { GalleryPhoto } from "@/sanity/lib/fetch";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { gsap } from "gsap";
 
@@ -116,10 +116,12 @@ export default function PhotoCollection({
           {isLoading && <div className="absolute inset-0 rounded-lg" />}
 
           <Image
-            key={currentPhoto.id}
-            src={currentPhoto.blob_url}
-            alt=""
+            key={currentPhoto._id}
+            src={currentPhoto.url}
+            alt={currentPhoto.alt ?? currentPhoto.photoName ?? ""}
             fill
+            placeholder={currentPhoto.lqip ? "blur" : "empty"}
+            blurDataURL={currentPhoto.lqip ?? undefined}
             className={`object-contain transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
             }`}

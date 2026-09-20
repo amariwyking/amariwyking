@@ -1,14 +1,15 @@
 import ResumeInteractive from "@/app/components/resume/ResumeInteractive";
-import { resumeData } from "@/app/lib/resume-data";
-import { sampleProjects } from "../lib/project-showcase-data";
+import { getExperience, getProjects } from "@/sanity/lib/fetch";
 
-export default function InteractiveResumePage() {
+export default async function InteractiveResumePage() {
+  const [projects, experience] = await Promise.all([
+    getProjects(),
+    getExperience(),
+  ]);
+
   return (
     <div className="col-span-2">
-      <ResumeInteractive
-        projectData={sampleProjects}
-        experienceData={resumeData}
-      />
+      <ResumeInteractive projectData={projects} experienceData={experience} />
     </div>
   );
 }
