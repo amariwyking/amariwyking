@@ -46,3 +46,9 @@ next-env.d.ts
 
 # Claude
 .claude/
+# worktrees
+.worktrees/
+
+# sanity studio artifacts
+.sanity/
+/dist
