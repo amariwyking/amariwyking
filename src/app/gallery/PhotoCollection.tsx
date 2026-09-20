@@ -120,9 +120,8 @@ export default function PhotoCollection({
             src={currentPhoto.url}
             alt={currentPhoto.alt ?? currentPhoto.photoName ?? ""}
             fill
-            {...(currentPhoto.lqip
-              ? { placeholder: "blur" as const, blurDataURL: currentPhoto.lqip }
-              : {})}
+            placeholder={currentPhoto.lqip ? "blur" : "empty"}
+            blurDataURL={currentPhoto.lqip ?? undefined}
             className={`object-contain transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
             }`}

@@ -250,7 +250,7 @@ export type COLLECTIONS_QUERYResult = Array<{
   slug: string | null;
 }>;
 // Variable: PHOTOS_BY_COLLECTION_QUERY
-// Query: *[_type == "galleryCollection" && slug.current == $slug][0].photos[]->{    _id, photoName, alt,    "url": image.asset->url,    "lqip": image.asset->metadata.lqip,    "dimensions": image.asset->metadata.dimensions,    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }  }
+// Query: *[_type == "galleryCollection" && slug.current == $slug][0].photos[]->[defined(image.asset)]{    _id, photoName, alt,    "url": image.asset->url,    "lqip": image.asset->metadata.lqip,    "dimensions": image.asset->metadata.dimensions,    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }  }
 export type PHOTOS_BY_COLLECTION_QUERYResult = Array<{
   _id: string;
   photoName: string | null;
@@ -260,17 +260,27 @@ export type PHOTOS_BY_COLLECTION_QUERYResult = Array<{
   dimensions: SanityImageDimensions | null;
   exif: null;
 }> | null;
-// Variable: ALL_PHOTOS_QUERY
-// Query: *[_type == "galleryPhoto"] | order(_createdAt desc) {    _id, photoName, alt,    "url": image.asset->url,    "lqip": image.asset->metadata.lqip,    "dimensions": image.asset->metadata.dimensions,    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }  }
-export type ALL_PHOTOS_QUERYResult = Array<{
-  _id: string;
-  photoName: string | null;
-  alt: string | null;
-  url: string | null;
-  lqip: string | null;
-  dimensions: SanityImageDimensions | null;
-  exif: null;
-}>;
+// Variable: FEATURED_PHOTOS_QUERY
+// Query: coalesce(    *[_type == "galleryCollection" && slug.current == "featured"][0].photos[]->[defined(image.asset)]{    _id, photoName, alt,    "url": image.asset->url,    "lqip": image.asset->metadata.lqip,    "dimensions": image.asset->metadata.dimensions,    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }  },    *[_type == "galleryPhoto"] | order(_createdAt desc)[defined(image.asset)]{    _id, photoName, alt,    "url": image.asset->url,    "lqip": image.asset->metadata.lqip,    "dimensions": image.asset->metadata.dimensions,    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }  }  )
+export type FEATURED_PHOTOS_QUERYResult =
+  | Array<{
+      _id: string;
+      photoName: string | null;
+      alt: string | null;
+      url: string | null;
+      lqip: string | null;
+      dimensions: SanityImageDimensions | null;
+      exif: null;
+    }>
+  | Array<{
+      _id: string;
+      photoName: string | null;
+      alt: string | null;
+      url: string | null;
+      lqip: string | null;
+      dimensions: SanityImageDimensions | null;
+      exif: null;
+    }>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -278,7 +288,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "project"] | order(featured desc, projectEndDate desc) {\n    _id, title, description, skills, featured, projectEndDate, projectLink,\n    images[]{\n      _key,\n      "url": asset->url,\n      "lqip": asset->metadata.lqip,\n      "dimensions": asset->metadata.dimensions,\n      caption,\n      alt\n    }\n  }\n': PROJECTS_QUERYResult;
     '\n  *[_type == "galleryCollection"] | order(_createdAt desc) {\n    _id, name, "slug": slug.current\n  }\n': COLLECTIONS_QUERYResult;
-    '\n  *[_type == "galleryCollection" && slug.current == $slug][0].photos[]->{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n': PHOTOS_BY_COLLECTION_QUERYResult;
-    '\n  *[_type == "galleryPhoto"] | order(_createdAt desc) {\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n': ALL_PHOTOS_QUERYResult;
+    '\n  *[_type == "galleryCollection" && slug.current == $slug][0].photos[]->[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n': PHOTOS_BY_COLLECTION_QUERYResult;
+    '\n  coalesce(\n    *[_type == "galleryCollection" && slug.current == "featured"][0].photos[]->[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  },\n    *[_type == "galleryPhoto"] | order(_createdAt desc)[defined(image.asset)]{\n    _id, photoName, alt,\n    "url": image.asset->url,\n    "lqip": image.asset->metadata.lqip,\n    "dimensions": image.asset->metadata.dimensions,\n    "exif": image.asset->metadata.exif{ FNumber, ISO, ExposureTime }\n  }\n  )\n': FEATURED_PHOTOS_QUERYResult;
   }
 }

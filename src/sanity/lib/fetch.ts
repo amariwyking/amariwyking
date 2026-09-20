@@ -1,12 +1,12 @@
 import type {
-  ALL_PHOTOS_QUERYResult,
   COLLECTIONS_QUERYResult,
+  FEATURED_PHOTOS_QUERYResult,
   PHOTOS_BY_COLLECTION_QUERYResult,
   PROJECTS_QUERYResult,
 } from "../../../sanity.types";
 import {
-  ALL_PHOTOS_QUERY,
   COLLECTIONS_QUERY,
+  FEATURED_PHOTOS_QUERY,
   PHOTOS_BY_COLLECTION_QUERY,
   PROJECTS_QUERY,
 } from "../queries";
@@ -37,22 +37,28 @@ export type PhotoExif = {
   ExposureTime?: number | null;
 } | null;
 
-type RawPhoto = ALL_PHOTOS_QUERYResult[number];
+type RawPhoto = NonNullable<PHOTOS_BY_COLLECTION_QUERYResult>[number];
 /** A gallery photo with a resolvable asset URL. */
 export type GalleryPhoto = Omit<RawPhoto, "exif" | "url"> & {
   url: string;
   exif: PhotoExif;
 };
 export type GalleryCollection = COLLECTIONS_QUERYResult[number];
-export type Project = PROJECTS_QUERYResult[number];
+/** One row of PROJECTS_QUERY (distinct from the generated `Project` document type). */
+export type ProjectListItem = PROJECTS_QUERYResult[number];
 
-/** Drops photos whose asset has no URL (nothing to render) and narrows `exif`. */
+/**
+ * The queries already filter on `defined(image.asset)`, so `url` is non-null
+ * at runtime; this only narrows the generated type (and `exif`, see above).
+ */
 function toGalleryPhotos(
-  photos: PHOTOS_BY_COLLECTION_QUERYResult | ALL_PHOTOS_QUERYResult
+  photos: PHOTOS_BY_COLLECTION_QUERYResult | FEATURED_PHOTOS_QUERYResult
 ): GalleryPhoto[] {
-  return (photos ?? []).filter(
-    (photo): photo is RawPhoto & { url: string } => photo.url !== null
-  ) as GalleryPhoto[];
+  const withUrl = (photos ?? []).filter(
+    (photo): photo is RawPhoto & { url: string } => photo?.url != null
+  );
+  // Widening `exif` from typegen's `null` to PhotoExif needs an explicit cast.
+  return withUrl as GalleryPhoto[];
 }
 
 export async function getProjects(): Promise<PROJECTS_QUERYResult> {
@@ -74,14 +80,9 @@ export async function getPhotosByCollection(
   return toGalleryPhotos(photos);
 }
 
-/**
- * Photos from the "featured" collection; falls back to every photo when no
- * such collection exists (the migrated data has none).
- */
+/** Photos of the "featured" collection, or every photo if none exists. */
 export async function getFeaturedPhotos(): Promise<GalleryPhoto[]> {
-  const featured = await getPhotosByCollection("featured");
-  if (featured.length > 0) return featured;
   return toGalleryPhotos(
-    await client.fetch(ALL_PHOTOS_QUERY, {}, fetchOptions())
+    await client.fetch(FEATURED_PHOTOS_QUERY, {}, fetchOptions())
   );
 }
