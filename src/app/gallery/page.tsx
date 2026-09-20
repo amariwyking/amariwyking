@@ -1,17 +1,13 @@
 import GalleryClient from "./GalleryClient";
-import { getFeaturedPhotos, getGalleryCollections } from "../lib/gallery-collections";
+import { getFeaturedPhotos, getGalleryCollections } from "@/sanity/lib/fetch";
 
 export default async function Gallery() {
-    // Fetch initial data on the server
-    const [featuredPhotos, collections] = await Promise.all([
-        getFeaturedPhotos(),
-        getGalleryCollections()
-    ]);
+  const [featuredPhotos, collections] = await Promise.all([
+    getFeaturedPhotos(),
+    getGalleryCollections(),
+  ]);
 
-    return (
-        <GalleryClient
-            initialPhotos={featuredPhotos}
-            collections={collections}
-        />
-    );
+  return (
+    <GalleryClient initialPhotos={featuredPhotos} collections={collections} />
+  );
 }

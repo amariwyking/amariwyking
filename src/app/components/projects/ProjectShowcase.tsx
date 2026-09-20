@@ -65,7 +65,7 @@ export default function ProjectShowcase({ projects }: ProjectShowcaseProps) {
       <section className="project-showcase">
         {projects.map((project) => (
           <div
-            key={project.id}
+            key={project._id}
             className="project-section w-full min-h-svh flex items-center px-6 sm:px-12 lg:px-24 py-8"
           >
             <ProjectCard project={project} />

@@ -1,4 +1,23 @@
-import { ProjectShowcaseData } from '@/app/types/project-showcase';
+// Legacy Supabase-era payload shape. Kept only so this file compiles until
+// Phase 4 deletes it; nothing imports from here anymore.
+interface ProjectImage {
+  id: string;
+  blob_url: string;
+  caption?: string;
+  alt_text?: string;
+  order?: number;
+}
+
+interface ProjectShowcaseData {
+  id: string;
+  title: string;
+  description: string;
+  skills: string[];
+  images: ProjectImage[];
+  featured?: boolean;
+  order?: number;
+  project_end_date?: string;
+}
 
 // Sample project data for development and testing
 export const sampleProjects: ProjectShowcaseData[] = [

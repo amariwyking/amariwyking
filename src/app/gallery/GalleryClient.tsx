@@ -5,14 +5,14 @@ import PhotoCollection from "./PhotoCollection";
 import CollectionDrawer from "../components/gallery/CollectionDrawer";
 import Navigation from "../components/shared/Navigation";
 import {
-  GalleryPhoto,
-  CollectionWithPhotoCount,
+  type GalleryCollection,
+  type GalleryPhoto,
   getPhotosByCollection,
-} from "../lib/gallery-collections";
+} from "@/sanity/lib/fetch";
 
 interface GalleryClientProps {
   initialPhotos: GalleryPhoto[];
-  collections: CollectionWithPhotoCount[];
+  collections: GalleryCollection[];
 }
 
 export default function GalleryClient({
@@ -46,10 +46,7 @@ export default function GalleryClient({
     };
   }, []);
 
-  const handleCollectionSelect = async (
-    collectionId: string,
-    collectionName: string
-  ) => {
+  const handleCollectionSelect = async (collectionId: string) => {
     if (collectionId === activeCollectionId) return; // Already selected
 
     setIsTransitioning(true);
@@ -63,8 +60,9 @@ export default function GalleryClient({
         newPhotos = initialPhotos;
         setActiveCollectionId(null);
       } else {
-        // Fetch photos for the selected collection
-        newPhotos = await getPhotosByCollection(collectionId);
+        // Fetch photos for the selected collection (queried by slug)
+        const slug = collections.find((c) => c._id === collectionId)?.slug;
+        newPhotos = slug ? await getPhotosByCollection(slug) : [];
         setActiveCollectionId(collectionId);
       }
 
@@ -114,8 +112,8 @@ export default function GalleryClient({
           <div className="text-center">
             <h1 className="text-xl sm:text-2xl lg:text-3xl text-foreground">
               {activeCollectionId
-                ? collections.find((c) => c.id === activeCollectionId)?.name ||
-                  "Gallery"
+                ? collections.find((c) => c._id === activeCollectionId)
+                    ?.name || "Gallery"
                 : "Featured"}
             </h1>
           </div>

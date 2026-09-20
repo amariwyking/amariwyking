@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { gsap } from "gsap";
-import { CollectionWithPhotoCount } from "@/app/lib/gallery-collections";
+import type { GalleryCollection } from "@/sanity/lib/fetch";
 
 interface CollectionDrawerProps {
-  collections: CollectionWithPhotoCount[];
+  collections: GalleryCollection[];
   activeCollectionId: string | null;
-  onCollectionSelect(collectionId: string, collectionName: string): void;
+  onCollectionSelect(collectionId: string): void;
   className?: string;
 }
 
@@ -63,15 +63,15 @@ export default function CollectionDrawer({
     setIsOpen(!isOpen);
   };
 
-  const handleCollectionClick = (collection: CollectionWithPhotoCount) => {
-    onCollectionSelect(collection.id, collection.name);
+  const handleCollectionClick = (collection: GalleryCollection) => {
+    onCollectionSelect(collection._id);
     handleToggle(); // Use toggle function instead of direct setIsOpen
   };
 
   const getActiveCollectionName = () => {
     if (!activeCollectionId) return "Featured";
     const activeCollection = collections.find(
-      (c) => c.id === activeCollectionId
+      (c) => c._id === activeCollectionId
     );
     return activeCollection?.name || "Featured";
   };
@@ -103,7 +103,7 @@ export default function CollectionDrawer({
             {/* Featured Collection */}
             <button
               onClick={() => {
-                onCollectionSelect("featured", "Featured");
+                onCollectionSelect("featured");
                 handleToggle();
               }}
               className="w-full text-center py-4 transition-all duration-200 group"
@@ -120,19 +120,19 @@ export default function CollectionDrawer({
             </button>
 
             {/* Collections */}
-            {collections.filter((c) => c.name !== "Featured").length > 0 && (
+            {collections.filter((c) => c.slug !== "featured").length > 0 && (
               <>
                 {collections
-                  .filter((c) => c.name !== "Featured")
+                  .filter((c) => c.slug !== "featured")
                   .map((collection) => (
                     <button
-                      key={collection.id}
+                      key={collection._id}
                       onClick={() => handleCollectionClick(collection)}
                       className="w-full text-center py-4 transition-all duration-200 group"
                     >
                       <div
                         className={`text-2xl md:text-4xl font-medium text-foreground ${
-                          activeCollectionId === collection.id
+                          activeCollectionId === collection._id
                             ? "underline decoration-2 decoration-primary underline-offset-8"
                             : "hover:text-primary duration-250"
                         }`}
@@ -144,7 +144,7 @@ export default function CollectionDrawer({
               </>
             )}
 
-            {collections.filter((c) => c.name !== "Featured").length === 0 && (
+            {collections.filter((c) => c.slug !== "featured").length === 0 && (
               <div className="text-center py-8 text-foreground/60">
                 <p className="text-lg">No additional collections available</p>
               </div>

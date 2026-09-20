@@ -1,22 +1,12 @@
-import { createClient } from "@/utils/supabase/client";
 import ProjectShowcase from "@/app/components/projects/ProjectShowcase";
-import {
-  transformProjectForShowcase,
-  sampleProjects,
-} from "@/app/lib/project-showcase-data";
+import { getProjects } from "@/sanity/lib/fetch";
 
 export default async function Projects() {
-  const supabase = createClient();
-  const { data: projects } = await supabase.from("project").select();
-
-  // Transform database projects to showcase format
-  const showcaseProjects = projects?.length
-    ? projects.map(transformProjectForShowcase)
-    : sampleProjects; // Use sample data as fallback
+  const projects = await getProjects();
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <ProjectShowcase projects={showcaseProjects} />
+      <ProjectShowcase projects={projects} />
     </div>
   );
 }
