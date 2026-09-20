@@ -369,12 +369,14 @@ Two traps in that table:
 - **`styled-components` is not optional.** It is a hard peer of both `sanity` and `@sanity/vision`, and is absent from `package.json` today. Omitting it produces a confusing runtime failure inside Studio, not an install error.
 - **The Node range has a hole**: `>=20.19 <22 || >=22.12`. Node **22.0–22.11 is excluded**.
 
-**Node version — confirmed, and it needs changing.** Local is 22.22.0 ✓. The Vercel project (`amariwyking`, `prj_ZXYx1XXu4uRT2BrVglxXHpaa5Rze`) is set to **`20.x`**, which is a problem twice over:
+**Node version — resolved 2026-09-19.** Local is 22.22.0 ✓. The Vercel project (`amariwyking`, `prj_ZXYx1XXu4uRT2BrVglxXHpaa5Rze`) was on **`20.x`**, which was a problem twice over:
 
-1. Vercel's `20.x` floats to 20.19.x, so it clears Sanity's `>=20.19` bound by a single patch version — on a tag that moves without notice.
-2. **Node 20 reached end-of-life in April 2026.** Production is already building on an EOL runtime, independent of this migration.
+1. Vercel's `20.x` floats to 20.19.x, so it cleared Sanity's `>=20.19` bound by a single patch version — on a tag that moves without notice.
+2. **Node 20 reached end-of-life in April 2026.** Production was building on an EOL runtime, independent of this migration.
 
-Set it to **22.x** in Phase 0 — it matches local, sits well inside Sanity's range instead of on its edge, and resolves the EOL exposure. This is a one-call change via the Vercel API or project settings, but it should land on the Sanity branch rather than mid-way through unrelated work, so the first build on the new runtime is one someone is watching.
+Now set to **`22.x`**, verified by re-reading the project from the Vercel API. It matches local and sits well inside Sanity's range rather than on its edge.
+
+**This applies to the next deploy, not retroactively.** The most recent production build (2025-12-16) ran on Node 20, so nothing has yet exercised 22.x. Trigger a deploy *before* Phase 1 adds Sanity to the dependency tree — otherwise a runtime failure and a dependency failure arrive in the same build and cannot be told apart.
 
 Upgrading to `sanity@6` / `next-sanity@13` is a reasonable follow-up *after* this migration lands and after Next 16 is adopted on its own merits. It is not a prerequisite.
 
@@ -451,7 +453,7 @@ Branch `feat/sanity-cms` from `main`. As of 2026-09-19 `main` is at `05dd57e` an
 
 Each phase leaves the site working.
 
-**Phase 0 — Access.** Authenticate the Sanity MCP (`npx sanity@latest mcp configure`; the current token is expired). Create the project and a `production` dataset, set public. **Register CORS origins** for `http://localhost:3000` and the production domain — the browser-side Studio calls `api.sanity.io` and fails silently without them. **Set the Vercel project's Node version to 22.x** (currently `20.x`; see §5). Add env vars locally and in Vercel.
+**Phase 0 — Access.** Authenticate the Sanity MCP (`npx sanity@latest mcp configure`; the current token is expired). Create the project and a `production` dataset, set public. **Register CORS origins** for `http://localhost:3000` and the production domain — the browser-side Studio calls `api.sanity.io` and fails silently without them. ~~Set the Vercel project's Node version to 22.x~~ — **done 2026-09-19** (see §5); trigger one deploy on the new runtime before Phase 1. Add env vars locally and in Vercel.
 
 **Phase 1 — Studio, additive.** Install the pinned versions from §5, **including `styled-components`**. Add `sanity.config.ts` (with `basePath`), `sanity.cli.ts`, the three schema types, and `app/studio/[[...tool]]/page.tsx`. Run `sanity schema deploy` so the MCP `get_schema` tool works against the live schema. Site still reads Supabase.
 **Verify:** Studio loads and renders correctly at `/studio`; all three types creatable; `npm run build && npm run lint` clean.
