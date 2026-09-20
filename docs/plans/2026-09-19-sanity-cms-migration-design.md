@@ -1,7 +1,7 @@
 # Sanity CMS Migration — Design
 
 **Date:** 2026-09-19
-**Status:** Design agreed, not yet implemented
+**Status:** Implemented 2026-09-20 on `feat/sanity-cms` (Phases 0–4). Phase 5 (pause Supabase) pending.
 **Goal:** Replace Supabase + the hand-built `/admin` route with Sanity Studio as the headless CMS for projects and the photo gallery.
 
 ---
